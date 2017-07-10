@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bridgeit.todo.model.User;
+import com.bridgeit.todo.securepassword.HashSecurePassword;
 import com.bridgeit.todo.service.UserRegService;
 import com.bridgeit.todo.validation.UserValidation;
 
@@ -23,18 +24,22 @@ public class UserLoginController
 	@Autowired
 	UserValidation userValidation;
 	
+	@Autowired
+	HashSecurePassword securePassword;
 	
 	@RequestMapping(value="/login",method=RequestMethod.POST)
 	public ResponseEntity<String> userLogin(@RequestBody User user,BindingResult result)
 	{
 		System.out.println(user.getEmail());
 		
-		userValidation.validate(user, result);
+		userValidation.loginValidate(user, result);
 		
 		if(result.hasErrors())
 		{
 			return new ResponseEntity<String>(HttpStatus.NOT_ACCEPTABLE);
 		}
+		
+		user.setPassword(securePassword.getSecurePassword(user.getPassword()));
 		
 		User login_user=userRegService.userLoginService(user.getEmail(),user.getPassword());
 		

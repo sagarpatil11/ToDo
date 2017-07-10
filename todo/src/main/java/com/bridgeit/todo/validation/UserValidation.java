@@ -98,5 +98,44 @@ public class UserValidation implements Validator
 				}  
 		  }
 	}
+	
+	
+	public void loginValidate(Object object,Errors error)
+	{
+		
+		User user=(User) object;
+		
+		// Email validation 
+		  
+		  ValidationUtils.rejectIfEmptyOrWhitespace(error, "email", "required.email", "Email is required");  
+				  
+			  
+		  if (!(user.getEmail() != null && user.getEmail().isEmpty())) 
+		  {  
+				 pattern = Pattern.compile(EMAIL_PATTERN);  
+				 matcher = pattern.matcher(user.getEmail());  
+				 
+				 if (!matcher.matches()) 
+				 {  
+				    error.rejectValue("email", "email.incorrect", "Enter a correct Email");  
+				 }  
+		  } 
+		  
+		  
+		  //Password validation
+		  
+		  ValidationUtils.rejectIfEmptyOrWhitespace(error, "password", "required.password", "Password is required");  
+				  
+		  if (!(user.getPassword() != null && user.getPassword().isEmpty())) 
+		  {  
+				pattern = Pattern.compile(PASSWORD_PATTERN);  
+				matcher = pattern.matcher(user.getPassword());  
+				   
+				if (!matcher.matches()) 
+				{  
+				    error.rejectValue("password", "password.incorrect", "Password contain atleast 6 characters or digits and maximum 15");  
+				}  
+		  }
+	}
 
 }

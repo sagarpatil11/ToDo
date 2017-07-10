@@ -1,15 +1,23 @@
 package com.bridgeit.todo.controller;
 
+import java.util.List;
+
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bridgeit.todo.model.User;
+import com.bridgeit.todo.responsemsg.ErrorResponse;
+import com.bridgeit.todo.responsemsg.Response;
+import com.bridgeit.todo.responsemsg.UserResponse;
+import com.bridgeit.todo.securepassword.HashSecurePassword;
 import com.bridgeit.todo.service.UserRegService;
 import com.bridgeit.todo.validation.UserValidation;
 
@@ -22,35 +30,60 @@ public class UserRegController
 	@Autowired
 	UserValidation userValidation;
 	
+	@Autowired
+	HashSecurePassword securePassword;
+	
+	private Logger logger=Logger.getLogger("UserRegController");
+	
+	UserResponse userResponse=new UserResponse();
+	ErrorResponse errorResponse=new ErrorResponse();
 	
 	/* ....................User Registration..................... */
 	
 	@RequestMapping(value="/signup",method=RequestMethod.POST)
-	public ResponseEntity<String> userRegistration(@RequestBody User user,BindingResult result)
+	public ResponseEntity<Response> userRegistration(@RequestBody User user,BindingResult result)
 	{
+			logger.debug("In userRegistration method");
 		
 			userValidation.validate(user, result);
 		
 			if(result.hasErrors())
 			{
 				System.out.println("error");
-			
-				return new ResponseEntity<String>(HttpStatus.NOT_ACCEPTABLE);
+				
+				List<FieldError> errorlist=result.getFieldErrors();
+				errorResponse.setStatus(-1);
+				errorResponse.setMessage("Error in user credentials");
+				errorResponse.setErrorlist(errorlist);
+				
+				return new ResponseEntity<Response>(errorResponse,HttpStatus.NOT_ACCEPTABLE);
 			}
-			
+		
 			try
 			{
+				user.setPassword(securePassword.getSecurePassword(user.getPassword()));
+				
 				userRegService.userRegService(user);
+				
+				System.out.println("user add");
+				userResponse.setStatus(1);
+				userResponse.setMessage("User successfully registered");
 				
 				System.out.println("User added");
 				
-				return new ResponseEntity<String>("User added successfully",HttpStatus.OK);
+				logger.debug("User is added");
+				
+				return new ResponseEntity<Response>(userResponse,HttpStatus.OK);
+				
 			}
 			catch(Exception e)
 			{
 				System.out.println("Error");
 				
-				return new ResponseEntity<String>(HttpStatus.NOT_ACCEPTABLE);
+				errorResponse.setStatus(-1);
+				errorResponse.setMessage("Error occured while registering");
+				
+				return new ResponseEntity<Response>(errorResponse,HttpStatus.NOT_ACCEPTABLE);
 			}
 		
 	}
@@ -75,6 +108,7 @@ public class UserRegController
 			{
 				userRegService.userUpdateService(user);
 				
+				logger.debug("User is updated");
 				return new ResponseEntity<String>("User updated",HttpStatus.OK);
 			}
 			catch (Exception e) 

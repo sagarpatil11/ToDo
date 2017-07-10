@@ -1,0 +1,12 @@
+2017-07-10 16:41:45 DEBUG UserRegController:37 - In userRegistration method
+2017-07-10 16:41:45 DEBUG UserRegController:56 - User is added
+2017-07-10 18:56:15 DEBUG UserRegController:46 - In userRegistration method
+2017-07-10 18:56:15 DEBUG UserRegController:70 - User is added
+2017-07-10 19:00:58 DEBUG UserRegController:46 - In userRegistration method
+2017-07-10 19:00:59 DEBUG UserRegController:70 - User is added
+2017-07-10 19:09:54 DEBUG UserRegController:46 - In userRegistration method
+2017-07-10 19:13:19 DEBUG UserRegController:46 - In userRegistration method
+2017-07-10 19:21:46 DEBUG UserRegController:46 - In userRegistration method
+2017-07-10 19:22:37 DEBUG UserRegController:46 - In userRegistration method
+2017-07-10 19:22:43 DEBUG UserRegController:46 - In userRegistration method
+2017-07-10 19:22:43 DEBUG UserRegController:74 - User is added

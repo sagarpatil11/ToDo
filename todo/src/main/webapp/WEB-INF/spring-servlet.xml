@@ -65,4 +65,5 @@
 		<property name="sessionFactory" ref="sessionFactory" />
 		</bean>
  		<bean id="userValidation" class="com.bridgeit.todo.validation.UserValidation" />
+ 		<bean id="securePassword" class="com.bridgeit.todo.securepassword.HashSecurePassword" />
 </beans>
