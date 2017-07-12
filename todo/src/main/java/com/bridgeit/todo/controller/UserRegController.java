@@ -91,7 +91,7 @@ public class UserRegController
 	/* ............................User Update..................... */
 	
 	@RequestMapping(value="/userupdate",method=RequestMethod.POST)
-	public ResponseEntity<String> userUpdate(@RequestBody User user,BindingResult result)
+	public ResponseEntity<Response> userUpdate(@RequestBody User user,BindingResult result)
 	{
 			System.out.println(user.toString());
 			
@@ -100,23 +100,35 @@ public class UserRegController
 			if(result.hasErrors())
 			{
 				System.out.println("error");
-			
-				return new ResponseEntity<String>(HttpStatus.NOT_ACCEPTABLE);
+				
+				List<FieldError> errorlist=result.getFieldErrors();
+				
+				errorResponse.setStatus(-1);
+				errorResponse.setMessage("Error in user credentials");
+				errorResponse.setErrorlist(errorlist);
+				
+				return new ResponseEntity<Response>(errorResponse,HttpStatus.NOT_ACCEPTABLE);
 			}
 		
 			try
 			{
 				userRegService.userUpdateService(user);
 				
+				userResponse.setStatus(1);
+				userResponse.setMessage("User successfully updated");
+				
 				logger.debug("User is updated");
-				return new ResponseEntity<String>("User updated",HttpStatus.OK);
+				return new ResponseEntity<Response>(userResponse,HttpStatus.OK);
 			}
 			catch (Exception e) 
 			{
 				// TODO: handle exception
 				System.out.println("Error");
 				
-				return new ResponseEntity<String>(HttpStatus.NOT_ACCEPTABLE);
+				errorResponse.setStatus(-1);
+				errorResponse.setMessage("Error occured while registering");
+				
+				return new ResponseEntity<Response>(errorResponse,HttpStatus.NOT_ACCEPTABLE);
 			}
 		
 	}

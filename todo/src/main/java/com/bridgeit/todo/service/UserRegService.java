@@ -1,5 +1,7 @@
 package com.bridgeit.todo.service;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,9 +29,9 @@ public class UserRegService
 	}
 	
 	@Transactional(readOnly=true)
-	public User userLoginService(String email,String password)
+	public User userLoginService(String email,String password,HttpServletRequest request)
 	{
-		return userRegDao.userLogin(email, password);
+		return userRegDao.userLogin(email, password, request);
 		
 	}
 	

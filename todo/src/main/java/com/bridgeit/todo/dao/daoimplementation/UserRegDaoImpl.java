@@ -1,5 +1,8 @@
 package com.bridgeit.todo.dao.daoimplementation;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -28,7 +31,7 @@ public class UserRegDaoImpl implements UserRegDao
 	}
 	
 	
-	public User userLogin(String email,String password) 
+	public User userLogin(String email,String password,HttpServletRequest request) 
 	{
 		// TODO Auto-generated method stub
 		
@@ -53,6 +56,12 @@ public class UserRegDaoImpl implements UserRegDao
 		criteria.add(andexp);
 		
 		User user=(User) criteria.uniqueResult();
+		
+		if(user != null)
+		{
+			HttpSession session2=request.getSession();
+			session2.setAttribute("userSession", user);
+		}
 		
 		return user;
 	}
