@@ -1,6 +1,7 @@
 package com.bridgeit.todo.service;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,5 +40,10 @@ public class UserRegService
 	public User getUserById(int uid)
 	{
 		return userRegDao.getUserById(uid);
+	}
+	
+	public void logout(HttpSession session)
+	{
+		userRegDao.logout(session);
 	}
 }

@@ -47,6 +47,9 @@
 				<value>
 					com.bridgeit.todo.model.User				
 				</value>
+				<value>
+					com.bridgeit.todo.model.Task				
+				</value>
 			
 			</list>
 		</property>
@@ -64,7 +67,9 @@
 				class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
 		</bean>
+ 		
  		<bean id="userValidation" class="com.bridgeit.todo.validation.UserValidation" />
+ 		
  		<bean id="securePassword" class="com.bridgeit.todo.securepassword.HashSecurePassword" />
  		
  		<bean id="tokenService" class="com.bridgeit.todo.service.TokenService" />

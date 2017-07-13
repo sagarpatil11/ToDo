@@ -16,7 +16,7 @@ public class TokenService
 	
 	//.........................Generate Access and Refresh Token..................//
 	
-	public Map<Integer, Token> tokenGenerator(Integer uid)
+	public Map<Integer, Token> tokenGenerator(int uid)
 	{
 		TokenGenerator tokenGenerator=new TokenGenerator();
 		
@@ -33,25 +33,17 @@ public class TokenService
 		return tokenmap;
 	}
 	
-	
-	public void validateTokens(int uid)
+	public Map<Integer, Token> getAccessToken(int uid, Token token)
 	{
-		Token token=tokenmap.get(uid);
+		TokenGenerator	tokenGenerator=new TokenGenerator();
 		
-		TokenGenerator tokenGenerator=new TokenGenerator();
+		token.setAccessToken(tokenGenerator.generateAccessToken());
+		token.setExpiryTimeAccessToken(tokenGenerator.accessTokenExpiryTime());
 		
-		if(token.getExpiryTimeAccessToken() > System.currentTimeMillis()/1000)
-		{
-			
-		}
+		tokenmap.put(uid, token);
 		
-		if(token.getExpiryTimeRefreshToken() > System.currentTimeMillis()/1000)
-		{
-			token.setAccessToken(tokenGenerator.generateAccessToken());
-			token.setExpiryTimeAccessToken(tokenGenerator.accessTokenExpiryTime());
-			tokenmap.put(uid, token);
-		}
-		
+		return tokenmap;
 	}
+	
 	
 }

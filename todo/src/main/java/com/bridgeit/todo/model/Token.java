@@ -9,6 +9,11 @@ public class Token implements Serializable
 	private long expiryTimeAccessToken;
 	private long expiryTimeRefreshToken;
 	
+	public Token()
+	{
+		
+	}
+	
 	public String getAccessToken() {
 		return accessToken;
 	}

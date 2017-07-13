@@ -103,4 +103,22 @@ public class UserLoginController
 			return new ResponseEntity<Response>(errorResponse,HttpStatus.NOT_ACCEPTABLE);
 		}
 	}
+	
+	
+	
+	//............................User Logout.............................//
+	
+	
+	@RequestMapping(value="/logout")
+	public ResponseEntity<Response> logout(HttpServletRequest request) 
+	{
+		HttpSession session=request.getSession();
+		
+		userRegService.logout(session);
+		
+		userResponse.setStatus(1);
+		userResponse.setMessage("User Logout Successfully");
+		
+		return new ResponseEntity<Response>(userResponse,HttpStatus.OK);
+	}
 }

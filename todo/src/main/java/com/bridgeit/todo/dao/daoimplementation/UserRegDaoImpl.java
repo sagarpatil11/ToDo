@@ -83,4 +83,9 @@ public class UserRegDaoImpl implements UserRegDao
 		return null;
 	}
 	
+	public void logout(HttpSession session)
+	{
+		session.invalidate();
+	}
+	
 }
