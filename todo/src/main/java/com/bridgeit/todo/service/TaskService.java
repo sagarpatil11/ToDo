@@ -1,5 +1,7 @@
 package com.bridgeit.todo.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,6 +31,13 @@ public class TaskService
 	public void deleteTask(int tid)
 	{
 		taskDao.deleteTask(tid);
+	}
+	
+	@Transactional(readOnly=true)
+	public List<Task> getNotes(int uid)
+	{
+		return taskDao.getNotes(uid);
+		
 	}
 
 }

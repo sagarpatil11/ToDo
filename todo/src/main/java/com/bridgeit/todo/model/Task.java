@@ -1,6 +1,7 @@
 package com.bridgeit.todo.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -24,10 +25,12 @@ public class Task implements Serializable
 	private String title;
 	
 	private String description;
-	/*
+	
+	private Date creation_date;
+
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="uid")
-	private User user;*/
+	private User user;
 	
 	public Task() 
 	{
@@ -65,7 +68,7 @@ public class Task implements Serializable
 	}
 
 
-	/*public User getUser() {
+	public User getUser() {
 		return user;
 	}
 
@@ -73,6 +76,23 @@ public class Task implements Serializable
 	public void setUser(User user) {
 		this.user = user;
 	}
-*/
+
+
+	public Date getCreation_date() {
+		return creation_date;
+	}
+
+
+	public void setCreation_date(Date creation_date) {
+		this.creation_date = creation_date;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Task [tid=" + tid + ", title=" + title + ", description=" + description + ", creation_date="
+				+ creation_date + "]";
+	}
+
 	
 }

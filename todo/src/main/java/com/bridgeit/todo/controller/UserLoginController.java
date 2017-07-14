@@ -28,6 +28,11 @@ import com.bridgeit.todo.service.UserRegService;
 import com.bridgeit.todo.token.TokenGenerator;
 import com.bridgeit.todo.validation.UserValidation;
 
+/**
+ * 
+ * @author bridgeit
+ *
+ */
 @RestController
 public class UserLoginController 
 {

@@ -1,5 +1,7 @@
 package com.bridgeit.todo.dao.daoimplementation;
 
+import java.util.List;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -42,6 +44,19 @@ public class TaskDaoImpl implements TaskDao
 		query.setParameter("tid", tid);
 		
 		query.executeUpdate();
+	}
+	
+	public List<Task> getNotes(int uid)
+	{
+		Session session=sessionFactory.getCurrentSession();
+		
+		Query query=session.createQuery("FROM Task where uid=:uid");
+		query.setParameter("uid", uid);
+		
+		List<Task> list=query.list();
+		
+		return list;
+		
 	}
 	
 
