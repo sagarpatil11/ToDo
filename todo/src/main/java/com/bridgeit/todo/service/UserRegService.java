@@ -30,9 +30,9 @@ public class UserRegService
 	}
 	
 	@Transactional(readOnly=true)
-	public User userLoginService(String email,String password,HttpServletRequest request)
+	public User userLoginService(String email,String password)
 	{
-		return userRegDao.userLogin(email, password, request);
+		return userRegDao.userLogin(email, password);
 		
 	}
 	
@@ -42,8 +42,10 @@ public class UserRegService
 		return userRegDao.getUserById(uid);
 	}
 	
+	@Transactional
 	public void logout(HttpSession session)
 	{
+		userRegDao.deleteToken((User) session.getAttribute("userSession"));
 		userRegDao.logout(session);
 	}
 }

@@ -1,6 +1,5 @@
 package com.bridgeit.todo.dao.daoimplementation;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.hibernate.Criteria;
@@ -31,7 +30,7 @@ public class UserRegDaoImpl implements UserRegDao
 	}
 	
 	
-	public User userLogin(String email,String password,HttpServletRequest request) 
+	public User userLogin(String email,String password) 
 	{
 		// TODO Auto-generated method stub
 		
@@ -57,12 +56,6 @@ public class UserRegDaoImpl implements UserRegDao
 		
 		User user=(User) criteria.uniqueResult();
 		
-		if(user != null)
-		{
-			HttpSession session2=request.getSession();
-			session2.setAttribute("userSession", user);
-		}
-		
 		return user;
 	}
 
@@ -85,7 +78,19 @@ public class UserRegDaoImpl implements UserRegDao
 	
 	public void logout(HttpSession session)
 	{
+		
 		session.invalidate();
+	}
+
+
+	public void deleteToken(User user) 
+	{
+		// TODO Auto-generated method stub
+		Session session=sessionFactory.getCurrentSession();
+		
+		Query query=session.createQuery("delete from Token where uid=:uid");
+		query.setParameter("uid", user.getId());
+		query.executeUpdate();
 	}
 	
 }

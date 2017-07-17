@@ -35,8 +35,13 @@ public class TaskController
 		
 		task.setCreation_date(new Date());
 		
-		taskService.addNote(task);
-	}
+		try {
+			taskService.addNote(task);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	} 
 	
 	
 	//..........................Update Notes...........................///
@@ -49,7 +54,12 @@ public class TaskController
 		
 		task.setUser(user);
 		
-		taskService.updateNote(task);
+		try {
+			taskService.updateNote(task);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	
@@ -59,7 +69,12 @@ public class TaskController
 	@RequestMapping(value="/deleteNote")
 	public void deleteTask(@RequestParam int tid)
 	{
-		taskService.deleteTask(tid);
+		try {
+			taskService.deleteTask(tid);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	
@@ -72,8 +87,15 @@ public class TaskController
 		HttpSession session=request.getSession();
 		User user=(User) session.getAttribute("userSession");
 		
-		List<Task> notes=taskService.getNotes(user.getId());
+		List<Task> notes;
+		try {
+			notes = taskService.getNotes(user.getId());
+			System.out.println(notes.toString());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		System.out.println(notes.toString());
+		
 	}
 }

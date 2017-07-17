@@ -50,6 +50,9 @@
 				<value>
 					com.bridgeit.todo.model.Task				
 				</value>
+				<value>
+					com.bridgeit.todo.model.Token				
+				</value>
 			
 			</list>
 		</property>
@@ -74,4 +77,5 @@
  		
  		<bean id="tokenService" class="com.bridgeit.todo.service.TokenService" />
  		
+ 		<bean id="tokenUtility" class="com.bridgeit.todo.token.TokenUtility" />
 </beans>

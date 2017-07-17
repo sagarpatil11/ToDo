@@ -1,48 +1,22 @@
 package com.bridgeit.todo.service;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.bridgeit.todo.dao.daointerface.TokenDao;
 import com.bridgeit.todo.model.Token;
-import com.bridgeit.todo.token.TokenGenerator;
 
+@Service
 public class TokenService 
 {	
+	@Autowired
+	TokenDao tokenDao;
 	
-	Map<Integer, Token> tokenmap=new HashMap<Integer, Token>();
-	
-	
-	//.........................Generate Access and Refresh Token..................//
-	
-	public Map<Integer, Token> tokenGenerator(int uid)
+	@Transactional
+	public void saveToken(Token token)
 	{
-		TokenGenerator tokenGenerator=new TokenGenerator();
-		
-		Token token=new Token();
-		
-		token.setAccessToken(tokenGenerator.generateAccessToken());
-		token.setExpiryTimeAccessToken(tokenGenerator.accessTokenExpiryTime());
-		
-		token.setRefreshToken(tokenGenerator.generateRefreshToken());
-		token.setExpiryTimeRefreshToken(tokenGenerator.refreshTokenExpiryTime());
-		
-		tokenmap.put(uid, token);
-		
-		return tokenmap;
-	}
-	
-	public Map<Integer, Token> getAccessToken(int uid, Token token)
-	{
-		TokenGenerator	tokenGenerator=new TokenGenerator();
-		
-		token.setAccessToken(tokenGenerator.generateAccessToken());
-		token.setExpiryTimeAccessToken(tokenGenerator.accessTokenExpiryTime());
-		
-		tokenmap.put(uid, token);
-		
-		return tokenmap;
+		tokenDao.saveToken(token);
 	}
 	
 	

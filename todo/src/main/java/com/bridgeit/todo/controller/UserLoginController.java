@@ -1,9 +1,9 @@
 package com.bridgeit.todo.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
@@ -25,7 +25,7 @@ import com.bridgeit.todo.responsemsg.UserResponse;
 import com.bridgeit.todo.securepassword.HashSecurePassword;
 import com.bridgeit.todo.service.TokenService;
 import com.bridgeit.todo.service.UserRegService;
-import com.bridgeit.todo.token.TokenGenerator;
+import com.bridgeit.todo.token.TokenUtility;
 import com.bridgeit.todo.validation.UserValidation;
 
 /**
@@ -48,6 +48,9 @@ public class UserLoginController
 	@Autowired
 	TokenService tokenService;
 	
+	@Autowired
+	TokenUtility tokenUtility;
+	
 	UserResponse userResponse=new UserResponse();
 	ErrorResponse errorResponse=new ErrorResponse();
 	
@@ -58,7 +61,7 @@ public class UserLoginController
 	
 	
 	@RequestMapping(value="/login",method=RequestMethod.POST)
-	public ResponseEntity<Response> userLogin(@RequestBody User user,BindingResult result,HttpServletRequest request)
+	public ResponseEntity<Response> userLogin(@RequestBody User user,BindingResult result,HttpServletRequest request,HttpServletResponse response)
 	{
 		
 		logger.debug("In userLogin method");
@@ -79,32 +82,51 @@ public class UserLoginController
 		
 		user.setPassword(securePassword.getSecurePassword(user.getPassword()));
 	
-		User login_user=userRegService.userLoginService(user.getEmail(), user.getPassword(), request);
-		
-		
-		if(login_user != null)
-		{
-			logger.debug("Login Successfull");
+		try {
+			User login_user=userRegService.userLoginService(user.getEmail(), user.getPassword());
 			
-			userResponse.setStatus(1);
-			userResponse.setMessage("Login Successfull");
 			
-			HttpSession session=request.getSession();
-			User userSession=(User) session.getAttribute("userSession");
-			
-			Map<Integer, Token> tokenmap=tokenService.tokenGenerator(userSession.getId());
-			
-			System.out.println(tokenmap.keySet()+" "+tokenmap.values().toString());
-			
-			return new ResponseEntity<Response>(userResponse,HttpStatus.ACCEPTED);
-		}
-		else
-		{
-			logger.debug("Login unsuccessfull");
-			
+			if(login_user != null)
+			{
+				logger.debug("Login Successfull");
+				
+				userResponse.setStatus(1);
+				userResponse.setMessage("Login Successfull");
+				
+
+				HttpSession session2=request.getSession();
+				session2.setAttribute("userSession", login_user);
+				
+				Token token=tokenUtility.tokenGenerator();
+				
+				token.setUser(login_user);
+				
+				try {
+					tokenService.saveToken(token);
+					
+					System.out.println(token.toString());
+					
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					
+				}
+				
+				response.setHeader("accesstoken", token.getAccessToken());
+				return new ResponseEntity<Response>(userResponse,HttpStatus.ACCEPTED);
+			}
+			else
+			{
+				logger.debug("Login unsuccessfull");
+				
+				errorResponse.setStatus(-1);
+				errorResponse.setMessage("Wrong Email or Password");
+				
+				return new ResponseEntity<Response>(errorResponse,HttpStatus.NOT_ACCEPTABLE);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
 			errorResponse.setStatus(-1);
-			errorResponse.setMessage("Wrong Email or Password");
-			
+			errorResponse.setMessage("DataBase Problem");
 			return new ResponseEntity<Response>(errorResponse,HttpStatus.NOT_ACCEPTABLE);
 		}
 	}
