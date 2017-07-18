@@ -89,10 +89,7 @@ public class UserLoginController
 			if(login_user != null)
 			{
 				logger.debug("Login Successfull");
-				
-				userResponse.setStatus(1);
-				userResponse.setMessage("Login Successfull");
-				
+					
 
 				HttpSession session2=request.getSession();
 				session2.setAttribute("userSession", login_user);
@@ -110,6 +107,10 @@ public class UserLoginController
 					// TODO Auto-generated catch block
 					
 				}
+				
+				userResponse.setStatus(1);
+				userResponse.setMessage("Login Successfull");
+				userResponse.setToken(token);
 				
 				response.setHeader("accesstoken", token.getAccessToken());
 				return new ResponseEntity<Response>(userResponse,HttpStatus.ACCEPTED);
