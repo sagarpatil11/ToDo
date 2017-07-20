@@ -10,7 +10,13 @@ var myApp=angular.module("todo",['ui.router'])
 			.state("register",{
 				   url:"/register",
 				   templateUrl:"templates/userregistration.html",
-				 });
+				   controller:"regCtrl"
+				 })
+				 
+			.state("home",{
+					url:"/home",
+					templateUrl:"templates/home.html"
+			})
 
 		 $urlRouterProvider.otherwise('/login');
 

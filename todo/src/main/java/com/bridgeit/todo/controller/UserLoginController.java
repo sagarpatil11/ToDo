@@ -113,7 +113,7 @@ public class UserLoginController
 				userResponse.setToken(token);
 				
 				response.setHeader("accesstoken", token.getAccessToken());
-				return new ResponseEntity<Response>(userResponse,HttpStatus.ACCEPTED);
+				return new ResponseEntity<Response>(userResponse,HttpStatus.OK);
 			}
 			else
 			{
@@ -122,13 +122,13 @@ public class UserLoginController
 				errorResponse.setStatus(-1);
 				errorResponse.setMessage("Wrong Email or Password");
 				
-				return new ResponseEntity<Response>(errorResponse,HttpStatus.NOT_ACCEPTABLE);
+				return new ResponseEntity<Response>(errorResponse,HttpStatus.OK);
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			errorResponse.setStatus(-1);
 			errorResponse.setMessage("DataBase Problem");
-			return new ResponseEntity<Response>(errorResponse,HttpStatus.NOT_ACCEPTABLE);
+			return new ResponseEntity<Response>(errorResponse,HttpStatus.OK);
 		}
 	}
 	

@@ -1,21 +1,43 @@
-myApp.controller( 'loginCtrl',function($scope, $state, $http)
+myApp.controller( 'loginCtrl',function($scope, $state, loginService)
 {
-	$scope.isSignIn = function () 
+	$scope.signin = function () 
 	{
-		var httpObj = loginService.isLogin();
-		httpObj.then(function(data)
+		var user={};
+		
+		user.email=$scope.email;
+		user.password=$scope.password;
+		
+		var httpObj = loginService.login(user);
+		
+		httpObj.then(function(response)
 		{
-			$scope.user = data;
-			console.log("inside the controller");
-			if(data.status==200)
+			if(response.data.status == 1)
 			{
-				
+				console.log(response.data);
+				$state.go('home');
 			}
 			else
 			{
+				console.log("login unsuccessfull");
+				console.log(response.data.status);
 				$state.go('login');
 			}
 
+		})
+		
+	}
+})
+
+
+
+myApp.service("loginService", function($http){
+	
+	console.log("in loginservice")
+	this.login=function(user){
+		return $http({
+			url:"login",
+			method:"post",
+			data:user
 		})
 	}
 })
