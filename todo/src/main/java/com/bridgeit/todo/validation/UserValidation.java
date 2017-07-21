@@ -14,10 +14,10 @@ public class UserValidation implements Validator
 	 private Pattern pattern;  
 	 private Matcher matcher;  
 	 
-	private static final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" 
-													+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"; 
+	private static final String EMAIL_PATTERN = "^[_a-z-\\+]+(\\.[_a-z0-9-]+)*@" 
+													+ "[a-z0-9-]+(\\.[a-z0-9]+)*(\\.[a-z]{2,})$"; 
 	
-	/*private static final String EMAIL_PATTERN = "^w+@[a-zA-Z_]+?.[a-zA-Z]{2,3}$";*/ 
+	
 	
 	String STRING_PATTERN = "^[a-zA-Z\\s]*$";  
 	String MOBILE_PATTERN = "[0-9]{10}";

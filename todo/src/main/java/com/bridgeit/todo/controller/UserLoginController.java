@@ -66,18 +66,23 @@ public class UserLoginController
 		
 		logger.debug("In userLogin method");
 		
-		userValidation.loginValidate(user, result);
+		try {
+			userValidation.loginValidate(user, result);
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 		if(result.hasErrors())
 		{
 			logger.debug("Error in login credentials");
 			
 			List<FieldError> errorlist=result.getFieldErrors();
-			errorResponse.setStatus(-1);
+			errorResponse.setStatus(-2);
 			errorResponse.setMessage("Error in user credentials");
 			errorResponse.setErrorlist(errorlist);
 		
-			return new ResponseEntity<Response>(errorResponse,HttpStatus.NOT_ACCEPTABLE);
+			return new ResponseEntity<Response>(errorResponse,HttpStatus.OK);
 		}
 		
 		user.setPassword(securePassword.getSecurePassword(user.getPassword()));
@@ -126,7 +131,7 @@ public class UserLoginController
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			errorResponse.setStatus(-1);
+			errorResponse.setStatus(-3);
 			errorResponse.setMessage("DataBase Problem");
 			return new ResponseEntity<Response>(errorResponse,HttpStatus.OK);
 		}

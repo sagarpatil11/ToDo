@@ -45,7 +45,14 @@ public class UserRegController
 	{
 			logger.debug("In userRegistration method");
 		
-			userValidation.validate(user, result);
+			try 
+			{
+				userValidation.validate(user, result);
+			} 
+			catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		
 			if(result.hasErrors())
 			{
@@ -95,7 +102,14 @@ public class UserRegController
 	{
 			System.out.println(user.toString());
 			
-			userValidation.validate(user, result);
+			try 
+			{
+				userValidation.validate(user, result);
+			} 
+			catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		
 			if(result.hasErrors())
 			{

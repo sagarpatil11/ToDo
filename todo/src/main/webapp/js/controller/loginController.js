@@ -19,9 +19,16 @@ myApp.controller( 'loginCtrl',function($scope, $state, loginService)
 			else
 			{
 				console.log("login unsuccessfull");
+				console.log(response.data);
+				$state.go('login');
+			}
+			/*else if(response.data.status == -2)
+			{
+				console.log("login unsuccessfull");
 				console.log(response.data.status);
 				$state.go('login');
 			}
+			*/
 
 		})
 		
