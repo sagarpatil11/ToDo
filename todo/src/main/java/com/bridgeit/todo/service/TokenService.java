@@ -19,5 +19,16 @@ public class TokenService
 		tokenDao.saveToken(token);
 	}
 	
+	@Transactional(readOnly = true)
+	public Token checkAccessToken(String accessToken)
+	{
+		return tokenDao.checkAccessToken(accessToken);
+		
+	}
 	
+	@Transactional(readOnly=true)
+	public Token checkRefreshToken(String refreshToken)
+	{
+		return tokenDao.checkRefreshToken(refreshToken);
+	}
 }

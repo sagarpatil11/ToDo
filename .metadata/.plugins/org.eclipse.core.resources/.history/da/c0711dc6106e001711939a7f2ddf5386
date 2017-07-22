@@ -1,0 +1,40 @@
+<div class="container">
+        <div class="card card-container">
+            
+            <h1 style="text-align: center;margin:10px">User Registration</h1>
+            
+            <form name="regform" class="form-signin" method="post">
+            	
+            	<div class="form-group">
+            		<input type="text" name="fullname" data-ng-model="fullname" data-ng-pattern="/^[a-zA-Z ]*$/" id="fullname" class="form-control" placeholder="Full Name" required autofocus>
+                	<p><span data-ng-show="regform.fullname.$error.required && regform.fullname.$touched" style="color: red">Fullname is required</span></p>
+               		 <p><span data-ng-show="regform.fullname.$error.pattern" style="color: red">Please enter valid fullname</span></p>
+ 				</div>
+               	
+               	<div class="form-group">
+                	<input type="email" name="email" data-ng-model="email" data-ng-pattern="^[_a-z-\\+]+(\\.[_a-z0-9-]+)*@[a-z0-9-]+(\\.[a-z0-9]+)*(\\.[a-z]{2,})$" id="inputEmail" class="form-control" placeholder="Email address" required >
+               		<p><span data-ng-show="regform.email.$error.required && regform.email.$touched" style="color: red">Email is required</span></p>
+               		<p><span data-ng-show="regform.email.$error.pattern && regform.email.$touched" style="color: red">Please enter valid Email</span></p>
+               	</div>
+               	
+               	<div class="form-group">
+                	<input type="text" name="mobile" data-ng-model="mobile" data-ng-pattern="/^[0-9]{10}$/" id="mobile" class="form-control" placeholder="Contact Number" required >
+               		<p><span data-ng-show="regform.mobile.$error.required && regform.mobile.$touched" style="color: red">Mobile number is required</span></p>
+               		<p><span data-ng-show="regform.mobile.$error.pattern" style="color: red">Please enter valid Mobile number</span></p>
+               	</div>
+               	
+               	<div class="form-group">
+               		<input type="password" name="password" data-ng-model="password" data-ng-minlength="6" data-ng-maxlength="15" id="inputPassword" class="form-control" placeholder="Password" required>
+                	<p><span data-ng-show="regform.password.$error.required && regform.password.$touched" style="color: red">Email is required</span></p>
+               		<p><span data-ng-show="regform.password.$error.minlength || regform.password.$error.maxlength" style="color: red">Please enter valid Password(size 6-15)</span></p>
+               	</div>
+               	
+                <button class="btn btn-primary btn-block btn-signup" type="submit" data-ng-disabled="regform.$invalid" data-ng-click="signUp()">Sign up</button>
+           
+            </form>
+            
+            <p style="text-align: center;">Already Registered?<a ui-sref="login"> Login</a></p>
+        </div>
+</div> 
+  
+  

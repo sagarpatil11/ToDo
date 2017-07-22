@@ -117,7 +117,6 @@ public class UserLoginController
 				userResponse.setMessage("Login Successfull");
 				userResponse.setToken(token);
 				
-				response.setHeader("accesstoken", token.getAccessToken());
 				return new ResponseEntity<Response>(userResponse,HttpStatus.OK);
 			}
 			else

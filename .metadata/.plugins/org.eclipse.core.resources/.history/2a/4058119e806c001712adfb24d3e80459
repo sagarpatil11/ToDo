@@ -1,0 +1,20 @@
+myApp.controller( 'loginCtrl',function($scope, $state, $http)
+{
+	$scope.isSignIn = function () 
+	{
+		var httpObje = loginService.isLogin();
+		httpObje.then(function(data)
+		{
+			$scope.user = data;
+			console.log("inside the controller");
+			if(data.status==200)
+			{
+
+			}else
+			{
+				$state.go('login');
+			}
+
+		})
+	}
+})

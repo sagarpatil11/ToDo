@@ -1,0 +1,23 @@
+<div class="container">
+        <div class="card card-container">
+           <h1 style="text-align: center;margin:10px">Sign in</h1>
+           
+            <form class="form-signin" method="post">
+            	<div class="control-group">
+            		<div class="controls">
+                		<input type="email" data-ng-model="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+               			<div class="input-help">
+               				<h4>Please enter valid Email</h4>
+               			</div>
+               		</div>
+             	</div>
+               	<input type="password" data-ng-model="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                
+                <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit" data-ng-click="signin()">Sign in</button>
+            </form>
+            
+            <p style="text-align: center;">Not yet Registered?<a ui-sref="register"> Register</a></p>
+        
+        </div>
+</div> 
+  

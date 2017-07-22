@@ -1,0 +1,19 @@
+var myApp=angular.module("myApp",['ui.router'])
+.config(function($stateProvider, $urlRouterProvider)){
+	$stateProvider
+			.state("login",{
+					url:"/login",
+					templateUrl:"templates/login.html",x
+					controller:"loginCtrl"
+		
+			})
+			
+			.state("register",{
+				   url:"/register",
+				   templateUrl:"template/registration.html",
+				   controller:"signupController"
+				 });
+
+		 $urlRouterProvider.otherwise('/login');
+
+});

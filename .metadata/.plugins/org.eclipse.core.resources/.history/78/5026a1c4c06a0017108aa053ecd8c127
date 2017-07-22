@@ -1,0 +1,40 @@
+package com.bridgeit.todo.service;
+
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.bridgeit.todo.model.Token;
+import com.bridgeit.todo.token.TokenGenerator;
+
+public class TokenService 
+{	
+	
+	Map<Integer, Token> tokenmap=new HashMap<Integer, Token>();
+	
+	
+	//.........................Generate Access and Refresh Token..................//
+	
+	public Token tokenGenerator(int uid)
+	{
+		TokenGenerator tokenGenerator=new TokenGenerator();
+		
+		Token token=new Token();
+		
+		token.setAccessToken(UUID.randomUUID().toString().replaceAll("-", ""));
+		token.setAccessTokenCreation(new Date());
+		
+		token.setRefreshToken(UUID.randomUUID().toString().replaceAll("-", ""));
+		token.setRefreshTokenCreation(new Date());
+		
+		tokenmap.put(uid, token);
+		
+		return token;
+	}
+	
+	
+	
+}

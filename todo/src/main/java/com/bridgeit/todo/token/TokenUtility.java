@@ -4,10 +4,15 @@ import java.util.Date;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.bridgeit.todo.model.Token;
+import com.bridgeit.todo.service.TokenService;
 
 public class TokenUtility 
 {
+	@Autowired
+	TokenService tokenService;
 	
 	public Token tokenGenerator()
 	{
@@ -24,19 +29,54 @@ public class TokenUtility
 		return token;
 	}
 	
-	public Boolean validateToken(String accesstoken,long creationtime)
+	public Boolean validateAccessToken(String accessToken)
 	{
-		long currenttime=new Date().getTime();
+		System.out.println("in validate");
 		
-		long diffrence=creationtime - currenttime;
+		Token token=tokenService.checkAccessToken(accessToken);
 		
-		long diffrenceinseconds=TimeUnit.MILLISECONDS.toSeconds(diffrence);
-		
-		if(diffrenceinseconds > 30)
+		if(token != null)
 		{
-			return false; 
-		}
+			long difference = new Date().getTime() - token.getAccessTokenCreation().getTime();
+			long differenceinseconds = TimeUnit.MILLISECONDS.toSeconds(difference);
+			
+			if(differenceinseconds > 60)
+			{
+				return false;
+			}
+			else
+			{
+				return true;
+			}
+ 		}
 		
-		return true;
+		
+		return false;
+	}
+	
+	public Boolean validateRefreshToken(String refreshToken)
+	{
+		System.out.println("in validate");
+		
+		Token token=tokenService.checkRefreshToken(refreshToken);
+		
+		if(token != null)
+		{
+			long difference = new Date().getTime() - token.getRefreshTokenCreation().getTime();
+			
+			long differenceinseconds = TimeUnit.MILLISECONDS.toSeconds(difference);
+			
+			if(differenceinseconds > 60)
+			{
+				return false;
+			}
+			else
+			{
+				
+			}
+ 		}
+		
+		
+		return false;
 	}
 }

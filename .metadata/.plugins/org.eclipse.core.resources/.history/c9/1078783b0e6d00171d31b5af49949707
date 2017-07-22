@@ -1,0 +1,16 @@
+myApp.controller("regCtrl", function($scope ,$state,regService){
+	
+	$scope.signUp=function(){
+		console.log="signup method";
+		
+		var user={};
+		
+		user.fullname=$scope.fullname;
+		user.email=$scope.email;
+		user.mobile=$scope.mobile;
+		user.password=$scope.password;
+		
+		var httpobj=regService.signUp(user);
+		
+	}
+})

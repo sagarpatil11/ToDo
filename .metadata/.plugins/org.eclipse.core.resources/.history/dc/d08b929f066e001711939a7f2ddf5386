@@ -1,0 +1,28 @@
+<div class="container">
+        <div class="card card-container">
+            
+            <h1 style="text-align: center;margin:10px">User Registration</h1>
+            
+            <form name="regform" class="form-signin" method="post">
+            	
+            	<div class="form-group">
+            		<input type="text" name="fullname" data-ng-model="fullname" id="fullname" class="form-control" placeholder="Full Name" required autofocus>
+                	<p><span data-ng-show="regform.fullname.$error.required && regform.fullname.$touched" style="color: red">Please Enter valid Fullname</span></p>
+               		<!-- <p><span data-ng-show="userform.email.$error.email && userform.email.$touched" style="color: red">Please enter valid Email</span></p> -->
+               	</div>
+               	
+                <input type="email" data-ng-model="email" id="inputEmail" class="form-control" placeholder="Email address" required >
+                
+                 <input type="number" data-ng-model="mobile" id="mobile" class="form-control" placeholder="Contact Number" required >
+               
+                <input type="password" data-ng-model="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                
+                <button class="btn btn-primary btn-block btn-signup" type="submit" data-ng-click="signUp()">Sign up</button>
+           
+            </form>
+            
+            <p style="text-align: center;">Already Registered?<a ui-sref="login"> Login</a></p>
+        </div>
+</div> 
+  
+  

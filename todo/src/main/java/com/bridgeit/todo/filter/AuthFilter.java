@@ -42,23 +42,26 @@ public class AuthFilter implements Filter {
 		// place your code here
 		
 		HttpServletRequest req=(HttpServletRequest) request;
-		HttpServletResponse resp=(HttpServletResponse) response;
+		//HttpServletResponse resp=(HttpServletResponse) response;
 		
 		WebApplicationContext context=WebApplicationContextUtils.getWebApplicationContext(request.getServletContext());
+		
 		TokenUtility tokenUtility=context.getBean(TokenUtility.class);
 		
 		String accesstoken=req.getHeader("accesstoken");
-	//	String refreshtoken=req.getHeader("refreshtoken");
-		String tokencreationtime=req.getHeader("tokencreationtime");
-		long creationtime=Long.parseLong(tokencreationtime);
 		
-		System.out.println(accesstoken +" "+ creationtime);
 		
-		Boolean isExpire=tokenUtility.validateToken(accesstoken,creationtime);
+		System.out.println(accesstoken);
+		
+		Boolean valid=tokenUtility.validateAccessToken(accesstoken);
 
-		if(isExpire == false)
+		if(valid == false)
 		{
 			System.out.println("Access Token is Expired");
+			
+			String result="Access Token expired";
+			String jsonResp = "{\"status\":\"-4\",\"errorMessage\":\"Access token is expired. Generate new Access Tokens\"}";
+			
 		}
 		else
 		{

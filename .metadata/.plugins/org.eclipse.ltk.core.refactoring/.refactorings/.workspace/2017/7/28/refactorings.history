@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Delete resource &apos;todo/src/main/java/com/bridgeit/todo/model/Token.java&apos;" deleteContents="false" description="Delete resource &apos;todo/src/main/java/com/bridgeit/todo/model/Token.java&apos;" element1="/todo/src/main/java/com/bridgeit/todo/model/Token.java" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1499768803733"/>
+</session>

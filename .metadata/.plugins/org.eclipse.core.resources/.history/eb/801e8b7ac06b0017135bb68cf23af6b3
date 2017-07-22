@@ -1,0 +1,9 @@
+var myApp=angular.module("myApp",['ui.router'])
+.config(function($stateprovider){
+	$stateprovider.state
+	{"login"{
+		url:"/login",
+		template:"templates/login.html"
+	}
+	}
+})
