@@ -41,10 +41,31 @@ public class TokenDaoImpl implements TokenDao
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.getCurrentSession();
 		
-		Query query = session.createQuery("from Token where accessToken=:accessToken");
-		query.setParameter("accessToken", refreshToken);
+		Query query = session.createQuery("from Token where refreshToken=:refreshToken");
+		query.setParameter("refreshToken", refreshToken);
 		
 		return (Token) query.uniqueResult();
+	}
+
+	@Override
+	public void updateToken(Token token) 
+	{
+		// TODO Auto-generated method stub
+		Session session=sessionFactory.getCurrentSession();
+		
+		session.update(token);
+	}
+
+	@Override
+	public void deleteToken(String refreshToken) 
+	{
+		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub
+		Session session=sessionFactory.getCurrentSession();
+				
+		Query query=session.createQuery("delete from Token where refreshToken =:refreshToken");
+		query.setParameter("refreshToken", refreshToken);
+		query.executeUpdate();
 	}
 
 }

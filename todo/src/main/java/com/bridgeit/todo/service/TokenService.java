@@ -31,4 +31,17 @@ public class TokenService
 	{
 		return tokenDao.checkRefreshToken(refreshToken);
 	}
+	
+	@Transactional
+	public void updateToken(Token token)
+	{
+		tokenDao.updateToken(token);
+	}
+	
+	@Transactional
+	public void deleteToken(String refreshToken)
+	{
+		tokenDao.deleteToken(refreshToken);
+	}
+	
 }

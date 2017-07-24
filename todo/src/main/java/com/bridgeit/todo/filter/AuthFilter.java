@@ -62,11 +62,12 @@ public class AuthFilter implements Filter {
 			String result="Access Token expired";
 			String jsonResp = "{\"status\":\"-4\",\"errorMessage\":\"Access token is expired. Generate new Access Tokens\"}";
 			
+			response.getWriter().write(jsonResp);
+			return;
 		}
-		else
-		{
-			chain.doFilter(request, response);
-		}
+		
+		chain.doFilter(request, response);
+		
 	}
 
 	

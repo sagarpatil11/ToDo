@@ -33,6 +33,11 @@ public class TokenUtility
 	{
 		System.out.println("in validate");
 		
+		if(accessToken == null)
+		{
+			return false;
+		}
+		
 		Token token=tokenService.checkAccessToken(accessToken);
 		
 		if(token != null)
@@ -40,13 +45,14 @@ public class TokenUtility
 			long difference = new Date().getTime() - token.getAccessTokenCreation().getTime();
 			long differenceinseconds = TimeUnit.MILLISECONDS.toSeconds(difference);
 			
-			if(differenceinseconds > 60)
+			if(differenceinseconds > 20)
 			{
 				return false;
 			}
 			else
 			{
 				return true;
+				
 			}
  		}
 		
@@ -54,9 +60,14 @@ public class TokenUtility
 		return false;
 	}
 	
-	public Boolean validateRefreshToken(String refreshToken)
+	public Token validateRefreshToken(String refreshToken)
 	{
-		System.out.println("in validate");
+		System.out.println(refreshToken);
+		
+		if(refreshToken == null)
+		{
+			return null;
+		}
 		
 		Token token=tokenService.checkRefreshToken(refreshToken);
 		
@@ -66,17 +77,34 @@ public class TokenUtility
 			
 			long differenceinseconds = TimeUnit.MILLISECONDS.toSeconds(difference);
 			
-			if(differenceinseconds > 60)
+			if(differenceinseconds > 120)
 			{
-				return false;
+				System.out.println("Refresh token expired");
+				return null;
 			}
 			else
 			{
+				Token newToken=tokenGenerator();
+				System.out.println(token.getUser());
 				
+				newToken.setUser(token.getUser());
+				newToken.setId(token.getId());
+				
+				try
+				{
+					tokenService.updateToken(newToken);
+					
+					System.out.println(newToken);
+				} 
+				catch (Exception e) 
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				return newToken;
 			}
  		}
 		
-		
-		return false;
+		return null;
 	}
 }

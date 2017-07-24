@@ -113,6 +113,8 @@ public class UserLoginController
 					
 				}
 				
+				token.setUser(null);
+				
 				userResponse.setStatus(1);
 				userResponse.setMessage("Login Successfull");
 				userResponse.setToken(token);
@@ -152,5 +154,29 @@ public class UserLoginController
 		userResponse.setMessage("User Logout Successfully");
 		
 		return new ResponseEntity<Response>(userResponse,HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="/newAccessToken",method=RequestMethod.POST)
+	public ResponseEntity<Response> getNewAccessTokenByRefreshToken(HttpServletRequest request)
+	{
+		String refreshToken=request.getHeader("refreshToken");
+		
+		Token token=tokenUtility.validateRefreshToken(refreshToken);
+		
+		if(token != null)
+		{
+			userResponse.setStatus(1);
+			userResponse.setMessage("New Access Token generated");
+			userResponse.setToken(token);
+			
+			return new ResponseEntity<Response>(userResponse,HttpStatus.OK);
+		}
+		
+		tokenService.deleteToken(refreshToken);
+		
+		errorResponse.setStatus(-1);
+		errorResponse.setMessage("Refresh Token expired");
+		
+		return new ResponseEntity<Response>(errorResponse,HttpStatus.OK);
 	}
 }

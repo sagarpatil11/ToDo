@@ -9,4 +9,8 @@ public interface TokenDao
 	public Token checkAccessToken(String accessToken);
 	
 	public Token checkRefreshToken(String refreshToken);
+	
+	public void updateToken(Token token);
+	
+	public void deleteToken(String refreshToken);
 }
