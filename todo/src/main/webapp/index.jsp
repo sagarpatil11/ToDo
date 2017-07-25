@@ -8,6 +8,7 @@
 
 
 <link rel="stylesheet" href="css/login.css">
+<link rel="stylesheet" href="css/navbar.css">
 
  </head>
 <body data-ng-app="todo">
