@@ -1,5 +1,0 @@
-package com.bridgeit.todo.dao.daointerface;
-
-public interface TokenDao {
-
-}

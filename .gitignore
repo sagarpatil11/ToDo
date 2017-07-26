@@ -37,7 +37,8 @@ ehthumbs.db
 Thumbs.db
 *.out
 bower_components
-.metatdata
+.metadata
 .recommenders
-.projects
-
+.project
+RemoteSystemsTempFiles
+Servers

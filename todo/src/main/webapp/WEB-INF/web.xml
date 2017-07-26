@@ -28,7 +28,7 @@ id="WebApp_ID" version="2.5">
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 	
-	<filter>
+	<!-- <filter>
 	<filter-name>authenticationFilter</filter-name>
 	<filter-class>com.bridgeit.todo.filter.AuthFilter</filter-class>
 	</filter>
@@ -40,5 +40,5 @@ id="WebApp_ID" version="2.5">
 		<url-pattern>/deleteNote</url-pattern>
 		<url-pattern>/getNotes</url-pattern>
 	</filter-mapping>
-  
+   -->
 </web-app>

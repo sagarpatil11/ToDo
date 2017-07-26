@@ -1,1 +1,125 @@
-<div><h1>Home Page</h1></div>
+<!-- <div><h1>Home Page</h1></div>
+<div class="card" style="width: 20rem;">
+  <div class="card-block">
+    <h4 class="card-title">Card title</h4>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  </div>
+</div> -->
+
+
+<nav class="navbar navbar-inverse navbar-fixed-top"
+	style="background-color: #f9b902;"navigation">
+	<div class="container-fluid" id="navbar1">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed"
+				data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+				aria-controls="navbar">
+				<span class="sr-only">Toggle navigation</span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#menu-toggle" id="menu-toggle"><span
+				aria-hidden="true"><img src="image/icons8-Menu_20.png"></span></a>
+			<a class="navbar-brand" id="website-name" href="#"><b>FunDo</b>
+				Notes</a>
+		</div>
+
+		<div id="navbar" class="navbar-collapse collapse">
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="#"><span aria-hidden="true"><img alt=""
+							src="image/refresh.svg"></span></a></li>
+				<li><a href="#"><span aria-hidden="true"></span><img alt=""
+						src="image/grid.svg"></a></li>
+				<li><a href="#"><span aria-hidden="true"></span><img alt=""
+						src="image/list.svg"></a></li>
+				<li><a href="#"><span class="glyphicon glyphicon-off"
+						aria-hidden="true"></span> Logout</a></li>
+			</ul>
+
+			<form class="navbar-form navbar-right" action="#" method="GET">
+				<div class="input-group">
+					<div class="input-group-btn">
+						<button type="submit" class="btn">
+							<span class="glyphicon glyphicon-search"></span>
+						</button>
+					</div>
+					<input type="search" class="form-control" placeholder="Search..."
+						id="query" name="search" value="">
+					<!-- <div class="input-group-btn">
+                    	<button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-search"></span></button>
+                  	</div> -->
+				</div>
+			</form>
+
+		</div>
+	</div>
+</nav>
+
+<div id="wrapper" class="toggled">
+	<div class="container-fluid">
+		<!-- Sidebar -->
+		<div id="sidebar-wrapper">
+			<ul class="sidebar-nav">
+				<li class="sidebar-brand"><br></li>
+				<li><a href="#"> <span aria-hidden="true"><img
+							alt="" src="image/noteicon.png"></span>&nbsp&nbsp&nbsp Notes
+				</a></li>
+				<li><a href="#"><span aria-hidden="true"><img alt=""
+							src="image/icons8-Hand Up-20.png"></span>&nbsp&nbsp&nbsp&nbsp
+						Remainders</a></li>
+				<li><a href="#"><span aria-hidden="true"><img alt=""
+							src="image/archieve.png"></span>&nbsp&nbsp&nbsp&nbsp Archieve</a></li>
+				<li><a href="#"><span aria-hidden="true"><img alt=""
+							src="image/icons8-Trash Can-20.png"></span>&nbsp&nbsp&nbsp&nbsp
+						Trash</a></li>
+
+			</ul>
+		</div>
+		<!-- /#sidebar-wrapper -->
+		<div contenteditable="true" aria-multiline="true" role="textbox"
+			class="notranslate IZ65Hb-YPqjbf h1U9Be-YPqjbf" tabindex="0"
+			spellcheck="false"></div>
+		<!-- Page Content -->
+
+		<div id="page-content-wrapper">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-12">
+
+						<div class="card" style="width:400px; background-color: white">
+							<div ng-click="addNote()">
+								<input type="text" ng-model="title" placeholder="Title..." style="outline: none;border: none">
+							</div>
+							<div ng-show="shownote">
+								<div contenteditable1 contentEditable=true  ng-model="description" data-placeholder="Take a note..."
+									style="outline: none"></div>
+								<div>
+									<button type="button" ng-click="submitNote()" style="float: right";>Done</button>
+								</div>
+							</div>
+						</div>
+
+						
+                      	<!--  <div class="card" style="width: 20rem;">
+  							<div class="card-block">
+   								<h4 class="card-title">Card title</h4>
+    							<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  							</div>
+						</div> --> 
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /#page-content-wrapper -->
+	</div>
+</div>
+<!-- /#wrapper -->
+
+
+
+<script>
+$("#menu-toggle").click(function(e) {
+    e.preventDefault();
+    $("#wrapper").toggleClass("toggled");
+});
+</script>

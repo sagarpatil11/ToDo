@@ -13,7 +13,8 @@ myApp.controller( 'loginCtrl',function($scope, $state, loginService)
 		{
 			if(response.data.status == 1)
 			{
-				console.log(response.data);
+				localStorage.setItem("accessToken", response.data.token.accessToken);
+				
 				$state.go('home');
 			}
 			else
