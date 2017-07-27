@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.SystemEnvironmentPropertySource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,7 +31,7 @@ public class TaskController
 	UserResponse userResponse=new UserResponse();
 	ErrorResponse errorResponse=new ErrorResponse();
 	
-	//..........................Add Notes...........................///
+	//..........................Add Notes...........................//
 	
 	@RequestMapping(value="/addNote")
 	public ResponseEntity<Response> addNote(@RequestBody Task task,HttpServletRequest request)
@@ -42,19 +43,23 @@ public class TaskController
 		
 		task.setCreation_date(new Date());
 		
-		try {
+		try 
+		{
 			taskService.addNote(task);
 			
-			userResponse.setStatus(1);
+			userResponse.setStatus(4);
 			userResponse.setMessage("Note added");
 			
 			return new ResponseEntity<Response>(userResponse,HttpStatus.OK);
-		} catch (Exception e) {
+		} 
+		catch (Exception e) 
+		{
 			// TODO Auto-generated catch block
 			errorResponse.setStatus(-1);
 			errorResponse.setMessage("Note not added");
 			
 			return new ResponseEntity<Response>(errorResponse,HttpStatus.OK);
+			
 		}
 	} 
 	
@@ -84,9 +89,11 @@ public class TaskController
 	@RequestMapping(value="/deleteNote")
 	public void deleteTask(@RequestParam int tid)
 	{
-		try {
+		try 
+		{
 			taskService.deleteTask(tid);
-		} catch (Exception e) {
+		} 
+		catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -103,10 +110,12 @@ public class TaskController
 		User user=(User) session.getAttribute("userSession");
 		
 		List<Task> notes;
-		try {
+		try 
+		{
 			notes = taskService.getNotes(user.getId());
 			System.out.println(notes.toString());
-		} catch (Exception e) {
+		} 
+		catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

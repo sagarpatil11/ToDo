@@ -160,6 +160,7 @@ public class UserLoginController
 	public ResponseEntity<Response> getNewAccessTokenByRefreshToken(HttpServletRequest request)
 	{
 		String refreshToken=request.getHeader("refreshToken");
+		System.out.println("new access token "+refreshToken);
 		
 		Token token=tokenUtility.validateRefreshToken(refreshToken);
 		

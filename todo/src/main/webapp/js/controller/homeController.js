@@ -1,6 +1,6 @@
 myApp.controller( 'homeCtrl',function($scope, $state, homeService){
 	
-	$scope.addNote=function(){
+	$scope.inputNote=function(){
 		console.log("shownote");
 		
 		$scope.shownote=true;
@@ -11,24 +11,39 @@ myApp.controller( 'homeCtrl',function($scope, $state, homeService){
 		$scope.shownote=false;
 		
 		var noteData={};
-		console.log($scope.title);
+		
 		noteData.title=$scope.title;
 		noteData.description=$scope.description;
 		
-		console.log(noteData);
+		$scope.title="";
+		$scope.description="";
 		
 		var httpnote=homeService.addNote(noteData);
 		
-		httpnote.then=function(response)
+		httpnote.then=function(response1)
 		{
-			if(response.data.status == 1)
+			console.log(response1.data);
+			if(response1.data.status == 4)
 			{
-				console.log(response.data);
+				console.log("note added");
 			}
-			else
+			if(response1.data.status == -4)
 			{
-				console.log(response.data);
+				console.log("access token expired");
+				
+				homeService.getNewAccessToken().then(function(response2){
+					if(response2.data.status == 1)
+					{
+						localStorage.setItem("accessToken", response2.data.token.accessToken);
+						localStorage.setItem("refreshToken", response2.data.token.refreshToken);
+					}
+					else
+					{
+						$state.go('login');
+					}
+				})
 			}
+			
 		}
 	}
 })
@@ -38,12 +53,24 @@ myApp.controller( 'homeCtrl',function($scope, $state, homeService){
 
 myApp.service("homeService", function($http){
 	
-	console.log("in homeservice")
+	console.log("in homeservice");
 	this.addNote=function(noteData){
 		return $http({
 			url:"addNote",
 			method:"post",
-			data:noteData
+			data:noteData,
+			headers:{"accessToken":localStorage.getItem("accessToken")}
 		})
 	}
+	
+	this.getNewAccessToken=function(){
+		console.log("in homeservice2");
+		return $http({
+						url:"newAccessToken",
+						method:"post",
+						headers:{"refreshToken":localStorage.getItem("refreshToken")}
+					})
+		}
 })
+
+

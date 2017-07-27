@@ -1,4 +1,9 @@
 @CHARSET "UTF-8";
+
+.body{
+	background-color: #ddd;	
+}
+
 #wrapper {
     padding-left: 0;
     -webkit-transition: all 0.5s ease;
@@ -19,7 +24,7 @@
     margin-left: -250px;
     width: 0;
     height: 100%;
-    background:#f5f5f5;
+    background:#ddd;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
@@ -119,8 +124,8 @@
 
 #navbar1{
 	
-	height: 70px;
-	padding: 12px 12px;
+	height: 65px;
+	padding: 10px 10px;
 }
 
  #menu-toggle{
@@ -142,8 +147,53 @@
     color: black;
 }
 
-[contentEditable=true]:empty:not(:focus):before{
-    content:attr(data-placeholder) }
+[contentEditable=true]:empty:before{
+    content:attr(data-placeholder);
+    color: grey;
+    font-size: 15px;
+ }
+
+#card{
+	width:600px; 
+	margin-top:70px;
+	background-color: white;
+	padding: 0px;
+}
+#donebutton{
+	background-color: white;
+	border: none;
+	float: right;
+	padding-right: 20px;
+}
+
+#title{
+	min-height: 30px;
+	padding-left: 15px;
+	padding-top: 10px;
+	padding-bottom: 15px;
+	font-size: initial;
+	font-weight: bold;
+	outline: none;
+}
+
+#description{
+	min-height: 40px;
+	padding-left: 15px;
+	padding-top: 10px;
+	padding-bottom: 15px;
+	font-size: initial;
+	outline: none;
+}
+
+#notefooter{
+	min-height: 30px;
+	padding-top: 10px;
+	padding-bottom: 15px;
+}
+
+#img{
+	padding-left: 25px;
+}
 
 
 /* #query{

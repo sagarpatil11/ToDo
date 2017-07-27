@@ -14,6 +14,9 @@ myApp.controller( 'loginCtrl',function($scope, $state, loginService)
 			if(response.data.status == 1)
 			{
 				localStorage.setItem("accessToken", response.data.token.accessToken);
+				localStorage.setItem("refreshToken", response.data.token.refreshToken);
+				
+				console.log(response.data);
 				
 				$state.go('home');
 			}
@@ -21,6 +24,7 @@ myApp.controller( 'loginCtrl',function($scope, $state, loginService)
 			{
 				console.log("login unsuccessfull");
 				console.log(response.data);
+				
 				$state.go('login');
 			}
 			/*else if(response.data.status == -2)
