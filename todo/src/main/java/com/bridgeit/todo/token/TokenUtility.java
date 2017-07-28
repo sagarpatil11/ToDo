@@ -7,12 +7,16 @@ import java.util.concurrent.TimeUnit;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.bridgeit.todo.model.Token;
+import com.bridgeit.todo.responsemsg.TokenResponse;
 import com.bridgeit.todo.service.TokenService;
 
 public class TokenUtility 
 {
 	@Autowired
 	TokenService tokenService;
+	
+	@Autowired
+	TokenResponse tokenResponse;
 	
 	public Token tokenGenerator()
 	{
@@ -29,13 +33,18 @@ public class TokenUtility
 		return token;
 	}
 	
-	public Boolean validateAccessToken(String accessToken)
+	public TokenResponse validateAccessToken(String accessToken)
 	{
 		System.out.println("in validate");
+		System.out.println(accessToken);
 		
 		if(accessToken == null)
 		{
-			return false;
+			tokenResponse.setStatus(-2);
+			tokenResponse.setMessage("Access Token is null");
+			tokenResponse.setToken(null);
+			
+			return tokenResponse;
 		}
 		
 		Token token=tokenService.checkAccessToken(accessToken);
@@ -45,28 +54,37 @@ public class TokenUtility
 			long difference = new Date().getTime() - token.getAccessTokenCreation().getTime();
 			long differenceinseconds = TimeUnit.MILLISECONDS.toSeconds(difference);
 			
-			if(differenceinseconds > 60)
+			if(differenceinseconds > 300)
 			{
-				return false;
+				tokenResponse.setStatus(-4);
+				tokenResponse.setMessage("Access Token is Expired");
+				return tokenResponse;
 			}
 			else
 			{
-				return true;
+				tokenResponse.setStatus(4);
+				tokenResponse.setMessage("Access Token is valid");
+				return tokenResponse;
 				
 			}
  		}
 		
-		
-		return false;
+		tokenResponse.setStatus(-3);
+		tokenResponse.setMessage("Access token sent is Wrong");
+		return tokenResponse;
 	}
 	
-	public Token validateRefreshToken(String refreshToken)
+	public TokenResponse validateRefreshToken(String refreshToken)
 	{
 		System.out.println(refreshToken);
 		
 		if(refreshToken == null)
 		{
-			return null;
+			tokenResponse.setStatus(-2);
+			tokenResponse.setMessage("Refresh Token is null");
+			tokenResponse.setToken(null);
+			
+			return tokenResponse;
 		}
 		
 		Token token=tokenService.checkRefreshToken(refreshToken);
@@ -80,7 +98,11 @@ public class TokenUtility
 			if(differenceinseconds > 600)
 			{
 				System.out.println("Refresh token expired");
-				return null;
+				
+				tokenResponse.setStatus(-4);
+				tokenResponse.setMessage("Refresh Token is Expired");
+				
+				return tokenResponse;
 			}
 			else
 			{
@@ -95,16 +117,34 @@ public class TokenUtility
 					tokenService.updateToken(newToken);
 					
 					System.out.println(newToken);
+					newToken.setUser(null);
+					
+					
+					
+					tokenResponse.setStatus(4);
+					tokenResponse.setMessage("Refresh Token is valid.New Access Token generated.");
+					tokenResponse.setToken(newToken);
+					
+					return tokenResponse;
 				} 
 				catch (Exception e) 
 				{
 					// TODO Auto-generated catch block
-					e.printStackTrace();
+					//e.printStackTrace();
+					tokenResponse.setStatus(-3);
+					tokenResponse.setMessage("Refresh token sent is Wrong");
+					tokenResponse.setToken(null);
+					
+					return tokenResponse;
 				}
-				return newToken;
+				
 			}
  		}
 		
-		return null;
+		tokenResponse.setStatus(-3);
+		tokenResponse.setMessage("Refresh token sent is Wrong");
+		tokenResponse.setToken(null);
+		
+		return tokenResponse;
 	}
 }

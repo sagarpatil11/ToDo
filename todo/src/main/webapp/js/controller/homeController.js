@@ -7,7 +7,7 @@ myApp.controller( 'homeCtrl',function($scope, $state, homeService){
 	}
 	
 	$scope.submitNote=function(){
-		
+		console.log("inside note");
 		$scope.shownote=false;
 		
 		var noteData={};
@@ -20,14 +20,15 @@ myApp.controller( 'homeCtrl',function($scope, $state, homeService){
 		
 		var httpnote=homeService.addNote(noteData);
 		
-		httpnote.then=function(response1)
+		httpnote.then(function(response1)
 		{
-			console.log(response1.data);
+			console.log(response1);
 			if(response1.data.status == 4)
 			{
 				console.log("note added");
+				$scope.showNotes();
 			}
-			if(response1.data.status == -4)
+			else
 			{
 				console.log("access token expired");
 				
@@ -36,16 +37,28 @@ myApp.controller( 'homeCtrl',function($scope, $state, homeService){
 					{
 						localStorage.setItem("accessToken", response2.data.token.accessToken);
 						localStorage.setItem("refreshToken", response2.data.token.refreshToken);
+						
+						homeService.addNote(noteData);
 					}
 					else
 					{
+						console.log(response2.data);
 						$state.go('login');
 					}
 				})
 			}
 			
-		}
+			
+		});
 	}
+	
+	$scope.showNotes=function(){
+	homeService.getNotes().then(function(resp){
+		console.log(resp);
+		$scope.records=resp.data;
+	})
+	}
+	$scope.showNotes();
 })
 
 
@@ -68,9 +81,41 @@ myApp.service("homeService", function($http){
 		return $http({
 						url:"newAccessToken",
 						method:"post",
-						headers:{"refreshToken":localStorage.getItem("refreshToken")}
+						headers:{"refsagar
+
+dgsgsg
+gsgsdg
+
+sgsdgsdg
+hdfhdfhdf
+hdfhdfh
+test
+
+adfdgfdf
+
+hjhgjhgkhk
+
+vnghj
+hjhjh
+jjjjkj
+
+
+
+dfafa
+
+adfafaff
+ffffffreshToken":localStorage.getItem("refreshToken")}
 					})
 		}
+	
+	this.getNotes=function(){
+		console.log("in getNotes service");
+		return $http({
+						url:"getNotes",
+						method:"get",
+						headres:{"refreshToken":localStorage.getItem("refreshToken")}
+				})
+	}
 })
 
 

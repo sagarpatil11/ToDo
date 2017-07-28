@@ -21,6 +21,7 @@ import com.bridgeit.todo.model.Token;
 import com.bridgeit.todo.model.User;
 import com.bridgeit.todo.responsemsg.ErrorResponse;
 import com.bridgeit.todo.responsemsg.Response;
+import com.bridgeit.todo.responsemsg.TokenResponse;
 import com.bridgeit.todo.responsemsg.UserResponse;
 import com.bridgeit.todo.securepassword.HashSecurePassword;
 import com.bridgeit.todo.service.TokenService;
@@ -157,27 +158,27 @@ public class UserLoginController
 	}
 	
 	@RequestMapping(value="/newAccessToken",method=RequestMethod.POST)
-	public ResponseEntity<Response> getNewAccessTokenByRefreshToken(HttpServletRequest request)
+	public ResponseEntity<TokenResponse> getNewAccessTokenByRefreshToken(HttpServletRequest request)
 	{
 		String refreshToken=request.getHeader("refreshToken");
 		System.out.println("new access token "+refreshToken);
 		
-		Token token=tokenUtility.validateRefreshToken(refreshToken);
+		TokenResponse tokenResponse=tokenUtility.validateRefreshToken(refreshToken);
 		
-		if(token != null)
+		
+		/*if(token != null)
 		{
 			userResponse.setStatus(1);
 			userResponse.setMessage("New Access Token generated");
 			userResponse.setToken(token);
-			
+		
 			return new ResponseEntity<Response>(userResponse,HttpStatus.OK);
 		}
 		
-		tokenService.deleteToken(refreshToken);
+			errorResponse.setStatus(-1);
+			errorResponse.setMessage("Refresh token expired");*/
+			
+		return new ResponseEntity<TokenResponse>(tokenResponse,HttpStatus.OK);
 		
-		errorResponse.setStatus(-1);
-		errorResponse.setMessage("Refresh Token expired");
-		
-		return new ResponseEntity<Response>(errorResponse,HttpStatus.OK);
 	}
 }

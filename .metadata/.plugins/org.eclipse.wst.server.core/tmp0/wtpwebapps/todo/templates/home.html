@@ -106,7 +106,24 @@
 								<button id="donebutton" type="button" ng-click="submitNote()">Done</button>
 							</div>
 							
-						</div>
+						</div> 
+						
+						
+						<!-- list of notes -->
+						
+						<div  ng-repeat="data in records">
+							<div  class="col-lg-4" style="margin-top:36px">
+								<div class="card" id="notes">
+									<div id="noteTitle" ng-bind-html="data.title">
+										
+									</div>
+									<br>
+									<div id="notesDescription" ng-bind-html="data.description"> 
+									
+									</div>
+								</div>
+							</div>
+						</div>            
 
 						
                       	<!--  <div class="card" style="width: 20rem;">

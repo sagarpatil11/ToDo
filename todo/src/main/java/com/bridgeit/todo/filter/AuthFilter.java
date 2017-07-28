@@ -14,7 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
+import com.bridgeit.todo.responsemsg.TokenResponse;
 import com.bridgeit.todo.token.TokenUtility;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * Servlet Filter implementation class Filter
@@ -48,21 +50,28 @@ public class AuthFilter implements Filter {
 		
 		TokenUtility tokenUtility=context.getBean(TokenUtility.class);
 		
+		TokenResponse tokenResponse=context.getBean(TokenResponse.class);
+		
 		String accesstoken=req.getHeader("accesstoken");
 		
 		
 		System.out.println(accesstoken);
 		
-		Boolean valid=tokenUtility.validateAccessToken(accesstoken);
+		tokenResponse=tokenUtility.validateAccessToken(accesstoken);
 
-		if(valid == false)
+		ObjectMapper mapper = new ObjectMapper();
+		
+		if(tokenResponse.getStatus() == -4)
 		{
 			System.out.println("Access Token is Expired");
 			
-			String result="Access Token expired";
-			String jsonResp = "{\"status\":-4,\"errorMessage\":\"Access token is expired. Generate new Access Tokens\"}";
+			//String result="Access Token expired";
+			//String jsonResp = "{\"status\":-4,\"errorMessage\":\"Access token is expired. Generate new Access Tokens\"}";
 			
-			response.getWriter().write(jsonResp);
+			String jsonResponse= mapper.writeValueAsString(tokenResponse);
+			
+			response.getWriter().write(jsonResponse);
+			
 			return;
 		}
 		

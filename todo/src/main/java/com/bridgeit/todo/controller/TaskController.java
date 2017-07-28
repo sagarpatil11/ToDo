@@ -104,22 +104,24 @@ public class TaskController
 	//..........................get notes..........................//
 	
 	@RequestMapping(value="/getNotes")
-	public void getNotes(HttpServletRequest request)
+	public ResponseEntity<List<Task>> getNotes(HttpServletRequest request)
 	{
 		HttpSession session=request.getSession();
 		User user=(User) session.getAttribute("userSession");
-		
-		List<Task> notes;
+		//System.out.println(user.getId());
+	
 		try 
 		{
-			notes = taskService.getNotes(user.getId());
-			System.out.println(notes.toString());
+			List taskList = taskService.getNotes(user.getId());
+			System.out.println(taskList.toString());
+			
+			return new ResponseEntity<List<Task>>(taskList, HttpStatus.OK);
 		} 
 		catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		return null;
 		
 	}
 }
