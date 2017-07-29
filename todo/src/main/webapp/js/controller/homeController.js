@@ -25,6 +25,7 @@ myApp.controller( 'homeCtrl',function($scope, $state, homeService){
 			console.log(response1);
 			if(response1.data.status == 4)
 			{
+				$scope.notesList=response1.data.list;
 				console.log("note added");
 				$scope.showNotes();
 			}
@@ -52,10 +53,41 @@ myApp.controller( 'homeCtrl',function($scope, $state, homeService){
 		});
 	}
 	
+	
+	//..........Delete note.............//
+	
+	
+	$scope.deleteNote=function(tid){
+		
+		console.log(tid);
+		//var id={"tid":id};
+		homeService.deleteNote(tid).then(function(response){
+			$scope.notesList=response.data.list;
+		})
+		
+	}
+		
+	
+	//..........logout.............//
+	
+	
+	$scope.logout=function(){
+		console.log("in logout");
+		
+		homeService.logout().then(function(response){
+			
+			if(response.data.status == 1)
+			{
+				console.log("logout success");
+				$state.go("login");
+			}	
+		})
+	}
+	
 	$scope.showNotes=function(){
 	homeService.getNotes().then(function(resp){
 		console.log(resp);
-		$scope.records=resp.data;
+		$scope.notesList=resp.data;
 	})
 	}
 	$scope.showNotes();
@@ -81,30 +113,7 @@ myApp.service("homeService", function($http){
 		return $http({
 						url:"newAccessToken",
 						method:"post",
-						headers:{"refsagar
-
-dgsgsg
-gsgsdg
-
-sgsdgsdg
-hdfhdfhdf
-hdfhdfh
-test
-
-adfdgfdf
-
-hjhgjhgkhk
-
-vnghj
-hjhjh
-jjjjkj
-
-
-
-dfafa
-
-adfafaff
-ffffffreshToken":localStorage.getItem("refreshToken")}
+						headers:{"refreshToken":localStorage.getItem("refreshToken")}
 					})
 		}
 	
@@ -113,9 +122,29 @@ ffffffreshToken":localStorage.getItem("refreshToken")}
 		return $http({
 						url:"getNotes",
 						method:"get",
-						headres:{"refreshToken":localStorage.getItem("refreshToken")}
+						headers:{"accessToken":localStorage.getItem("accessToken")}
 				})
 	}
+	
+	this.deleteNote=function(tid){
+		console.log("in deletenote service."+tid);
+		return $http({
+						url:"deleteNote/"+tid,
+						method:"post",
+						headers:{"accessToken":localStorage.getItem("accessToken")}
+				})
+	}
+	
+	
+	this.logout=function(){
+		console.log("in service logout");
+		return $http({
+						url:"logout",
+						method:"get",
+						headers:{"accessToken":localStorage.getItem("accessToken")}
+		})		
+	}
+	
 })
 
 

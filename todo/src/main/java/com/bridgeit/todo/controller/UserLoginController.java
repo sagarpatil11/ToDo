@@ -147,20 +147,36 @@ public class UserLoginController
 	@RequestMapping(value="/logout")
 	public ResponseEntity<Response> logout(HttpServletRequest request) 
 	{
-		HttpSession session=request.getSession();
+		/*HttpSession session=request.getSession();*/
 		
-		userRegService.logout(session);
+		String accessToken=request.getHeader("accessToken");
+		System.out.println("in logout "+accessToken);
 		
-		userResponse.setStatus(1);
-		userResponse.setMessage("User Logout Successfully");
-		
-		return new ResponseEntity<Response>(userResponse,HttpStatus.OK);
+		try 
+		{
+			
+			userRegService.logout(accessToken);
+			
+			userResponse.setStatus(1);
+			userResponse.setMessage("User Logout Successfully");
+			
+			return new ResponseEntity<Response>(userResponse,HttpStatus.OK);
+		} 
+		catch (Exception e) 
+		{
+			// TODO Auto-generated catch block
+			errorResponse.setStatus(-1);
+			errorResponse.setMessage("DataBase Problem");
+			
+			return new ResponseEntity<Response>(errorResponse,HttpStatus.OK);
+		}
 	}
 	
 	@RequestMapping(value="/newAccessToken",method=RequestMethod.POST)
 	public ResponseEntity<TokenResponse> getNewAccessTokenByRefreshToken(HttpServletRequest request)
 	{
 		String refreshToken=request.getHeader("refreshToken");
+		
 		System.out.println("new access token "+refreshToken);
 		
 		TokenResponse tokenResponse=tokenUtility.validateRefreshToken(refreshToken);

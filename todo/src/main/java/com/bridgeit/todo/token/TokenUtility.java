@@ -33,10 +33,11 @@ public class TokenUtility
 		return token;
 	}
 	
+	//..................validate access token.......................//
+	
 	public TokenResponse validateAccessToken(String accessToken)
 	{
-		System.out.println("in validate");
-		System.out.println(accessToken);
+		System.out.println("in validateAccessToken() "+accessToken);
 		
 		if(accessToken == null)
 		{
@@ -51,17 +52,23 @@ public class TokenUtility
 		
 		if(token != null)
 		{
+			System.out.println(token.toString());
+			
 			long difference = new Date().getTime() - token.getAccessTokenCreation().getTime();
 			long differenceinseconds = TimeUnit.MILLISECONDS.toSeconds(difference);
 			
 			if(differenceinseconds > 300)
 			{
+				System.out.println("access token expired");
+				
 				tokenResponse.setStatus(-4);
 				tokenResponse.setMessage("Access Token is Expired");
 				return tokenResponse;
 			}
 			else
 			{
+				System.out.println("access token valid");
+				
 				tokenResponse.setStatus(4);
 				tokenResponse.setMessage("Access Token is valid");
 				return tokenResponse;
@@ -73,6 +80,12 @@ public class TokenUtility
 		tokenResponse.setMessage("Access token sent is Wrong");
 		return tokenResponse;
 	}
+
+	
+	
+	
+	//..................validate refresh token.......................//
+	
 	
 	public TokenResponse validateRefreshToken(String refreshToken)
 	{
@@ -91,6 +104,8 @@ public class TokenUtility
 		
 		if(token != null)
 		{
+			System.out.println(token.toString());
+			
 			long difference = new Date().getTime() - token.getRefreshTokenCreation().getTime();
 			
 			long differenceinseconds = TimeUnit.MILLISECONDS.toSeconds(difference);
@@ -106,6 +121,8 @@ public class TokenUtility
 			}
 			else
 			{
+				System.out.println("refresh token valid");
+				
 				Token newToken=tokenGenerator();
 				System.out.println(token.getUser());
 				

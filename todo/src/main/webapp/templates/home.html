@@ -32,7 +32,7 @@
 						src="image/grid.svg"></a></li>
 				<li><a href="#"><span aria-hidden="true"></span><img alt=""
 						src="image/list.svg"></a></li>
-				<li><a href="#"><span class="glyphicon glyphicon-off"
+				<li><a href="" ng-click="logout()"><span class="glyphicon glyphicon-off"
 						aria-hidden="true"></span> Logout</a></li>
 			</ul>
 
@@ -85,7 +85,8 @@
 		<div id="page-content-wrapper">
 			<div class="container-fluid">
 				<div class="row">
-					<div class="col-lg-12">
+			<!-- 	<div class="col-lg-1"></div> -->
+					<div class="col-lg-10" style="width:784px">
 
 						<div class="card" id="card">
 							
@@ -110,10 +111,10 @@
 						
 						
 						<!-- list of notes -->
-						
-						<div  ng-repeat="data in records">
+						<div id="listnotes">
+						 <div  ng-repeat="data in notesList">
 							<div  class="col-lg-4" style="margin-top:36px">
-								<div class="card" id="notes">
+								<div id="notes">
 									<div id="noteTitle" ng-bind-html="data.title">
 										
 									</div>
@@ -121,11 +122,26 @@
 									<div id="notesDescription" ng-bind-html="data.description"> 
 									
 									</div>
+									<div>
+										<button type="button" ng-click="deleteNote(data.tid)">delete</button>
+									</div>
 								</div>
 							</div>
-						</div>            
-
+						</div>           
+						</div>
 						
+						<!-- <div class="card col-lg-4" style="margin-top: 36px" id="notes" ng-repeat="data in notesList">
+							<div id="noteTitle" ng-bind-html="data.title" >
+							
+							</div>
+							<div id="noteTitle" ng-bind-html="data.title">
+							
+							</div>
+							<div>
+							
+							</div>						
+						</div>
+						 -->
                       	<!--  <div class="card" style="width: 20rem;">
   							<div class="card-block">
    								<h4 class="card-title">Card title</h4>
@@ -133,6 +149,7 @@
   							</div>
 						</div> --> 
 					</div>
+					<!-- <div class="col-lg-1"></div> -->
 				</div>
 			</div>
 		</div>

@@ -43,9 +43,8 @@ public class UserRegService
 	}
 	
 	@Transactional
-	public void logout(HttpSession session)
+	public void logout(String accessToken)
 	{
-		userRegDao.deleteToken((User) session.getAttribute("userSession"));
-		userRegDao.logout(session);
+		userRegDao.deleteToken(accessToken);
 	}
 }

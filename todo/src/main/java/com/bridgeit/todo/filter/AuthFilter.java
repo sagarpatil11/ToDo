@@ -52,10 +52,10 @@ public class AuthFilter implements Filter {
 		
 		TokenResponse tokenResponse=context.getBean(TokenResponse.class);
 		
-		String accesstoken=req.getHeader("accesstoken");
+		String accesstoken=req.getHeader("accessToken");
 		
 		
-		System.out.println(accesstoken);
+		System.out.println("in filter "+accesstoken);
 		
 		tokenResponse=tokenUtility.validateAccessToken(accesstoken);
 

@@ -1,6 +1,5 @@
 package com.bridgeit.todo.dao.daointerface;
 
-import javax.servlet.http.HttpSession;
 
 import com.bridgeit.todo.model.User;
 
@@ -13,8 +12,6 @@ public interface UserRegDao
 	public User userLogin(String email,String password);
 	
 	public User getUserById(int uid);
-	
-	public void logout(HttpSession session);
-	
-	public void deleteToken(User user);
+		
+	public void deleteToken(String accessToken);
 }

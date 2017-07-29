@@ -10,8 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.SystemEnvironmentPropertySource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -46,7 +48,9 @@ public class TaskController
 		try 
 		{
 			taskService.addNote(task);
+			List taskList = taskService.getNotes(user.getId());
 			
+			userResponse.setList(taskList);
 			userResponse.setStatus(4);
 			userResponse.setMessage("Note added");
 			
@@ -61,6 +65,7 @@ public class TaskController
 			return new ResponseEntity<Response>(errorResponse,HttpStatus.OK);
 			
 		}
+		
 	} 
 	
 	
@@ -86,16 +91,32 @@ public class TaskController
 	
 	//..........................Delete Notes...........................///
 	
-	@RequestMapping(value="/deleteNote")
-	public void deleteTask(@RequestParam int tid)
+	@RequestMapping(value="/deleteNote/{tid}",method=RequestMethod.POST)
+	public ResponseEntity<Response> deleteTask(@PathVariable("tid") int tid, HttpServletRequest request)
 	{
+		System.out.println("delete tid "+tid );
+		
+		HttpSession session=request.getSession();
+		User user=(User) session.getAttribute("userSession");
+		
 		try 
 		{
 			taskService.deleteTask(tid);
+			
+			List taskList = taskService.getNotes(user.getId());
+			
+			userResponse.setList(taskList);
+			userResponse.setStatus(1);
+			userResponse.setMessage("Note deleted");
+			
+			return new ResponseEntity<Response>(userResponse,HttpStatus.OK);
 		} 
 		catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			errorResponse.setStatus(-1);
+			errorResponse.setMessage("Note is not deleted");
+			
+			return new ResponseEntity<Response>(errorResponse,HttpStatus.OK);
 		}
 	}
 	

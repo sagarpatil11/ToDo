@@ -1,15 +1,16 @@
 <html>
 <head>
 
+<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+
+<link rel="stylesheet" href="css/login.css">
+<link rel="stylesheet" href="css/navbar.css">
+
 <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
 <script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
 <script type="text/javascript" src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
 <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
 
-
-<link rel="stylesheet" href="css/login.css">
-<link rel="stylesheet" href="css/navbar.css">
 
  </head>
 <body data-ng-app="todo">

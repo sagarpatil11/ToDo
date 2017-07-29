@@ -76,20 +76,16 @@ public class UserRegDaoImpl implements UserRegDao
 		return null;
 	}
 	
-	public void logout(HttpSession session)
-	{
-		
-		session.invalidate();
-	}
+	
 
-
-	public void deleteToken(User user) 
+	public void deleteToken(String accessToken) 
 	{
 		// TODO Auto-generated method stub
 		Session session=sessionFactory.getCurrentSession();
 		
-		Query query=session.createQuery("delete from Token where uid=:uid");
-		query.setParameter("uid", user.getId());
+		Query query=session.createQuery("delete from Token where accessToken=:accessToken");
+		query.setParameter("accessToken", accessToken);
+		
 		query.executeUpdate();
 	}
 	
