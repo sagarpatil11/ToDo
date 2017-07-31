@@ -7,8 +7,7 @@
 </div> -->
 
 
-<nav class="navbar navbar-inverse navbar-fixed-top"
-	style="background-color: #f9b902;"navigation">
+<nav class="navbar navbar-inverse navbar-fixed-top" style="background-color: #f9b902;"navigation">
 	<div class="container-fluid" id="navbar1">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed"
@@ -85,17 +84,17 @@
 		<div id="page-content-wrapper">
 			<div class="container-fluid">
 				<div class="row">
-			<!-- 	<div class="col-lg-1"></div> -->
-					<div class="col-lg-10" style="width:784px">
+					<!-- <div class="col-sm-2"></div>  -->
+						<div class="col-lg-12">
 
-						<div class="card" id="card">
+						<div id="card">
 							
-							<div ng-show="shownote" id="title" contenteditable1 contentEditable=true ng-model="title" data-placeholder="Title...">
+							<div ng-show="shownote" id="title" contenteditable1 contentEditable=true ng-model="title" data-placeholder="Title..." spellcheck="false">
 								
 							</div>
 							
 							<div id="description" contenteditable1 contentEditable=true ng-click="inputNote()"  ng-model="description" 
-									data-placeholder="Take a note..." >
+									data-placeholder="Take a note..." spellcheck="false" >
 							</div>
 								
 							<div id="notefooter" ng-show="shownote">
@@ -109,26 +108,50 @@
 							
 						</div> 
 						
+				 
 						
-						<!-- list of notes -->
-						<div id="listnotes">
-						 <div  ng-repeat="data in notesList">
-							<div  class="col-lg-4" style="margin-top:36px">
-								<div id="notes">
-									<div id="noteTitle" ng-bind-html="data.title">
-										
-									</div>
-									<br>
-									<div id="notesDescription" ng-bind-html="data.description"> 
-									
-									</div>
-									<div>
-										<button type="button" ng-click="deleteNote(data.tid)">delete</button>
+						 <!-- list of notes -->
+						
+						
+							<div  ng-repeat="data in notesList" >
+								<div id="listnotes">
+									<div style="margin-top:36px;">
+										<div id="title" ng-click="openPopup(data)" ng-bind-html="data.title">
+								
+										</div>
+							
+										<div id="description" ng-click="openPopup(data)" ng-bind-html="data.description" >
+										</div>
+								
+										<div id="notefooter">
+											<a href="#" id="img"><span aria-hidden="true"><img alt=""src="image/remainder.svg"></span></a>
+											<a href="#" id="img"><span aria-hidden="true"><img alt=""src="image/collaborator.svg"></span></a>
+											<a href="#" id="img"><span aria-hidden="true"><img alt=""src="image/addimage.svg"></span></a>
+											<a href="#" id="img"><span aria-hidden="true"><img alt=""src="image/color.svg"></span></a>
+											<a href="#" id="img"><span aria-hidden="true"><img alt=""src="image/archieve.png"></span></a>
+											<button id="donebutton" type="button" ng-click="deleteNote(data.tid)">Delete</button>
+										</div>
 									</div>
 								</div>
-							</div>
-						</div>           
-						</div>
+							</div> 
+					
+						<!--  <div id="listnotes">
+						 	<div  ng-repeat="data in notesList">
+								<div  style="margin-top:36px;">
+									<div id="notesInList">
+										<div id="noteTitle" ng-bind-html="data.title">
+										
+										</div>
+										<div id="notesDescription" ng-bind-html="data.description"> 
+									
+										</div>
+										<div>
+											<button id="deleteButton" type="button" ng-click="deleteNote(data.tid)">Delete</button>
+										</div>
+									</div>
+								</div>
+							</div>           
+						</div>  -->
 						
 						<!-- <div class="card col-lg-4" style="margin-top: 36px" id="notes" ng-repeat="data in notesList">
 							<div id="noteTitle" ng-bind-html="data.title" >
@@ -149,7 +172,6 @@
   							</div>
 						</div> --> 
 					</div>
-					<!-- <div class="col-lg-1"></div> -->
 				</div>
 			</div>
 		</div>
@@ -166,3 +188,5 @@ $("#menu-toggle").click(function(e) {
     $("#wrapper").toggleClass("toggled");
 });
 </script>
+
+

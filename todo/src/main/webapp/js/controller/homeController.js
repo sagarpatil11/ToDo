@@ -1,4 +1,4 @@
-myApp.controller( 'homeCtrl',function($scope, $state, homeService){
+myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 	
 	$scope.inputNote=function(){
 		console.log("shownote");
@@ -34,7 +34,7 @@ myApp.controller( 'homeCtrl',function($scope, $state, homeService){
 				console.log("access token expired");
 				
 				homeService.getNewAccessToken().then(function(response2){
-					if(response2.data.status == 1)
+					if(response2.data.status == 4)
 					{
 						localStorage.setItem("accessToken", response2.data.token.accessToken);
 						localStorage.setItem("refreshToken", response2.data.token.refreshToken);
@@ -66,7 +66,41 @@ myApp.controller( 'homeCtrl',function($scope, $state, homeService){
 		})
 		
 	}
+	
+	
+	//......................Update note.........................//
+	
+	
+	
+	$scope.openPopup=function(data){
+		console.log("in ctrl ",data.title," ",data.description," ");
 		
+		var modal=$uibModal.open({
+			templateUrl:"templates/updatePopup.html",
+			controller:function($uibModalInstance){
+				var $ctrl=this;
+				
+				this.updateTitle=data.title;
+				this.updateDescription=data.description;
+				this.noteId=data.tid;
+				this.createdDate=data.creation_date;
+				this.user=data.user;
+				
+				this.updateNote=function(tid){
+					console.log(tid);
+					console.log(this.title1);
+					console.log(this.description1);
+					$uibModalInstance.dismiss('Done');
+					
+				}
+				
+			
+			},
+			controllerAs:"$ctrl"
+		})
+	}
+	
+	
 	
 	//..........logout.............//
 	
@@ -83,6 +117,11 @@ myApp.controller( 'homeCtrl',function($scope, $state, homeService){
 			}	
 		})
 	}
+	
+	
+	
+	//...........show notes initialy...........//
+	
 	
 	$scope.showNotes=function(){
 	homeService.getNotes().then(function(resp){

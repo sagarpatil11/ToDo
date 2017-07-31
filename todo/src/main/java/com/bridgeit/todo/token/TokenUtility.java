@@ -55,9 +55,9 @@ public class TokenUtility
 			System.out.println(token.toString());
 			
 			long difference = new Date().getTime() - token.getAccessTokenCreation().getTime();
-			long differenceinseconds = TimeUnit.MILLISECONDS.toSeconds(difference);
+			long differenceInMinutes = TimeUnit.MILLISECONDS.toMinutes(difference);
 			
-			if(differenceinseconds > 300)
+			if(differenceInMinutes > 15)
 			{
 				System.out.println("access token expired");
 				
@@ -108,9 +108,9 @@ public class TokenUtility
 			
 			long difference = new Date().getTime() - token.getRefreshTokenCreation().getTime();
 			
-			long differenceinseconds = TimeUnit.MILLISECONDS.toSeconds(difference);
+			long differenceInMinutes = TimeUnit.MILLISECONDS.toMinutes(difference);
 			
-			if(differenceinseconds > 600)
+			if(differenceInMinutes > 30)
 			{
 				System.out.println("Refresh token expired");
 				

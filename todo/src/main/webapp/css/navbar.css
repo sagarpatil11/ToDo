@@ -1,7 +1,7 @@
 @CHARSET "UTF-8";
 
-.body{
-	background-color: #ddd;	
+body{
+	background-color: #e8e8e8;	
 }
 
 #wrapper {
@@ -24,7 +24,7 @@
     margin-left: -250px;
     width: 0;
     height: 100%;
-    background:#ddd;
+    background:#e8e8e8;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
@@ -155,11 +155,14 @@
 
 #card{
 	width:600px; 
-	margin-top:70px;
 	background-color: white;
 	padding: 0px;
+	margin: auto; 
+	margin-top:65px;
+    border-radius: 2px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-#donebutton{
+#donebutton,#deleteButton{
 	background-color: white;
 	border: none;
 	float: right;
@@ -196,15 +199,39 @@
 }
 
 
-#notes{
-	width: 240px;
+#notesInList{
+	width: 600px;
 	background-color: white;
 	padding: 20px 25px 30px;
     margin: auto;
+    
     border-radius: 2px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+
+#listnotes{
+	width:600px; 
+	background-color: white;
+	padding: 0px;
+	margin: auto; 
+	margin-top:35px;
+    border-radius: 2px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#noteTitle{
+	min-height: 30px;
 	
+	font-weight: bold;
+	outline: none;
+}
+
+	
+#noteDescription{
+	min-height: 40px;
+	
+	font-size: initial;
+	outline: none;
 }
 
 /* #query{

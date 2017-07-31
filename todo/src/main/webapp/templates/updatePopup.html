@@ -1,0 +1,20 @@
+
+
+	<div id="title" contenteditable1
+		contentEditable=true ng-model="$ctrl.title1" data-placeholder="Title..."
+		spellcheck="false" ng-bind-html="$ctrl.updateTitle"></div>
+
+	<div id="description" contenteditable1 contentEditable=true
+		ng-click="inputNote()" ng-model="$ctrl.description1"
+		data-placeholder="Take a note..." spellcheck="false" ng-bind-html="$ctrl.updateDescription"></div>
+
+	<div id="notefooter">
+		<a href="#" id="img"><span aria-hidden="true"><img alt="" src="image/remainder.svg"></span></a> 
+		<a href="#" id="img"><span aria-hidden="true"><img alt="" src="image/collaborator.svg"></span></a>
+		<a href="#" id="img"><span aria-hidden="true"><img alt="" src="image/addimage.svg"></span></a> 
+		<a href="#" id="img"><span aria-hidden="true"><img alt="" src="image/color.svg"></span></a> 
+		<a href="#" id="img"><span aria-hidden="true"><img alt="" src="image/archieve.png"></span></a>
+		<button id="donebutton" type="button" ng-click="updateNote($ctrl.noteId)">Done</button>
+	</div>
+
+
