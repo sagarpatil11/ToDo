@@ -24,6 +24,10 @@ import com.bridgeit.todo.responsemsg.Response;
 import com.bridgeit.todo.responsemsg.UserResponse;
 import com.bridgeit.todo.service.TaskService;
 
+/**
+ * @author bridgeit
+ *
+ */
 @RestController
 public class TaskController 
 {
@@ -33,8 +37,13 @@ public class TaskController
 	UserResponse userResponse=new UserResponse();
 	ErrorResponse errorResponse=new ErrorResponse();
 	
-	//..........................Add Notes...........................//
 	
+	
+	/**
+	 * @param task
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value="/addNote")
 	public ResponseEntity<Response> addNote(@RequestBody Task task,HttpServletRequest request)
 	{
@@ -51,7 +60,7 @@ public class TaskController
 			List taskList = taskService.getNotes(user.getId());
 			
 			userResponse.setList(taskList);
-			userResponse.setStatus(4);
+			userResponse.setStatus(1);
 			userResponse.setMessage("Note added");
 			
 			return new ResponseEntity<Response>(userResponse,HttpStatus.OK);
@@ -71,19 +80,34 @@ public class TaskController
 	
 	//..........................Update Notes...........................///
 	
-	@RequestMapping(value="/updateNote")
-	public void updateNote(@RequestBody Task task,HttpServletRequest request)
+	
+	@RequestMapping(value="/updateNote",method=RequestMethod.POST)
+	public ResponseEntity<Response> updateNote(@RequestBody Task task,HttpServletRequest request)
 	{
 		HttpSession session=request.getSession();
 		User user=(User) session.getAttribute("userSession");
 		
-		task.setUser(user);
+		//task.setUser(user);
+		System.out.println(task.toString());
 		
-		try {
+		try 
+		{
 			taskService.updateNote(task);
-		} catch (Exception e) {
+			
+			List taskList = taskService.getNotes(user.getId());
+			
+			userResponse.setStatus(1);
+			userResponse.setMessage("Note updated successfully");
+			userResponse.setList(taskList);
+			
+			return new ResponseEntity<Response>(userResponse, HttpStatus.OK);
+		} 
+		catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			errorResponse.setStatus(-1);
+			errorResponse.setMessage("Updation failed due to some exception");
+			
+			return new ResponseEntity<Response>(errorResponse, HttpStatus.OK);
 		}
 	}
 	
@@ -101,7 +125,7 @@ public class TaskController
 		
 		try 
 		{
-			taskService.deleteTask(tid);
+			taskService.deleteTask( tid);
 			
 			List taskList = taskService.getNotes(user.getId());
 			

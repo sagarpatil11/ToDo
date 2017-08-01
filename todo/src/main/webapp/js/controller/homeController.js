@@ -1,14 +1,45 @@
 myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 	
-	$scope.inputNote=function(){
-		console.log("shownote");
+		$scope.inputNote=function(){
+			console.log("shownote");
 		
-		$scope.shownote=true;
-	}
+			$scope.shownote=true;
+		}
 	
-	$scope.submitNote=function(){
-		console.log("inside note");
-		$scope.shownote=false;
+		
+		
+		
+		//.....................show grid or list view.................//
+		
+		
+		$scope.gridView=function(){
+			
+			$scope.listBtn=true;
+			$scope.gridBtn=false;
+			
+			$scope.gridview=true;
+			$scope.listview=false;
+		}
+		
+		
+		$scope.listView=function(){
+			
+			$scope.listBtn=false;
+			$scope.gridBtn=true;
+			
+			$scope.gridview=false;
+			$scope.listview=true;
+		}
+		
+		
+		
+		//......................Add new note .................//
+		
+		$scope.submitNote=function(){
+		
+			console.log("inside note");
+		
+			$scope.shownote=false;
 		
 		var noteData={};
 		
@@ -18,40 +49,50 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 		$scope.title="";
 		$scope.description="";
 		
+		
 		var httpnote=homeService.addNote(noteData);
 		
 		httpnote.then(function(response1)
 		{
 			console.log(response1);
-			if(response1.data.status == 4)
-			{
-				$scope.notesList=response1.data.list;
-				console.log("note added");
-				$scope.showNotes();
-			}
-			else
-			{
-				console.log("access token expired");
-				
-				homeService.getNewAccessToken().then(function(response2){
-					if(response2.data.status == 4)
-					{
-						localStorage.setItem("accessToken", response2.data.token.accessToken);
-						localStorage.setItem("refreshToken", response2.data.token.refreshToken);
+				if(response1.data.status == 1)
+				{
+						$scope.notesList=response1.data.list.reverse();
+						console.log("note added");
 						
-						homeService.addNote(noteData);
-					}
-					else
-					{
+				}
+				else if(response1.data.status == -4)
+				{
+						console.log("access token expired");
+				
+						homeService.getNewAccessToken().then(function(response2){
+							
+							if(response2.data.status == 4)
+							{
+									localStorage.setItem("accessToken", response2.data.token.accessToken);
+									localStorage.setItem("refreshToken", response2.data.token.refreshToken);
+						
+									homeService.addNote(noteData).then(function(resp){
+										console.log(resp.data);
+										$scope.notesList=resp.data.list.reverse();
+									})
+							}
+							else
+							{
+									console.log(response2.data);
+									$state.go('login');
+							}
+						})
+				}
+				else
+				{
 						console.log(response2.data);
 						$state.go('login');
-					}
-				})
-			}
+				}
 			
 			
-		});
-	}
+			});
+		}
 	
 	
 	//..........Delete note.............//
@@ -61,8 +102,48 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 		
 		console.log(tid);
 		//var id={"tid":id};
-		homeService.deleteNote(tid).then(function(response){
-			$scope.notesList=response.data.list;
+		homeService.deleteNote(tid).then(function(response1){
+			
+			console.log(response1);
+			
+			if(response1.data.status == 1)
+			{
+					$scope.notesList=response1.data.list.reverse();
+					
+					console.log("note deleted");
+			}
+			else if(response1.data.status == -4)
+			{
+					console.log("access token expired");
+			
+					homeService.getNewAccessToken().then(function(response2){
+						
+						if(response2.data.status == 4)
+						{
+								localStorage.setItem("accessToken", response2.data.token.accessToken);
+								localStorage.setItem("refreshToken", response2.data.token.refreshToken);
+					
+								homeService.addNote(noteData).then(function(resp){
+									console.log(resp.data);
+									
+									$scope.notesList=resp.data.list.reverse();
+								})
+						}
+						else
+						{
+								console.log(response2.data);
+								
+								$state.go('login');
+						}
+					})
+			}
+			else
+			{
+				console.log(response1.data);
+				$state.go('login');
+			}
+		
+		
 		})
 		
 	}
@@ -73,32 +154,85 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 	
 	
 	$scope.openPopup=function(data){
-		console.log("in ctrl ",data.title," ",data.description," ");
+			console.log("in ctrl ",data.title," ",data.description," ");
 		
-		var modal=$uibModal.open({
-			templateUrl:"templates/updatePopup.html",
-			controller:function($uibModalInstance){
-				var $ctrl=this;
+			var modal=$uibModal.open({
+				templateUrl:"templates/updatePopup.html",
+				controller:function($uibModalInstance){
+					var $ctrl=this;
 				
-				this.updateTitle=data.title;
-				this.updateDescription=data.description;
-				this.noteId=data.tid;
-				this.createdDate=data.creation_date;
-				this.user=data.user;
+					this.updateTitle=data.title;
+					this.updateDescription=data.description;
+					this.noteId=data.tid;
+					this.createdDate=data.creation_date;
+					this.user=data.user;
 				
-				this.updateNote=function(tid){
-					console.log(tid);
-					console.log(this.title1);
-					console.log(this.description1);
-					$uibModalInstance.dismiss('Done');
+					this.updateNote=function(tid){
+						
+						console.log(tid);
+						console.log(this.updateTitle);
+						console.log(this.updateDescription);
+						
+						$uibModalInstance.dismiss('Done');
+						
+						var updateData={};
+						
+						updateData.tid=tid;
+						updateData.title=this.updateTitle;
+						updateData.description=this.updateDescription;
+						updateData.user=this.user;
+						updateData.creation_date=this.createdDate;
+						
+						
+						homeService.updateNote(updateData)
+						.then(function(response1)
+						{
+							console.log(response1);
+								if(response1.data.status == 1)
+								{
+										$scope.notesList=response1.data.list.reverse();
+										console.log("note updated");
 					
-				}
+								}
+								else if(response1.data.status == -4)
+								{
+										console.log("access token expired");
+								
+										homeService.getNewAccessToken().then(function(response2){
+											
+											if(response2.data.status == 4)
+											{
+													localStorage.setItem("accessToken", response2.data.token.accessToken);
+													localStorage.setItem("refreshToken", response2.data.token.refreshToken);
+										
+													homeService.updateNote(updateData).then(function(resp){
+														console.log(resp.data);
+														$scope.notesList=resp.data.list.reverse();
+													})
+											}
+											else
+											{
+													console.log(response2.data);
+													$state.go('login');
+											}
+										})
+								}
+								else 
+								{
+									console.log(response1.data);
+									return;
+								}
+								
+							
+							});
+						
+					}
 				
 			
-			},
-			controllerAs:"$ctrl"
-		})
-	}
+				},
+				controllerAs:"$ctrl"
+			})
+		}
 	
 	
 	
@@ -124,13 +258,28 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 	
 	
 	$scope.showNotes=function(){
-	homeService.getNotes().then(function(resp){
-		console.log(resp);
-		$scope.notesList=resp.data;
-	})
+		homeService.getNotes().then(function(resp){
+			console.log(resp);
+			console.log("list display after login");
+			
+			
+			$scope.notesList=resp.data.reverse();
+			$scope.listBtn=true;
+			$scope.gridBtn=false;
+			
+			$scope.gridview=true;
+			$scope.listview=false;
+		})
 	}
 	$scope.showNotes();
 })
+
+
+
+
+
+
+//////////.......................Home Service.....................///////////////////
 
 
 
@@ -147,6 +296,8 @@ myApp.service("homeService", function($http){
 		})
 	}
 	
+	
+	
 	this.getNewAccessToken=function(){
 		console.log("in homeservice2");
 		return $http({
@@ -154,7 +305,9 @@ myApp.service("homeService", function($http){
 						method:"post",
 						headers:{"refreshToken":localStorage.getItem("refreshToken")}
 					})
-		}
+	}
+	
+	
 	
 	this.getNotes=function(){
 		console.log("in getNotes service");
@@ -164,6 +317,8 @@ myApp.service("homeService", function($http){
 						headers:{"accessToken":localStorage.getItem("accessToken")}
 				})
 	}
+	
+	
 	
 	this.deleteNote=function(tid){
 		console.log("in deletenote service."+tid);
@@ -175,6 +330,7 @@ myApp.service("homeService", function($http){
 	}
 	
 	
+	
 	this.logout=function(){
 		console.log("in service logout");
 		return $http({
@@ -183,6 +339,19 @@ myApp.service("homeService", function($http){
 						headers:{"accessToken":localStorage.getItem("accessToken")}
 		})		
 	}
+	
+	
+	this.updateNote=function(updateData){
+		console.log(updateData);
+		
+		return $http({
+						url:"updateNote",
+						method:"post",
+						data:updateData,
+						headers:{"accessToken":localStorage.getItem("accessToken")}
+		})		
+	}
+	
 	
 })
 

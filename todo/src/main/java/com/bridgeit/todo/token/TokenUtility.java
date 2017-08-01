@@ -41,7 +41,7 @@ public class TokenUtility
 		
 		if(accessToken == null)
 		{
-			tokenResponse.setStatus(-2);
+			tokenResponse.setStatus(-3);
 			tokenResponse.setMessage("Access Token is null");
 			tokenResponse.setToken(null);
 			
@@ -71,6 +71,7 @@ public class TokenUtility
 				
 				tokenResponse.setStatus(4);
 				tokenResponse.setMessage("Access Token is valid");
+				
 				return tokenResponse;
 				
 			}
@@ -93,7 +94,7 @@ public class TokenUtility
 		
 		if(refreshToken == null)
 		{
-			tokenResponse.setStatus(-2);
+			tokenResponse.setStatus(-3);
 			tokenResponse.setMessage("Refresh Token is null");
 			tokenResponse.setToken(null);
 			

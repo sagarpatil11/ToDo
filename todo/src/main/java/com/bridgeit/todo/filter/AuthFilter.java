@@ -73,6 +73,17 @@ public class AuthFilter implements Filter {
 			response.getWriter().write(jsonResponse);
 			
 			return;
+		
+		}
+		else if (tokenResponse.getStatus() == -3) 
+		{
+			System.out.println("Access token is null or wrong");
+			
+			String jsonResponse= mapper.writeValueAsString(tokenResponse);
+			
+			response.getWriter().write(jsonResponse);
+			
+			return;
 		}
 		
 		chain.doFilter(request, response);

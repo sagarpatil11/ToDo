@@ -150,7 +150,8 @@ body{
 [contentEditable=true]:empty:before{
     content:attr(data-placeholder);
     color: grey;
-    font-size: 15px;
+    font-size: 16px;
+    font-family: 'Roboto Slab','Times New Roman',serif;
  }
 
 #card{
@@ -166,25 +167,34 @@ body{
 	background-color: white;
 	border: none;
 	float: right;
-	padding-right: 20px;
+	outline: none;
+    margin-right: 15px;
+}
+
+#donebutton:hover{
+	background-color:#ddd;
 }
 
 #title{
 	min-height: 30px;
 	padding-left: 15px;
+	padding-right:15px;
 	padding-top: 10px;
 	padding-bottom: 15px;
-	font-size: initial;
+	font-size: 18px;
 	font-weight: bold;
+	font-family: 'Roboto Condensed',arial,sans-serif;
 	outline: none;
 }
 
 #description{
 	min-height: 40px;
 	padding-left: 15px;
+	padding-right:15px;
 	padding-top: 10px;
 	padding-bottom: 15px;
-	font-size: initial;
+	font-size: 16px;
+	font-family: 'Roboto Slab','Times New Roman',serif;
 	outline: none;
 }
 
@@ -195,7 +205,15 @@ body{
 }
 
 #img{
-	padding-left: 25px;
+	padding-left: 15px;
+	padding-right:15px;
+	outline: none;
+}
+
+#img1{
+	padding-left: 9px;
+	padding-right:9px;
+	outline: none;
 }
 
 
@@ -219,6 +237,21 @@ body{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+
+#maindiv{
+	width:784px;
+	margin:auto;
+}
+
+#gridnotes{
+	width:240px;; 
+	background-color: white;
+	margin: auto; 
+	margin-top:35px;
+    border-radius: 2px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
+}
+
 #noteTitle{
 	min-height: 30px;
 	
@@ -232,6 +265,11 @@ body{
 	
 	font-size: initial;
 	outline: none;
+}
+
+
+.modal-open .modal{
+	margin-top: 130px;
 }
 
 /* #query{
