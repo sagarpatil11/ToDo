@@ -9,7 +9,7 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 		
 		
 		
-		//.....................show grid or list view.................//
+		//.....................show list view.................//
 		
 		
 		$scope.gridView=function(){
@@ -20,6 +20,9 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 			$scope.gridview=true;
 			$scope.listview=false;
 		}
+		
+		
+		//.....................show grid view.................//
 		
 		
 		$scope.listView=function(){
@@ -286,71 +289,71 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 
 myApp.service("homeService", function($http){
 	
-	console.log("in homeservice");
-	this.addNote=function(noteData){
-		return $http({
-			url:"addNote",
-			method:"post",
-			data:noteData,
-			headers:{"accessToken":localStorage.getItem("accessToken")}
-		})
-	}
+		console.log("in homeservice");
+		this.addNote=function(noteData){
+			return $http({
+						url:"addNote",
+						method:"post",
+						data:noteData,
+						headers:{"accessToken":localStorage.getItem("accessToken")}
+					})
+		}
 	
 	
 	
-	this.getNewAccessToken=function(){
-		console.log("in homeservice2");
-		return $http({
+		this.getNewAccessToken=function(){
+			console.log("in homeservice2");
+			return $http({
 						url:"newAccessToken",
 						method:"post",
 						headers:{"refreshToken":localStorage.getItem("refreshToken")}
 					})
-	}
+		}
 	
 	
 	
-	this.getNotes=function(){
-		console.log("in getNotes service");
-		return $http({
+		this.getNotes=function(){
+			console.log("in getNotes service");
+			return $http({
 						url:"getNotes",
 						method:"get",
 						headers:{"accessToken":localStorage.getItem("accessToken")}
-				})
-	}
+					})
+		}
 	
 	
 	
-	this.deleteNote=function(tid){
-		console.log("in deletenote service."+tid);
-		return $http({
+		this.deleteNote=function(tid){
+			console.log("in deletenote service."+tid);
+				return $http({
 						url:"deleteNote/"+tid,
 						method:"post",
 						headers:{"accessToken":localStorage.getItem("accessToken")}
-				})
-	}
+					})
+		}
 	
 	
 	
-	this.logout=function(){
-		console.log("in service logout");
-		return $http({
+		this.logout=function(){
+			console.log("in service logout");
+			return $http({
 						url:"logout",
 						method:"get",
 						headers:{"accessToken":localStorage.getItem("accessToken")}
-		})		
-	}
+					})		
+		}
 	
 	
-	this.updateNote=function(updateData){
-		console.log(updateData);
+		this.updateNote=function(updateData){
+			console.log(updateData);
 		
-		return $http({
+			return $http({
 						url:"updateNote",
 						method:"post",
 						data:updateData,
 						headers:{"accessToken":localStorage.getItem("accessToken")}
-		})		
-	}
+					})		
+		}
 	
 	
 })

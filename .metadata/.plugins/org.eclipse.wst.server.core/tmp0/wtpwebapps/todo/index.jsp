@@ -12,6 +12,7 @@
 <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
 <script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
 <script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+<script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
 
 
  </head>

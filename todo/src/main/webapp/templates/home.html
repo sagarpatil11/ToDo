@@ -31,8 +31,20 @@
 						src="image/grid.svg"></a></li>
 				<li><a href="" ng-show="listBtn" ng-click="listView()"><span aria-hidden="true"></span><img alt=""
 						src="image/list.svg"></a></li>
-				<li><a href="" ng-click="logout()"><span class="glyphicon glyphicon-off"
-						aria-hidden="true"></span> Logout</a></li>
+				<!-- <li><a href="" ng-click="logout()"><span class="glyphicon glyphicon-off"
+						aria-hidden="true"></span> Logout</a></li> -->		
+				<li><div class="dropdown"><a href="" data-toggle="dropdown" class="dropdown-toggle" ><img class="img-circle" alt="more" id="userimg" src="image/usericon.png" ></a>
+						<div class="dropdown-menu">
+							<div>
+							</div>
+							<div>
+								<button style="float: right" ng-click="logout()">Sign out</button>
+							</div>
+						</div>
+					</div>
+				</li>	
+				
+				</span></li>
 			</ul>
 
 			<form class="navbar-form navbar-right" action="#" method="GET">
@@ -99,12 +111,17 @@
 							</div>
 								
 							<div id="notefooter" ng-show="shownote">
-								<a href="#" id="img"><span aria-hidden="true"><img alt=""src="image/remainder.svg"></span></a>
-								<a href="#" id="img"><span aria-hidden="true"><img alt=""src="image/collaborator.svg"></span></a>
-								<a href="#" id="img"><span aria-hidden="true"><img alt=""src="image/addimage.svg"></span></a>
-								<a href="#" id="img"><span aria-hidden="true"><img alt=""src="image/color.svg"></span></a>
-								<a href="#" id="img"><span aria-hidden="true"><img alt=""src="image/archieve1.svg"></span></a>
-								<a href="#" id="img"><span aria-hidden="true"><img alt=""src="image/list.png"></span></a>
+								<a href="" id="img"><span aria-hidden="true"><img alt=""src="image/remainder.svg"></span></a>
+								<a href="" id="img"><span aria-hidden="true"><img alt=""src="image/collaborator.svg"></span></a>
+								<a href="" id="img"><span aria-hidden="true"><img alt=""src="image/addimage.svg"></span></a>
+								<a href="" id="img"><span aria-hidden="true"><img alt=""src="image/color.svg"></span></a>
+								<a href="" id="img"><span aria-hidden="true"><img alt=""src="image/archieve1.svg"></span></a>
+								<span  class="dropdown"><a href="" id="img" data-toggle="dropdown" class="dropdown-toggle" ><img alt="more" src="image/list.png"></a>
+									<ul class="dropdown-menu" >
+      									<li><a role="menuitem" tabindex="-1" href="">Add label</a></li>
+      									<li><a role="menuitem" tabindex="-1" href="">Show checkboxes</a></li>
+     								</ul>
+								</span>
 								<button id="donebutton" type="button" ng-click="submitNote()">Done</button>
 							</div>
 							
@@ -129,13 +146,18 @@
 										</div>
 								
 										<div id="notefooter">
-											<a href="#" id="img"><span aria-hidden="true"><img alt=""src="image/remainder.svg"></span></a>
-											<a href="#" id="img"><span aria-hidden="true"><img alt=""src="image/collaborator.svg"></span></a>
-											<a href="#" id="img"><span aria-hidden="true"><img alt=""src="image/addimage.svg"></span></a>
-											<a href="#" id="img"><span aria-hidden="true"><img alt=""src="image/color.svg"></span></a>
-											<a href="#" id="img"><span aria-hidden="true"><img alt=""src="image/archieve1.svg"></span></a>
-											<a href="#" id="img"><span aria-hidden="true"><img alt=""src="image/list.png"></span></a>
-											<button id="donebutton" type="button" ng-click="deleteNote(data.tid)">Delete</button>
+											<a href="" id="img"><span aria-hidden="true"><img alt=""src="image/remainder.svg"></span></a>
+											<a href="" id="img"><span aria-hidden="true"><img alt=""src="image/collaborator.svg"></span></a>
+											<a href="" id="img"><span aria-hidden="true"><img alt=""src="image/addimage.svg"></span></a>
+											<a href="" id="img"><span aria-hidden="true"><img alt=""src="image/color.svg"></span></a>
+											<a href="" id="img"><span aria-hidden="true"><img alt=""src="image/archieve1.svg"></span></a>
+											<span  class="dropdown"><a href="" id="img" data-toggle="dropdown" class="dropdown-toggle" ><img alt="more" src="image/list.png"></a>
+												<ul class="dropdown-menu" >
+													<li><a role="menuitem" tabindex="-1" href="" ng-click="deleteNote(data.tid)">Delete note</a></li>
+      												<li><a role="menuitem" tabindex="-1" href="">Add label</a></li>
+      												<li><a role="menuitem" tabindex="-1" href="">Show checkboxes</a></li>
+     											</ul>
+											 </span>
 										</div>
 									</div>
 								</div>
@@ -148,9 +170,9 @@
 			  
 			  			<div ng-repeat="data in notesList">
 			  				<div class="col-lg-4">
-			  						<div id="gridnotes" ng-show="gridview">
+			  						<div  id="gridnotes" ng-show="gridview">
 			  								<div id="title" ng-click="openPopup(data)" ng-bind-html="data.title">
-												<a href="#"><span aria-hidden="true"><img alt="pin" src="image/icons8-Pin-20.png"></span></a>
+												<a href=""><span aria-hidden="true"><img alt="pin" src="image/icons8-Pin-20.png"></span></a>
 										
 											</div>
 							
@@ -159,19 +181,33 @@
 											</div>
 								
 											<div id="notefooter">
-												<a href="#" id="img1"><span aria-hidden="true"><img alt=""src="image/remainder.svg"></span></a>
-												<a href="#" id="img1"><span aria-hidden="true"><img alt=""src="image/collaborator.svg"></span></a>
-												<a href="#" id="img1"><span aria-hidden="true"><img alt=""src="image/addimage.svg"></span></a>
-												<a href="#" id="img1"><span aria-hidden="true"><img alt=""src="image/color.svg"></span></a>
-												<a href="#" id="img1"><span aria-hidden="true"><img alt=""src="image/archieve1.svg"></span></a>
-												<a href="#" id="img1"><span aria-hidden="true"><img alt=""src="image/list.png"></span></a>
-												<button id="donebutton" type="button" ng-click="deleteNote(data.tid)">Delete</button>
+												<a href="" id="img1"><img alt=""src="image/remainder.svg"></a>
+												<a href="" id="img1"><img alt=""src="image/collaborator.svg"></a>
+												<a href="" id="img1"><img alt=""src="image/addimage.svg"></a>
+												<a href="" id="img1"><img alt=""src="image/color.svg"></a>
+												<a href="" id="img1"><img alt=""src="image/archieve1.svg"></a>
+												<div class="dropdown"><a href="" id="img1" data-toggle="dropdown" class="dropdown-toggle"><img alt="" src="image/list.png"></a>
+													<ul class="dropdown-menu" >
+														<li><a role="menuitem" tabindex="-1" href="" ng-click="deleteNote(data.tid)">Delete note</a></li>
+      													<li><a role="menuitem" tabindex="-1" href="">Add label</a></li>
+      													<li><a role="menuitem" tabindex="-1" href="">Show checkboxes</a></li>
+     												</ul>
+     											</div>	
 											</div>
 			  						</div>
 			  				</div>
 			  			
 			  			</div>
 			  		</div>
+			  		
+			  		
+			 <!--........................ option div............................. --> 	
+			 	
+			 		<div>
+			 			
+			 		</div>
+			 
+			 	
 			  			<!-- <div class="col-lg-1"></div> -->
     					<!-- <div class="col-lg-10" >
     					
