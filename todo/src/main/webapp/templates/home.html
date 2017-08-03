@@ -1,13 +1,7 @@
-<!-- <div><h1>Home Page</h1></div>
-<div class="card" style="width: 20rem;">
-  <div class="card-block">
-    <h4 class="card-title">Card title</h4>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-  </div>
-</div> -->
 
+<!-- ...................................nav bar................................... -->
 
-<nav class="navbar navbar-inverse navbar-fixed-top" style="background-color: #f9b902;"navigation">
+<nav class="navbar navbar-inverse navbar-fixed-top" style="background-color: #f9b902;border: none" navigation">
 	<div class="container-fluid" id="navbar1">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed"
@@ -20,7 +14,7 @@
 			</button>
 			<a class="navbar-brand" href="#menu-toggle" id="menu-toggle"><span
 				aria-hidden="true"><img src="image/icons8-Menu_20.png"></span></a>
-			<a class="navbar-brand" id="website-name" href="#"><b>FunDo</b> Notes</a>
+			<a class="navbar-brand" id="website-name" href="#"><b>FunDoo</b> Notes</a>
 		</div>
 
 		<div id="navbar" class="navbar-collapse collapse">
@@ -31,10 +25,8 @@
 						src="image/grid.svg"></a></li>
 				<li><a href="" ng-show="listBtn" ng-click="listView()"><span aria-hidden="true"></span><img alt=""
 						src="image/list.svg"></a></li>
-				<!-- <li><a href="" ng-click="logout()"><span class="glyphicon glyphicon-off"
-						aria-hidden="true"></span> Logout</a></li> -->		
-				<li><div class="dropdown"><a href="" data-toggle="dropdown" class="dropdown-toggle" ><img class="img-circle" alt="more" id="userimg" src="image/usericon.png" ></a>
-						<div class="dropdown-menu">
+				<li><div class="dropdown"><a href="" data-toggle="dropdown" class="dropdown-toggle" ><img class="img-circle" id="userimg" src="image/usericon.png" ></a>
+						<div class="dropdown-menu" id="profile-card">
 							<div>
 							</div>
 							<div>
@@ -55,7 +47,7 @@
 						</button>
 					</div>
 					<input type="search" class="form-control" placeholder="Search..."
-						id="query" name="search" value="">
+						id="query" name="search" value="" ng-model="search">
 					<!-- <div class="input-group-btn">
                     	<button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-search"></span></button>
                   	</div> -->
@@ -65,6 +57,10 @@
 		</div>
 	</div>
 </nav>
+
+
+
+<!--  ......................................side bar toggle ...................................... -->
 
 <div id="wrapper" class="toggled">
 	<div class="container-fluid">
@@ -91,13 +87,23 @@
 			class="notranslate IZ65Hb-YPqjbf h1U9Be-YPqjbf" tabindex="0"
 			spellcheck="false"></div>
 		
-		<!-- Page Content -->
+	
+	
+   <!-- ....................................Page Content......................................... -->
+
+
 
 		<div id="page-content-wrapper">
 			<div class="container-fluid">
 				<div class="row">
 					<!-- <div class="col-sm-2"></div>  -->
 						<div class="col-lg-12">
+
+
+
+
+		<!-- .................................Add note div ............................ -->
+
 
 						<div id="card">
 							
@@ -133,8 +139,8 @@
 		
 		       <!-- ..................... list view .......................... -->				 
 						
-						 
-							<div  ng-repeat="data in notesList" >
+						 <!-- 
+							<div  ng-repeat="data in notesList | filter: search" >
 								<div id="listnotes" ng-show="listview">
 									<div style="margin-top:36px;">
 										<div id="title" ng-click="openPopup(data)" ng-bind-html="data.title">
@@ -146,31 +152,32 @@
 										</div>
 								
 										<div id="notefooter">
-											<a href="" id="img"><span aria-hidden="true"><img alt=""src="image/remainder.svg"></span></a>
-											<a href="" id="img"><span aria-hidden="true"><img alt=""src="image/collaborator.svg"></span></a>
-											<a href="" id="img"><span aria-hidden="true"><img alt=""src="image/addimage.svg"></span></a>
-											<a href="" id="img"><span aria-hidden="true"><img alt=""src="image/color.svg"></span></a>
-											<a href="" id="img"><span aria-hidden="true"><img alt=""src="image/archieve1.svg"></span></a>
-											<span  class="dropdown"><a href="" id="img" data-toggle="dropdown" class="dropdown-toggle" ><img alt="more" src="image/list.png"></a>
-												<ul class="dropdown-menu" >
+											<a href="" id="img1"><img alt=""src="image/remainder.svg"></a>
+											<a href="" id="img1"><img alt=""src="image/collaborator.svg"></a>
+											<a href="" id="img1"><img alt=""src="image/addimage.svg"></a>
+											<a href="" id="img1"><img alt=""src="image/color.svg"></a>
+											<a href="" id="img1"><img alt=""src="image/archieve1.svg"></a>
+											<div  class="dropdown"><a href="" id="img1" data-toggle="dropdown" class="dropdown-toggle" ><img alt="more" src="image/list.png"></a>
+												<ul class="dropdown-menu" id="option-dropdown1" >
 													<li><a role="menuitem" tabindex="-1" href="" ng-click="deleteNote(data.tid)">Delete note</a></li>
       												<li><a role="menuitem" tabindex="-1" href="">Add label</a></li>
       												<li><a role="menuitem" tabindex="-1" href="">Show checkboxes</a></li>
      											</ul>
-											 </span>
+											</div>
 										</div>
 									</div>
 								</div>
 							</div>  
 							 
-							
+							 -->
 			  <!-- ..................... grid view ........................ -->			
 			  
-			  		<div id="maindiv">
+			  			 <div id="maindiv"> 
 			  
-			  			<div ng-repeat="data in notesList">
-			  				<div class="col-lg-4">
-			  						<div  id="gridnotes" ng-show="gridview">
+			  				<div ng-repeat="data in notesList | filter: search">
+			  					<div ng-class="col2"></div>
+			  					<div ng-class="showdiv">
+			  						<div id="gridnotes" ng-style="{'background-color':data.color}">
 			  								<div id="title" ng-click="openPopup(data)" ng-bind-html="data.title">
 												<a href=""><span aria-hidden="true"><img alt="pin" src="image/icons8-Pin-20.png"></span></a>
 										
@@ -181,13 +188,28 @@
 											</div>
 								
 											<div id="notefooter">
-												<a href="" id="img1"><img alt=""src="image/remainder.svg"></a>
-												<a href="" id="img1"><img alt=""src="image/collaborator.svg"></a>
-												<a href="" id="img1"><img alt=""src="image/addimage.svg"></a>
-												<a href="" id="img1"><img alt=""src="image/color.svg"></a>
-												<a href="" id="img1"><img alt=""src="image/archieve1.svg"></a>
-												<div class="dropdown"><a href="" id="img1" data-toggle="dropdown" class="dropdown-toggle"><img alt="" src="image/list.png"></a>
-													<ul class="dropdown-menu" >
+												<a href="" id="img2"><img alt=""src="image/remainder.svg"></a>
+												<a href="" id="img2"><img alt=""src="image/collaborator.svg"></a>
+												<a href="" id="img2"><img alt=""src="image/addimage.svg"></a>
+												
+												<div class="dropup"><a href="" id="img2" data-toggle="dropdown" class="dropdown-toggle"><img alt="" src="image/color.svg"></a>
+													<div class="dropdown-menu" id="colordropup">
+															<a role="menuitem" tabindex="-1" href="" ng-click="changeColor(data.tid,'rgb(250, 250, 250)')"><img class="colorimg" alt="" src="image/white.png"></a>
+															<a role="menuitem" tabindex="-1" href="" ng-click="changeColor(data.tid,'rgb(255, 138, 128)')"><img class="colorimg" alt="" src="image/red.png"></a>
+															<a role="menuitem" tabindex="-1" href="" ng-click="changeColor(data.tid,'rgb(255, 209, 128)')"><img class="colorimg" alt="" src="image/orange.png"></a>
+															<a role="menuitem" tabindex="-1" href="" ng-click="changeColor(data.tid,'rgb(255, 255, 141)')"><img class="colorimg" alt="" src="image/yellow.png"></a>
+      														<br>
+      														<a role="menuitem" tabindex="-1" href="" ng-click="changeColor(data.tid,'rgb(207, 216, 220)')"><img class="colorimg" alt="" src="image/gray.png"></a>
+      														<a role="menuitem" tabindex="-1" href="" ng-click="changeColor(data.tid,'rgb(128, 216, 255)')"><img class="colorimg" alt="" src="image/blue.png"></a>
+      														<a role="menuitem" tabindex="-1" href="" ng-click="changeColor(data.tid,'rgb(167, 255, 235)')"><img class="colorimg" alt="" src="image/teal.png"></a>
+      														<a role="menuitem" tabindex="-1" href="" ng-click="changeColor(data.tid,'rgb(204, 255, 144)')"><img class="colorimg" alt="" src="image/green.png"></a>
+     												</div>
+     											</div>	
+     											
+												<a href="" id="img2"><img alt=""src="image/archieve1.svg"></a>
+												
+												<div class="dropdown"><a href="" id="img2" data-toggle="dropdown" class="dropdown-toggle"><img alt="" src="image/list.png"></a>
+													<ul class="dropdown-menu" id="option-dropdown2" >
 														<li><a role="menuitem" tabindex="-1" href="" ng-click="deleteNote(data.tid)">Delete note</a></li>
       													<li><a role="menuitem" tabindex="-1" href="">Add label</a></li>
       													<li><a role="menuitem" tabindex="-1" href="">Show checkboxes</a></li>
@@ -195,120 +217,14 @@
      											</div>	
 											</div>
 			  						</div>
-			  				</div>
-			  			
-			  			</div>
-			  		</div>
-			  		
-			  		
-			 <!--........................ option div............................. --> 	
-			 	
-			 		<div>
-			 			
-			 		</div>
-			 
-			 	
-			  			<!-- <div class="col-lg-1"></div> -->
-    					<!-- <div class="col-lg-10" >
-    					
-    					<div class="col-lg-4">
-    						<div class="card" style="width: 240px;">
-    						
-  								<div class="card-block">
-   									<h4 class="card-title">Card title1</h4>
-    								<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-  								</div>
-  								</div>
-							</div>
-    					
-    					<div class="col-lg-4">
-    					<div class="card" style="width: 240px;">
-    					
-  								<div class="card-block">
-   									<h4 class="card-title">Card title2</h4>
-    								<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-  								</div>
-  								</div>
-							</div>
-							
-								<div class="col-lg-4">	
-							<div class="card" style="width: 240px;">
-					
-  								<div class="card-block">
-   									<h4 class="card-title">Card title3</h4>
-    								<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-  								</div>
-  								</div>
-							</div>
-    					
-    					
-    					</div> -->
-    					
-    					<!-- <div  ng-repeat="data in notesList" >
-								<div id="gridnotes" class="card" class="col-lg-4">
-									<div  style="margin-top:36px;">
-										<div id="title" ng-click="openPopup(data)" ng-bind-html="data.title">
-										<a href="#"><span aria-hidden="true"><img alt="pin" src="image/icons8-Pin-20.png"></span></a>
-										
-										</div>
-							
-										<div id="description" ng-click="openPopup(data)" ng-bind-html="data.description" >
-										</div>
-								
-										<div id="notefooter">
-											<a href="#" id="img"><span aria-hidden="true"><img alt=""src="image/remainder.svg"></span></a>
-											<a href="#" id="img"><span aria-hidden="true"><img alt=""src="image/collaborator.svg"></span></a>
-											<a href="#" id="img"><span aria-hidden="true"><img alt=""src="image/addimage.svg"></span></a>
-											<a href="#" id="img"><span aria-hidden="true"><img alt=""src="image/color.svg"></span></a>
-											<a href="#" id="img"><span aria-hidden="true"><img alt=""src="image/archieve1.svg"></span></a>
-											<a href="#" id="img"><span aria-hidden="true"><img alt=""src="image/list.png"></span></a>
-											<button id="donebutton" type="button" ng-click="deleteNote(data.tid)">Delete</button>
-										</div>
-									</div>
-								</div>
-							</div>  -->
-    					
-    					
-    					<!-- <div class="col-lg-1" ></div> -->
+			  					</div>
+			  					</div>
+			  				
+			  		   </div> 
+			  
+			  <!-- ........ -->
 			  
 			  
-					
-						<!--  <div id="listnotes">
-						 	<div  ng-repeat="data in notesList">
-								<div  style="margin-top:36px;">
-									<div id="notesInList">
-										<div id="noteTitle" ng-bind-html="data.title">
-										
-										</div>
-										<div id="notesDescription" ng-bind-html="data.description"> 
-									
-										</div>
-										<div>
-											<button id="deleteButton" type="button" ng-click="deleteNote(data.tid)">Delete</button>
-										</div>
-									</div>
-								</div>
-							</div>           
-						</div>  -->
-						
-						<!-- <div class="card col-lg-4" style="margin-top: 36px" id="notes" ng-repeat="data in notesList">
-							<div id="noteTitle" ng-bind-html="data.title" >
-							
-							</div>
-							<div id="noteTitle" ng-bind-html="data.title">
-							
-							</div>
-							<div>
-							
-							</div>						
-						</div>
-						 -->
-                      	<!--  <div class="card" style="width: 20rem;">
-  							<div class="card-block">
-   								<h4 class="card-title">Card title</h4>
-    							<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-  							</div>
-						</div> --> 
 					</div>
 				</div>
 			</div>

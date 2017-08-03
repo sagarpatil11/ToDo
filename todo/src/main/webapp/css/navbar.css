@@ -155,7 +155,7 @@ body{
  }
 
 #card{
-	width:600px; 
+	width:500px; 
 	background-color: white;
 	padding: 0px;
 	margin: auto; 
@@ -200,22 +200,31 @@ body{
 
 #notefooter{
 	min-height: 30px;
-	padding-top: 10px;
-	padding-bottom: 15px;
+	/* padding-top: 10px;
+	padding-bottom: 15px; */
 }
+
 
 #img{
 	padding-left: 15px;
 	padding-right:15px;
 	outline: none;
-}
+}	
 
 #img1{
-	padding-left: 9px;
-	padding-right:9px;
+	padding-left: 15px;
+	padding-right:15px;
 	outline: none;
 	display: none;
-	float:left
+	float:left;
+}
+
+#img2{
+	padding-left: 10px;
+	padding-right:10px;
+	outline: none;
+	display: none;
+	float:left;
 }
 
 #userimg{
@@ -224,16 +233,6 @@ body{
 	
 }
 
-
-#notesInList{
-	width: 600px;
-	background-color: white;
-	padding: 20px 25px 30px;
-    margin: auto;
-    
-    border-radius: 2px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
 
 #listnotes{
 	width:600px; 
@@ -251,8 +250,12 @@ body{
 	margin:auto;
 }
 
+.col-lg-8 {
+    width: 67.666667%;
+}
+
 #gridnotes{
-	width:240px;; 
+	width:100%; 
 	background-color: white;
 	margin: auto; 
 	margin-top:35px;
@@ -260,7 +263,13 @@ body{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
 }
 
-#gridnotes:hover #img1{
+
+#listnotes:hover #img1{
+	display: block;
+}
+
+
+#gridnotes:hover #img2{
 	display: block;
 }
 
@@ -285,13 +294,43 @@ body{
 }
 
 
-.dropdown-menu{
+#profile-card{
 	margin-right: 15px;
     margin-top: 28px;
     width: 300px;
     height: 170px;
 }
-/* #query{
+
+.nav .open>a{
+	background-color: transparent;
+}
+
+#option-dropdown1{
+	margin: 24px 0 0 245px;
+}
+
+#option-dropdown2{
+	margin: 24px 0 0 180px;
+}
+
+#colordropup{
+	min-width: 0;
+	margin-left: 114px;
+    margin-bottom: 0px;
+    border: none;
+    display: none;
+}
+
+.dropup:hover #colordropup{
+	display: block;
+}
+
+.colorimg{
+	padding-left: 2;
+    padding-bottom: 3px;
+}
+
+/* #query{ 
     width: 400px;
     height: 40px;
     margin-top: -10px;

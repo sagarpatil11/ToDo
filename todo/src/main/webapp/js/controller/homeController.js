@@ -9,7 +9,7 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 		
 		
 		
-		//.....................show list view.................//
+		//.....................show grid view.................//
 		
 		
 		$scope.gridView=function(){
@@ -17,12 +17,12 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 			$scope.listBtn=true;
 			$scope.gridBtn=false;
 			
-			$scope.gridview=true;
-			$scope.listview=false;
+			$scope.col2="";
+			$scope.showdiv="col-lg-4";
 		}
 		
 		
-		//.....................show grid view.................//
+		//.....................show list view.................//
 		
 		
 		$scope.listView=function(){
@@ -30,8 +30,8 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 			$scope.listBtn=false;
 			$scope.gridBtn=true;
 			
-			$scope.gridview=false;
-			$scope.listview=true;
+			$scope.col2="col-lg-2";
+			$scope.showdiv="col-lg-8";
 		}
 		
 		
@@ -89,7 +89,7 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 				}
 				else
 				{
-						console.log(response2.data);
+						console.log(response1.data);
 						$state.go('login');
 				}
 			
@@ -191,6 +191,7 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 						.then(function(response1)
 						{
 							console.log(response1);
+							
 								if(response1.data.status == 1)
 								{
 										$scope.notesList=response1.data.list.reverse();
@@ -239,6 +240,15 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 	
 	
 	
+	//..............change color.............// 
+	
+	
+	$scope.changeColor=function(tid,color)
+	{
+		console.log("in changeColor() ",tid,color);
+	}
+	
+	
 	//..........logout.............//
 	
 	
@@ -261,17 +271,53 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 	
 	
 	$scope.showNotes=function(){
-		homeService.getNotes().then(function(resp){
-			console.log(resp);
+		homeService.getNotes().then(function(response1){
+			console.log(response1);
 			console.log("list display after login");
 			
+			if(response1.data.status == 1)
+			{
+				$scope.notesList=response1.data.list.reverse();
+				
+				$scope.gridView();
+				
+				/*$scope.listBtn=true;
+				$scope.gridBtn=false;
+				
+				$scope.gridview=true;
+				$scope.listview=false;*/
+					
+			}
+			else if(response1.data.status == -4)
+			{
+					console.log("access token expired");
 			
-			$scope.notesList=resp.data.reverse();
-			$scope.listBtn=true;
-			$scope.gridBtn=false;
+					homeService.getNewAccessToken().then(function(response2){
+						
+						if(response2.data.status == 4)
+						{
+								localStorage.setItem("accessToken", response2.data.token.accessToken);
+								localStorage.setItem("refreshToken", response2.data.token.refreshToken);
+					
+								homeService.getNotes().then(function(resp){
+									console.log(resp.data);
+									$scope.notesList=resp.data.list.reverse();
+								})
+						}
+						else
+						{
+								console.log(response2.data);
+								$state.go('login');
+						}
+					})
+			}
+			else
+			{
+					console.log(response1.data);
+					$state.go('login');
+			}
+		
 			
-			$scope.gridview=true;
-			$scope.listview=false;
 		})
 	}
 	$scope.showNotes();

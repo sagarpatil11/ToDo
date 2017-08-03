@@ -149,7 +149,7 @@ public class TaskController
 	//..........................get notes..........................//
 	
 	@RequestMapping(value="/getNotes")
-	public ResponseEntity<List<Task>> getNotes(HttpServletRequest request)
+	public ResponseEntity<Response> getNotes(HttpServletRequest request)
 	{
 		HttpSession session=request.getSession();
 		User user=(User) session.getAttribute("userSession");
@@ -158,15 +158,21 @@ public class TaskController
 		try 
 		{
 			List taskList = taskService.getNotes(user.getId());
-			System.out.println(taskList.toString());
 			
-			return new ResponseEntity<List<Task>>(taskList, HttpStatus.OK);
+			userResponse.setList(taskList);
+			userResponse.setStatus(1);
+			userResponse.setMessage("Notes list");
+			
+			return new ResponseEntity<Response>(userResponse, HttpStatus.OK);
 		} 
 		catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			errorResponse.setStatus(-1);
+			errorResponse.setMessage("There is some problem in getting list of notes");
+			
+			return new ResponseEntity<Response>(errorResponse,HttpStatus.OK);
 		}
-		return null;
+		
 		
 	}
 }
