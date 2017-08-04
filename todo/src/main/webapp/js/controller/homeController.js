@@ -36,7 +36,20 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 		
 		
 		
-		//......................Add new note .................//
+		//...................set color while creating note..........//
+		
+		
+		/*var givecolor;
+		
+		$scope.putColor=function(colors){
+			
+			givecolor=colors;
+			
+			$scope.notecolor={'background-color':givecolor}
+		}*/
+		
+		
+		//......................Create new note .................//
 		
 		$scope.submitNote=function(){
 		
@@ -48,9 +61,11 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 		
 		noteData.title=$scope.title;
 		noteData.description=$scope.description;
+		noteData.color=$scope.putcolor;
 		
 		$scope.title="";
 		$scope.description="";
+		$scope.putcolor='rgb(250, 250, 250)';
 		
 		
 		var httpnote=homeService.addNote(noteData);
@@ -152,7 +167,7 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 	}
 	
 	
-	//......................Update note.........................//
+	//......................popup note.........................//
 	
 	
 	
@@ -169,12 +184,17 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 					this.noteId=data.tid;
 					this.createdDate=data.creation_date;
 					this.user=data.user;
+					this.editedDate=data.edited_date;
+					this.notecolor=data.color;
 				
+		//.........................update note......................//			
+					
 					this.updateNote=function(tid){
 						
 						console.log(tid);
 						console.log(this.updateTitle);
 						console.log(this.updateDescription);
+						console.log("color ",this.notecolor);
 						
 						$uibModalInstance.dismiss('Done');
 						
@@ -185,7 +205,8 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 						updateData.description=this.updateDescription;
 						updateData.user=this.user;
 						updateData.creation_date=this.createdDate;
-						
+						updateData.color=this.notecolor;
+						//updateData.edited_date=this.editedDate;
 						
 						homeService.updateNote(updateData)
 						.then(function(response1)
@@ -240,16 +261,61 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 	
 	
 	
-	//..............change color.............// 
+	//.................................change color...........................................// 
 	
 	
-	$scope.changeColor=function(tid,color)
+	$scope.changeColor=function(noteData,color)
 	{
-		console.log("in changeColor() ",tid,color);
+		
+		noteData.color=color;
+		
+		homeService.updateNote(noteData)
+		.then(function(response1)
+		{
+			console.log(response1);
+			
+				if(response1.data.status == 1)
+				{
+						$scope.notesList=response1.data.list.reverse();
+						console.log("note updated");
+	
+				}
+				else if(response1.data.status == -4)
+				{
+						console.log("access token expired");
+				
+						homeService.getNewAccessToken().then(function(response2){
+							
+							if(response2.data.status == 4)
+							{
+									localStorage.setItem("accessToken", response2.data.token.accessToken);
+									localStorage.setItem("refreshToken", response2.data.token.refreshToken);
+						
+									homeService.updateNote(updateData).then(function(resp){
+										console.log(resp.data);
+										$scope.notesList=resp.data.list.reverse();
+									})
+							}
+							else
+							{
+									console.log(response2.data);
+									$state.go('login');
+							}
+						})
+				}
+				else 
+				{
+					console.log(response1.data);
+					return;
+				}
+				
+			
+			});
+		
 	}
 	
 	
-	//..........logout.............//
+	//...............................logout....................................//
 	
 	
 	$scope.logout=function(){
@@ -267,7 +333,7 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 	
 	
 	
-	//...........show notes initialy...........//
+	//.................................show notes initialy................................//
 	
 	
 	$scope.showNotes=function(){

@@ -40,9 +40,10 @@ public class TaskController
 	
 	
 	/**
-	 * @param task
-	 * @param request
-	 * @return
+	 * This method create new note 
+	 * @param task	{@link Task}
+	 * @param request {@link HttpServletRequest}
+	 * @return ResponseEntity {@link Response}
 	 */
 	@RequestMapping(value="/addNote")
 	public ResponseEntity<Response> addNote(@RequestBody Task task,HttpServletRequest request)
@@ -53,6 +54,8 @@ public class TaskController
 		task.setUser(user);
 		
 		task.setCreation_date(new Date());
+		
+		task.setEdited_date(new Date());
 		
 		try 
 		{
@@ -81,6 +84,12 @@ public class TaskController
 	//..........................Update Notes...........................///
 	
 	
+	/**
+	 * This method update's note contents
+	 * @param task {@link Task}
+	 * @param request {@link HttpServletRequest}
+	 * @return ResponseEntity {@link Response}
+	 */
 	@RequestMapping(value="/updateNote",method=RequestMethod.POST)
 	public ResponseEntity<Response> updateNote(@RequestBody Task task,HttpServletRequest request)
 	{
@@ -89,6 +98,8 @@ public class TaskController
 		
 		//task.setUser(user);
 		System.out.println(task.toString());
+		
+		task.setEdited_date(new Date());
 		
 		try 
 		{
@@ -115,6 +126,12 @@ public class TaskController
 	
 	//..........................Delete Notes...........................///
 	
+	/**
+	 * This method delete note 
+	 * @param tid {@link Task}
+	 * @param request {@link HttpServletRequest}
+	 * @return ResponseEntity {@link Response}
+	 */
 	@RequestMapping(value="/deleteNote/{tid}",method=RequestMethod.POST)
 	public ResponseEntity<Response> deleteTask(@PathVariable("tid") int tid, HttpServletRequest request)
 	{
@@ -148,6 +165,10 @@ public class TaskController
 	
 	//..........................get notes..........................//
 	
+	/**
+	 * @param request {@link HttpServletRequest}
+	 * @return ResponseEntity {@link Response}
+	 */
 	@RequestMapping(value="/getNotes")
 	public ResponseEntity<Response> getNotes(HttpServletRequest request)
 	{
@@ -175,4 +196,6 @@ public class TaskController
 		
 		
 	}
+	
+	
 }

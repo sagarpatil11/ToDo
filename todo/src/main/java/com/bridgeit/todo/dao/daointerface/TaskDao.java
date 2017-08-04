@@ -13,4 +13,5 @@ public interface TaskDao
 	public void deleteTask(int tid);
 	
 	public List<Task> getNotes(int uid);
+	
 }

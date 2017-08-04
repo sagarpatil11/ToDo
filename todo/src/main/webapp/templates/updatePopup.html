@@ -1,21 +1,42 @@
 
+<div id="popupdiv" ng-model="$ctrl.notecolor" ng-style="{'background-color':$ctrl.notecolor}">
+		<div id="title" contenteditable1 contentEditable=true ng-model="$ctrl.updateTitle" data-placeholder="Title..." 
+			spellcheck="false" ng-bind-html="$ctrl.updateTitle"></div>
 
-	<div id="title" contenteditable1
-		contentEditable=true ng-model="$ctrl.updateTitle" data-placeholder="Title..." 
-		spellcheck="false" ng-bind-html="$ctrl.updateTitle"></div>
+		<div id="description" contenteditable1 contentEditable=true ng-click="inputNote()" ng-model="$ctrl.updateDescription"
+			data-placeholder="Take a note..." spellcheck="false" ng-bind-html="$ctrl.updateDescription"></div>
 
-	<div id="description" contenteditable1 contentEditable=true
-		ng-click="inputNote()" ng-model="$ctrl.updateDescription"
-		data-placeholder="Take a note..." spellcheck="false" ng-bind-html="$ctrl.updateDescription"></div>
-
-	<div id="notefooter">
-		<a href="#" id="img"><span aria-hidden="true"><img alt="" src="image/remainder.svg"></span></a> 
-		<a href="#" id="img"><span aria-hidden="true"><img alt="" src="image/collaborator.svg"></span></a>
-		<a href="#" id="img"><span aria-hidden="true"><img alt="" src="image/addimage.svg"></span></a> 
-		<a href="#" id="img"><span aria-hidden="true"><img alt="" src="image/color.svg"></span></a> 
-		<a href="#" id="img"><span aria-hidden="true"><img alt=""src="image/archieve1.svg"></span></a>
-		<a href="#" id="img"><span aria-hidden="true"><img alt=""src="image/list.png"></span></a>
-		<button id="donebutton" type="button" ng-click="$ctrl.updateNote($ctrl.noteId)">Done</button>
-	</div>
+		<div id="notefooter">
+				<a href="" id="img1"><img alt=""src="image/remainder.svg"></a>
+				<a href="" id="img1"><img alt=""src="image/collaborator.svg"></a>
+				<a href="" id="img1"><img alt=""src="image/addimage.svg"></a>
+												
+				<div class="dropup"><a href="" id="img1" data-toggle="dropdown" class="dropdown-toggle"><img alt="" src="image/color.svg"></a>
+					<div class="dropdown-menu" id="colordropup">
+							<a role="menuitem" tabindex="-1" href="" ng-click="$ctrl.notecolor='rgb(250, 250, 250)'"><img class="colorimg" alt="" src="image/white.png"></a>
+							<a role="menuitem" tabindex="-1" href="" ng-click="$ctrl.notecolor='rgb(255, 138, 128)'"><img class="colorimg" alt="" src="image/red.png"></a>
+							<a role="menuitem" tabindex="-1" href="" ng-click="$ctrl.notecolor='rgb(255, 209, 128)'"><img class="colorimg" alt="" src="image/orange.png"></a>								
+							<a role="menuitem" tabindex="-1" href="" ng-click="$ctrl.notecolor='rgb(255, 255, 141)'"><img class="colorimg" alt="" src="image/yellow.png"></a>
+      						<br>
+   							<a role="menuitem" tabindex="-1" href="" ng-click="$ctrl.notecolor='rgb(207, 216, 220)'"><img class="colorimg" alt="" src="image/gray.png"></a>
+							<a role="menuitem" tabindex="-1" href="" ng-click="$ctrl.notecolor='rgb(128, 216, 255)'"><img class="colorimg" alt="" src="image/blue.png"></a>
+      						<a role="menuitem" tabindex="-1" href="" ng-click="$ctrl.notecolor='rgb(167, 255, 235)'"><img class="colorimg" alt="" src="image/teal.png"></a>
+      						<a role="menuitem" tabindex="-1" href="" ng-click="$ctrl.notecolor='rgb(204, 255, 144)'"><img class="colorimg" alt="" src="image/green.png"></a>
+     				</div>
+     			</div>	
+     											
+				<a href="" id="img1"><img alt=""src="image/archieve1.svg"></a>
+												
+				<div class="dropdown"><a href="" id="img1" data-toggle="dropdown" class="dropdown-toggle"><img alt="" src="image/list.png"></a>
+					<ul class="dropdown-menu" id="option-dropdown2" >
+						<li><a role="menuitem" tabindex="-1" href="" ng-click="deleteNote(data.tid)">Delete note</a></li>
+      					<li><a role="menuitem" tabindex="-1" href="">Add label</a></li>
+      					<li><a role="menuitem" tabindex="-1" href="">Show checkboxes</a></li>
+     				</ul>
+    			</div>	
+    		
+    			<button id="donebutton" type="button" ng-click="$ctrl.updateNote($ctrl.noteId)">Done</button>
+		</div>
+</div>
 
 

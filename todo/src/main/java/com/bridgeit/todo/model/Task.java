@@ -27,6 +27,10 @@ public class Task implements Serializable
 	private String description;
 	
 	private Date creation_date;
+	
+	private Date edited_date;
+	
+	private String color;
 
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="uid")
@@ -85,6 +89,27 @@ public class Task implements Serializable
 
 	public void setCreation_date(Date creation_date) {
 		this.creation_date = creation_date;
+	}
+
+	
+
+	public Date getEdited_date() {
+		return edited_date;
+	}
+
+
+	public void setEdited_date(Date edited_date) {
+		this.edited_date = edited_date;
+	}
+
+
+	public String getColor() {
+		return color;
+	}
+
+
+	public void setColor(String color) {
+		this.color = color;
 	}
 
 

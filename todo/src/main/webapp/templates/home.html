@@ -102,10 +102,10 @@
 
 
 
-		<!-- .................................Add note div ............................ -->
+		<!-- .................................create note div ............................ -->
 
 
-						<div id="card">
+						<div id="card" ng-model="putcolor" ng-style="{'background-color':putcolor}">
 							
 							<div ng-show="shownote" id="title" contenteditable1 contentEditable=true ng-model="title" data-placeholder="Title..." spellcheck="false">
 							<a href="#"><span aria-hidden="true"><img alt="" src="image/icons8-Pin-20.png"></span></a>
@@ -117,18 +117,33 @@
 							</div>
 								
 							<div id="notefooter" ng-show="shownote">
-								<a href="" id="img"><span aria-hidden="true"><img alt=""src="image/remainder.svg"></span></a>
-								<a href="" id="img"><span aria-hidden="true"><img alt=""src="image/collaborator.svg"></span></a>
-								<a href="" id="img"><span aria-hidden="true"><img alt=""src="image/addimage.svg"></span></a>
-								<a href="" id="img"><span aria-hidden="true"><img alt=""src="image/color.svg"></span></a>
-								<a href="" id="img"><span aria-hidden="true"><img alt=""src="image/archieve1.svg"></span></a>
-								<span  class="dropdown"><a href="" id="img" data-toggle="dropdown" class="dropdown-toggle" ><img alt="more" src="image/list.png"></a>
-									<ul class="dropdown-menu" >
-      									<li><a role="menuitem" tabindex="-1" href="">Add label</a></li>
-      									<li><a role="menuitem" tabindex="-1" href="">Show checkboxes</a></li>
-     								</ul>
-								</span>
-								<button id="donebutton" type="button" ng-click="submitNote()">Done</button>
+									<a href="" id="img1"><span aria-hidden="true"><img alt=""src="image/remainder.svg"></span></a>
+									<a href="" id="img1"><span aria-hidden="true"><img alt=""src="image/collaborator.svg"></span></a>
+									<a href="" id="img1"><span aria-hidden="true"><img alt=""src="image/addimage.svg"></span></a>
+									<div class="dropup"><a href="" id="img1" data-toggle="dropdown" class="dropdown-toggle"><img alt="" src="image/color.svg"></a>
+										<div class="dropdown-menu" id="colordropup">
+											<a role="menuitem" tabindex="-1" href="" ng-click="putcolor='rgb(250, 250, 250)'"><img class="colorimg" alt="" src="image/white.png"></a>
+											<a role="menuitem" tabindex="-1" href="" ng-click="putcolor='rgb(255, 138, 128)'"><img class="colorimg" alt="" src="image/red.png"></a>
+											<a role="menuitem" tabindex="-1" href="" ng-click="putcolor='rgb(255, 209, 128)'"><img class="colorimg" alt="" src="image/orange.png"></a>
+											<a role="menuitem" tabindex="-1" href="" ng-click="putcolor='rgb(255, 255, 141)'"><img class="colorimg" alt="" src="image/yellow.png"></a>
+  											<br>
+      										<a role="menuitem" tabindex="-1" href="" ng-click="putcolor='rgb(207, 216, 220)'"><img class="colorimg" alt="" src="image/gray.png"></a>
+      										<a role="menuitem" tabindex="-1" href="" ng-click="putcolor='rgb(128, 216, 255)'"><img class="colorimg" alt="" src="image/blue.png"></a>
+      										<a role="menuitem" tabindex="-1" href="" ng-click="putcolor='rgb(167, 255, 235)'"><img class="colorimg" alt="" src="image/teal.png"></a>
+											<a role="menuitem" tabindex="-1" href="" ng-click="putcolor='rgb(204, 255, 144)'"><img class="colorimg" alt="" src="image/green.png"></a>
+     									</div>
+     								</div>	
+								
+									<a href="" id="img1"><span aria-hidden="true"><img alt=""src="image/archieve1.svg"></span></a>
+								
+									<div class="dropdown"><a href="" id="img1" data-toggle="dropdown" class="dropdown-toggle" ><img alt="more" src="image/list.png"></a>
+										<ul class="dropdown-menu" >
+      										<li><a role="menuitem" tabindex="-1" href="">Add label</a></li>
+      										<li><a role="menuitem" tabindex="-1" href="">Show checkboxes</a></li>
+     									</ul>
+									</div>
+									
+									<button id="donebutton" type="button" ng-click="submitNote()">Done</button>
 							</div>
 							
 						</div> 
@@ -194,15 +209,15 @@
 												
 												<div class="dropup"><a href="" id="img2" data-toggle="dropdown" class="dropdown-toggle"><img alt="" src="image/color.svg"></a>
 													<div class="dropdown-menu" id="colordropup">
-															<a role="menuitem" tabindex="-1" href="" ng-click="changeColor(data.tid,'rgb(250, 250, 250)')"><img class="colorimg" alt="" src="image/white.png"></a>
-															<a role="menuitem" tabindex="-1" href="" ng-click="changeColor(data.tid,'rgb(255, 138, 128)')"><img class="colorimg" alt="" src="image/red.png"></a>
-															<a role="menuitem" tabindex="-1" href="" ng-click="changeColor(data.tid,'rgb(255, 209, 128)')"><img class="colorimg" alt="" src="image/orange.png"></a>
-															<a role="menuitem" tabindex="-1" href="" ng-click="changeColor(data.tid,'rgb(255, 255, 141)')"><img class="colorimg" alt="" src="image/yellow.png"></a>
+															<a role="menuitem" tabindex="-1" href="" ng-click="changeColor(data,'rgb(250, 250, 250)')"><img class="colorimg" alt="" src="image/white.png"></a>
+															<a role="menuitem" tabindex="-1" href="" ng-click="changeColor(data,'rgb(255, 138, 128)')"><img class="colorimg" alt="" src="image/red.png"></a>
+															<a role="menuitem" tabindex="-1" href="" ng-click="changeColor(data,'rgb(255, 209, 128)')"><img class="colorimg" alt="" src="image/orange.png"></a>
+															<a role="menuitem" tabindex="-1" href="" ng-click="changeColor(data,'rgb(255, 255, 141)')"><img class="colorimg" alt="" src="image/yellow.png"></a>
       														<br>
-      														<a role="menuitem" tabindex="-1" href="" ng-click="changeColor(data.tid,'rgb(207, 216, 220)')"><img class="colorimg" alt="" src="image/gray.png"></a>
-      														<a role="menuitem" tabindex="-1" href="" ng-click="changeColor(data.tid,'rgb(128, 216, 255)')"><img class="colorimg" alt="" src="image/blue.png"></a>
-      														<a role="menuitem" tabindex="-1" href="" ng-click="changeColor(data.tid,'rgb(167, 255, 235)')"><img class="colorimg" alt="" src="image/teal.png"></a>
-      														<a role="menuitem" tabindex="-1" href="" ng-click="changeColor(data.tid,'rgb(204, 255, 144)')"><img class="colorimg" alt="" src="image/green.png"></a>
+      														<a role="menuitem" tabindex="-1" href="" ng-click="changeColor(data,'rgb(207, 216, 220)')"><img class="colorimg" alt="" src="image/gray.png"></a>
+      														<a role="menuitem" tabindex="-1" href="" ng-click="changeColor(data,'rgb(128, 216, 255)')"><img class="colorimg" alt="" src="image/blue.png"></a>
+      														<a role="menuitem" tabindex="-1" href="" ng-click="changeColor(data,'rgb(167, 255, 235)')"><img class="colorimg" alt="" src="image/teal.png"></a>
+      														<a role="menuitem" tabindex="-1" href="" ng-click="changeColor(data,'rgb(204, 255, 144)')"><img class="colorimg" alt="" src="image/green.png"></a>
      												</div>
      											</div>	
      											
