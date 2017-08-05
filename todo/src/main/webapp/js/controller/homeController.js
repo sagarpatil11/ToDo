@@ -18,7 +18,7 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 			$scope.gridBtn=false;
 			
 			$scope.col2="";
-			$scope.showdiv="col-lg-4";
+			$scope.showdiv="col-lg-4 col-md-6 col-sm-12 col-xs-12";
 		}
 		
 		
@@ -65,7 +65,7 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 		
 		$scope.title="";
 		$scope.description="";
-		$scope.putcolor='rgb(250, 250, 250)';
+		$scope.putcolor='';
 		
 		
 		var httpnote=homeService.addNote(noteData);
@@ -346,6 +346,7 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 				$scope.notesList=response1.data.list.reverse();
 				
 				$scope.gridView();
+				
 				
 				/*$scope.listBtn=true;
 				$scope.gridBtn=false;

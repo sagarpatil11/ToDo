@@ -25,12 +25,18 @@
 						src="image/grid.svg"></a></li>
 				<li><a href="" ng-show="listBtn" ng-click="listView()"><span aria-hidden="true"></span><img alt=""
 						src="image/list.svg"></a></li>
-				<li><div class="dropdown"><a href="" data-toggle="dropdown" class="dropdown-toggle" ><img class="img-circle" id="userimg" src="image/usericon.png" ></a>
+				<li><div class="dropdown"><a href="" data-toggle="dropdown" class="dropdown-toggle" ><img id="userimg" src="image/usericon.png" ></a>
 						<div class="dropdown-menu" id="profile-card">
 							<div>
+								<a src=""><div><img id="profileimg" alt="" src="image/usericon.png"></div></a>
+								<div>
+									<div>{{username}}</div>
+									<div>{{email}}</div>
+								</div>
 							</div>
 							<div>
-								<button style="float: right" ng-click="logout()">Sign out</button>
+								<button>Add Account</button>
+								<button id="logoutbtn" ng-click="logout()">Sign out</button>
 							</div>
 						</div>
 					</div>
