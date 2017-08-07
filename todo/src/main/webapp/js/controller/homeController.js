@@ -18,7 +18,9 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 			$scope.gridBtn=false;
 			
 			$scope.col2="";
-			$scope.showdiv="col-lg-4 col-md-6 col-sm-12 col-xs-12";
+			$scope.showdiv="col-lg-4 col-md-6 col-sm-12 col-xs-12 item";
+			
+			localStorage.setItem("view","grid");
 		}
 		
 		
@@ -31,9 +33,19 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 			$scope.gridBtn=true;
 			
 			$scope.col2="col-lg-2";
-			$scope.showdiv="col-lg-8";
+			$scope.showdiv="col-lg-8 item";
+			localStorage.setItem("view","list");
 		}
 		
+		
+		if(localStorage.view == "list")
+		{
+			$scope.listView();
+		}
+		else
+		{
+			$scope.gridView();
+		}
 		
 		
 		//...................set color while creating note..........//
@@ -65,7 +77,7 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 		
 		$scope.title="";
 		$scope.description="";
-		$scope.putcolor='';
+		$scope.putcolor="";
 		
 		
 		var httpnote=homeService.addNote(noteData);
@@ -345,15 +357,6 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 			{
 				$scope.notesList=response1.data.list.reverse();
 				
-				$scope.gridView();
-				
-				
-				/*$scope.listBtn=true;
-				$scope.gridBtn=false;
-				
-				$scope.gridview=true;
-				$scope.listview=false;*/
-					
 			}
 			else if(response1.data.status == -4)
 			{

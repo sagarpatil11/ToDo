@@ -13,7 +13,12 @@
 <script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
 <script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
 <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script type="text/javascript" src="bower_components/packery-angular/dist/packery-angular.min.js"></script>
+<script src="bower_components/packery/dist/packery.pkgd.min.js"></script>
+ <script src="bower_components/draggabilly/dist/draggabilly.pkgd.min.js"></script>
+ <script type="text/javascript" src="bower_components/moment/moment.js"></script>
 
+ 
 
  </head>
 <body data-ng-app="todo">
@@ -26,6 +31,7 @@
 <script type="text/javascript" src="js/controller/loginController.js"></script>
 <script type="text/javascript" src="js/controller/regController.js"></script>
 <script type="text/javascript" src="js/controller/homeController.js"></script>
+<script type="text/javascript" src="js/directive/packery.js"></script>
 
 </html>
 

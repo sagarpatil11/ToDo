@@ -1,4 +1,4 @@
-var myApp=angular.module("todo",['ui.router','ngSanitize','ui.bootstrap'])
+var myApp=angular.module("todo",['ui.router','ngSanitize','ui.bootstrap','packery-angular'])
 .config(function($stateProvider, $urlRouterProvider){
 	$stateProvider
 			.state("login",{
@@ -22,6 +22,9 @@ var myApp=angular.module("todo",['ui.router','ngSanitize','ui.bootstrap'])
 		 $urlRouterProvider.otherwise('/login');
 
 });
+
+
+
 
 myApp.directive('contenteditable1', [function() {
     return {
@@ -54,3 +57,4 @@ myApp.directive('contenteditable1', [function() {
     };
 
 }]);
+

@@ -114,7 +114,7 @@
 						<div id="card" ng-model="putcolor" ng-style="{'background-color':putcolor}">
 							
 							<div ng-show="shownote" id="title" contenteditable1 contentEditable=true ng-model="title" data-placeholder="Title..." spellcheck="false">
-							<a href="#"><span aria-hidden="true"><img alt="" src="image/icons8-Pin-20.png"></span></a>
+							<a href=""><span aria-hidden="false"><img alt="pin" src="image/icons8-Pin-20.png"></span></a>
 								
 							</div>
 							
@@ -193,12 +193,12 @@
 							 -->
 			  <!-- ..................... grid view ........................ -->			
 			  
-			  			 <div id="maindiv"> 
+			  			 <div   id="maindiv"> 
 			  
-			  				<div ng-repeat="data in notesList | filter: search">
+			  				<div testpackery1  ng-repeat="data in notesList | filter: search">
 			  					<div ng-class="col2"></div>
 			  					<div ng-class="showdiv">
-			  						<div id="gridnotes" ng-style="{'background-color':data.color}">
+			  						<div  id="gridnotes" ng-style="{'background-color':data.color}">
 			  								<div id="title" ng-click="openPopup(data)" ng-bind-html="data.title">
 												<a href=""><span aria-hidden="true"><img alt="pin" src="image/icons8-Pin-20.png"></span></a>
 										
@@ -239,7 +239,7 @@
 											</div>
 			  						</div>
 			  					</div>
-			  					</div>
+			  				</div>
 			  				
 			  		   </div> 
 			  
