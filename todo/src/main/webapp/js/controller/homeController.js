@@ -18,7 +18,7 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 			$scope.gridBtn=false;
 			
 			$scope.col2="";
-			$scope.showdiv="col-lg-4 col-md-6 col-sm-12 col-xs-12 item";
+			$scope.showdiv="col-lg-4 col-md-6 col-sm-12 col-xs-12";
 			
 			localStorage.setItem("view","grid");
 		}
@@ -33,7 +33,7 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 			$scope.gridBtn=true;
 			
 			$scope.col2="col-lg-2";
-			$scope.showdiv="col-lg-8 item";
+			$scope.showdiv="col-lg-8 ";
 			localStorage.setItem("view","list");
 		}
 		

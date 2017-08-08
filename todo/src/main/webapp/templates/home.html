@@ -27,14 +27,14 @@
 						src="image/list.svg"></a></li>
 				<li><div class="dropdown"><a href="" data-toggle="dropdown" class="dropdown-toggle" ><img id="userimg" src="image/usericon.png" ></a>
 						<div class="dropdown-menu" id="profile-card">
-							<div>
-								<a src=""><div><img id="profileimg" alt="" src="image/usericon.png"></div></a>
-								<div>
-									<div>{{username}}</div>
-									<div>{{email}}</div>
+							<div style="margin: 15px 15px 15px 15px;"">
+								<img id="profileimg" alt="" src="image/usericon.png">
+								<div style="float: right;width: 145px;">
+									<p>Sagar Patil</p>
+									<p>sagar@gmail.com</p>
 								</div>
 							</div>
-							<div>
+							<div id="profile-footer">
 								<button>Add Account</button>
 								<button id="logoutbtn" ng-click="logout()">Sign out</button>
 							</div>
@@ -195,7 +195,7 @@
 			  
 			  			 <div   id="maindiv"> 
 			  
-			  				<div testpackery1  ng-repeat="data in notesList | filter: search">
+			  				<div ng-repeat="data in notesList | filter: search">
 			  					<div ng-class="col2"></div>
 			  					<div ng-class="showdiv">
 			  						<div  id="gridnotes" ng-style="{'background-color':data.color}">
@@ -209,8 +209,20 @@
 											</div>
 								
 											<div id="notefooter">
-												<a href="" id="img2"><img alt=""src="image/remainder.svg"></a>
+												
+												<div class="dropdown"><a href="" id="img2" data-toggle="dropdown" class="dropdown-toggle"><img alt="" src="image/remainder.svg"></a>
+													<ul class="dropdown-menu" id="dropdown-reminder" >
+														<li class="dropdown-header" style="font-size: 16px;">Reminder:</li>
+      													<li style="padding: 3 0 3 0;font-size: 13px;"><a role="menuitem" tabindex="-1" href="" ng-click="setReminder(data,)">Later today<span style="float: right;">8:00 PM</span></a></li>
+      													<li style="padding: 3 0 3 0;font-size: 13px;"><a role="menuitem" tabindex="-1" href="" ng-click="setReminder()">Tomorrow<span style="float: right;">8:00 AM</span></a></li>
+      													<li style="padding: 3 0 3 0;font-size: 13px;"><a role="menuitem" tabindex="-1" href="" ng-click="setReminder()">Next weak<span style="float: right;">Mon, 8:00 AM</span></a></li>
+      													<li style="padding: 3 0 3 0;font-size: 13px;"><a role="menuitem" tabindex="-1" href="" ng-click="setReminder()"><span class="glyphicon glyphicon-time"></span>&nbsp&nbspPick date & time</a></li>
+      													<li style="padding: 3 0 3 0;font-size: 13px;"><a role="menuitem" tabindex="-1" href="" ng-click="setPlace()"><span class="glyphicon glyphicon-map-marker"></span>&nbsp&nbspPick place</a></li>
+     												</ul>
+     											</div>
+												
 												<a href="" id="img2"><img alt=""src="image/collaborator.svg"></a>
+												
 												<a href="" id="img2"><img alt=""src="image/addimage.svg"></a>
 												
 												<div class="dropup"><a href="" id="img2" data-toggle="dropdown" class="dropdown-toggle"><img alt="" src="image/color.svg"></a>
@@ -230,7 +242,7 @@
 												<a href="" id="img2"><img alt=""src="image/archieve1.svg"></a>
 												
 												<div class="dropdown"><a href="" id="img2" data-toggle="dropdown" class="dropdown-toggle"><img alt="" src="image/list.png"></a>
-													<ul class="dropdown-menu" id="option-dropdown2" >
+													<ul class="dropdown-menu" id="dropdown-more">
 														<li><a role="menuitem" tabindex="-1" href="" ng-click="deleteNote(data.tid)">Delete note</a></li>
       													<li><a role="menuitem" tabindex="-1" href="">Add label</a></li>
       													<li><a role="menuitem" tabindex="-1" href="">Show checkboxes</a></li>

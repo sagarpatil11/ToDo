@@ -31,6 +31,8 @@ public class Task implements Serializable
 	private Date edited_date;
 	
 	private String color;
+	
+	private Date reminder;
 
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="uid")
@@ -110,6 +112,16 @@ public class Task implements Serializable
 
 	public void setColor(String color) {
 		this.color = color;
+	}
+
+	
+	public Date getReminder() {
+		return reminder;
+	}
+
+
+	public void setReminder(Date reminder) {
+		this.reminder = reminder;
 	}
 
 
