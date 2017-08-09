@@ -36,6 +36,15 @@
     			</div>	
     		
     			<button id="donebutton" type="button" ng-click="$ctrl.updateNote($ctrl.noteId)">Done</button>
+    			
+		</div>
+		
+		<div ng-if=$ctrl.notereminder id="reminder-div" ng-mouseover="cancelbtn=true" ng-mouseleave="cancelbtn=false">
+				<span><img alt="clock" src="image/clock1.svg" width=13px ></span>
+												
+				{{$ctrl.notereminder | date:'MMM, dd yyyy hh:mm a'}}
+												
+				<span ng-show="cancelbtn"><img ng-click="$ctrl.deleteReminder()" alt="cancel" src="image/cancel.svg" width=15px style="float: right;"></span>
 		</div>
 </div>
 

@@ -17,8 +17,8 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 			$scope.listBtn=true;
 			$scope.gridBtn=false;
 			
-			$scope.col2="";
-			$scope.showdiv="col-lg-4 col-md-6 col-sm-12 col-xs-12";
+			$scope.col2="col-lg-2";
+			$scope.showdiv="col-lg-4 col-md-6 col-sm-12 col-xs-12 item";
 			
 			localStorage.setItem("view","grid");
 		}
@@ -33,7 +33,7 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 			$scope.gridBtn=true;
 			
 			$scope.col2="col-lg-2";
-			$scope.showdiv="col-lg-8 ";
+			$scope.showdiv="col-lg-8 item";
 			localStorage.setItem("view","list");
 		}
 		
@@ -198,7 +198,29 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 					this.user=data.user;
 					this.editedDate=data.edited_date;
 					this.notecolor=data.color;
+					this.notereminder=data.reminder;
 				
+					
+		//..........................delete reminder.................//
+					
+					
+					this.deleteReminder=function(){
+						
+						var noteData={};
+						
+						noteData.tid=this.noteId;
+						noteData.title=this.updateTitle;
+						noteData.description=this.updateDescription;
+						noteData.user=this.user;
+						noteData.creation_date=this.createdDate;
+						noteData.color=this.notecolor;
+						noteData.reminder=null;
+						
+						$scope.cancelReminder(noteData);
+						this.notereminder=null;
+					}
+					
+					
 		//.........................update note......................//			
 					
 					this.updateNote=function(tid){
@@ -218,6 +240,7 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 						updateData.user=this.user;
 						updateData.creation_date=this.createdDate;
 						updateData.color=this.notecolor;
+						updateData.reminder=this.notereminder;
 						//updateData.edited_date=this.editedDate;
 						
 						homeService.updateNote(updateData)
@@ -324,6 +347,265 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 			
 			});
 		
+	}
+	
+	
+	
+	
+	
+	//...............................set reminder....................................//
+	
+	
+	$scope.setReminder=function(notedata,day){
+		console.log("in setReminder");
+		
+		
+		var today=new Date();
+		
+		var httpobj;
+		
+		if(day == "Today")
+		{
+			today.setHours(20,00,00);
+			
+			notedata.reminder=today;
+			
+			console.log(today);
+			
+			httpobj=homeService.updateNote(notedata);
+			
+		}
+		else if(day == "Tomorrow")
+		{
+			var tomorrow=new Date();
+			tomorrow.setDate(today.getDate() + 1);
+			tomorrow.setHours(08,00,00);
+			console.log(tomorrow);
+			
+			notedata.reminder=tomorrow;
+			
+			httpobj=homeService.updateNote(notedata);
+			
+		}
+		/*else if(day == "Next-week")*/
+		else
+		{
+			var nextweek=new Date();
+			nextweek.setDate(today.getDate() + 7);
+			nextweek.setHours(08,00,00);
+			console.log(nextweek);
+			
+			notedata.reminder=nextweek;
+			
+			httpobj=homeService.updateNote(notedata);
+			
+		}
+		
+		
+		
+		
+		httpobj.then(function(response1)
+		{
+			console.log(response1);
+			
+				if(response1.data.status == 1)
+				{
+						$scope.notesList=response1.data.list.reverse();
+						console.log("reminder set");
+	
+				}
+				else if(response1.data.status == -4)
+				{
+						console.log("access token expired");
+				
+						homeService.getNewAccessToken().then(function(response2){
+							
+							if(response2.data.status == 4)
+							{
+									localStorage.setItem("accessToken", response2.data.token.accessToken);
+									localStorage.setItem("refreshToken", response2.data.token.refreshToken);
+						
+									homeService.updateNote(notedata).then(function(resp){
+										console.log(resp.data);
+										$scope.notesList=resp.data.list.reverse();
+									})
+							}
+							else
+							{
+									console.log(response2.data);
+									$state.go('login');
+							}
+						})
+				}
+				else 
+				{
+					console.log(response1.data);
+					return;
+				}
+				
+			
+			});
+		
+	}
+	
+	
+	//...............................cancel reminder...........................//
+
+	
+	$scope.cancelReminder=function(notedata){
+		
+		console.log("in cancelReminder");
+		
+		notedata.reminder=null;
+		
+		homeService.updateNote(notedata)
+		.then(function(response1)
+				{
+					console.log(response1);
+					
+						if(response1.data.status == 1)
+						{
+								$scope.notesList=response1.data.list.reverse();
+								console.log("reminder set");
+			
+						}
+						else if(response1.data.status == -4)
+						{
+								console.log("access token expired");
+						
+								homeService.getNewAccessToken().then(function(response2){
+									
+									if(response2.data.status == 4)
+									{
+											localStorage.setItem("accessToken", response2.data.token.accessToken);
+											localStorage.setItem("refreshToken", response2.data.token.refreshToken);
+								
+											homeService.updateNote(notedata).then(function(resp){
+												console.log(resp.data);
+												$scope.notesList=resp.data.list.reverse();
+											})
+									}
+									else
+									{
+											console.log(response2.data);
+											$state.go('login');
+									}
+								})
+						}
+						else 
+						{
+							console.log(response1.data);
+							return;
+						}
+						
+					
+					});
+		
+	}
+	
+	
+	
+	
+	//...............................do archive.............................//
+	
+	
+	$scope.doArchive=function(notedata){
+		console.log("in doArchive");
+		
+		notedata.isArchive="true";
+		
+		homeService.updateNote(notedata)
+		.then(function(response1)
+				{
+					console.log(response1);
+					
+						if(response1.data.status == 1)
+						{
+								$scope.notesList=response1.data.list.reverse();
+								console.log("archive done");
+			
+						}
+						else if(response1.data.status == -4)
+						{
+								console.log("access token expired");
+						
+								homeService.getNewAccessToken().then(function(response2){
+									
+									if(response2.data.status == 4)
+									{
+											localStorage.setItem("accessToken", response2.data.token.accessToken);
+											localStorage.setItem("refreshToken", response2.data.token.refreshToken);
+								
+											homeService.updateNote(notedata).then(function(resp){
+												$scope.notesList=resp.data.list.reverse();
+											})
+									}
+									else
+									{
+											console.log(response2.data);
+											$state.go('login');
+									}
+								})
+						}
+						else 
+						{
+							console.log(response1.data);
+							return;
+						}
+						
+					
+					});
+	}
+	
+	
+	//.................................. do trash.............................//
+	
+	$scope.doTrash=function(notedata){
+		console.log("in doTrash");
+		
+		notedata.isTrash="true";
+		
+		homeService.updateNote(notedata)
+		.then(function(response1)
+				{
+					console.log(response1);
+					
+						if(response1.data.status == 1)
+						{
+								$scope.notesList=response1.data.list.reverse();
+								console.log("archive done");
+			
+						}
+						else if(response1.data.status == -4)
+						{
+								console.log("access token expired");
+						
+								homeService.getNewAccessToken().then(function(response2){
+									
+									if(response2.data.status == 4)
+									{
+											localStorage.setItem("accessToken", response2.data.token.accessToken);
+											localStorage.setItem("refreshToken", response2.data.token.refreshToken);
+								
+											homeService.updateNote(notedata).then(function(resp){
+												$scope.notesList=resp.data.list.reverse();
+											})
+									}
+									else
+									{
+											console.log(response2.data);
+											$state.go('login');
+									}
+								})
+						}
+						else 
+						{
+							console.log(response1.data);
+							return;
+						}
+						
+					
+					});
 	}
 	
 	

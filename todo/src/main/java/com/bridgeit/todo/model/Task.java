@@ -33,6 +33,10 @@ public class Task implements Serializable
 	private String color;
 	
 	private Date reminder;
+	
+	private String isTrash;
+	
+	private String isArchive;
 
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="uid")
@@ -122,6 +126,26 @@ public class Task implements Serializable
 
 	public void setReminder(Date reminder) {
 		this.reminder = reminder;
+	}
+
+	
+	public String getIsTrash() {
+		return isTrash;
+	}
+
+
+	public void setIsTrash(String isTrash) {
+		this.isTrash = isTrash;
+	}
+
+
+	public String getIsArchive() {
+		return isArchive;
+	}
+
+
+	public void setIsArchive(String isArchive) {
+		this.isArchive = isArchive;
 	}
 
 

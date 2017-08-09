@@ -1,4 +1,4 @@
-/*myApp.directive('testpackery1', ['$rootScope', '$timeout',
+myApp.directive('testpackery1', ['$rootScope', '$timeout',
 	  function($rootScope, $timeout) {
 	    return {
 	      restrict: 'A',
@@ -8,8 +8,8 @@
 	          scope.element = element;
 	          $rootScope.packery = new Packery(element[0].parentElement, {
 	            isResizeBound: true,
-	            // rowHeight: 230,
-	            // columnWidth: 230,
+	            /*rowHeight: 230,
+	            columnWidth: 230,*/
 	            itemSelector: '.item'
 	          });
 	          $rootScope.packery.bindResize();
@@ -45,7 +45,7 @@
 	          draggable2.on('dragEnd', function(instance, event, pointer) {
 	            $timeout(function() {
 	              $rootScope.packery.layout();
-	              $rootScope.packery = null;
+	           /*   $rootScope.packery = null;*/
 	            }, 200);
 	          });
 
@@ -58,13 +58,13 @@
 	    };
 
 	  }
-	])*/
+	]);
 
 
 
 
 
-myApp.directive('testpackery', ['$rootScope', '$timeout',
+/*myApp.directive('testpackery', ['$rootScope', '$timeout',
   function($rootScope, $timeout) {
     return {
       restrict: 'A',
@@ -74,7 +74,7 @@ myApp.directive('testpackery', ['$rootScope', '$timeout',
           scope.element = element;
           $rootScope.packery = new Packery(element[0].parentElement, {
             isResizeBound: true,
-           /* rowHeight: 230,*/
+            rowHeight: 230,
             columnWidth: 230,
             itemSelector: '.itemwin'
           });
@@ -122,4 +122,4 @@ myApp.directive('testpackery', ['$rootScope', '$timeout',
     };
 
   }
-]);
+]);*/
