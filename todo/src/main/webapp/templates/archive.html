@@ -1,0 +1,78 @@
+ <div class="row">
+	<div class="col-lg-12">
+			
+			
+			  			<div id="maindiv"> 
+			  				
+			  				<div ng-class="showdiv" ng-repeat="data in notesList | filter: search">
+			  					
+			  					
+			  						<div ng-if="data.isArchive == 'true'" id="gridnotes" ng-style="{'background-color':data.color}">
+			  								<div id="title" ng-click="openPopup(data)" ng-bind-html="data.title">
+												<a href=""><span aria-hidden="true"><img alt="pin" src="image/icons8-Pin-20.png"></span></a>
+										
+											</div>
+							
+											<div id="description" ng-click="openPopup(data)" ng-bind-html="data.description" >
+											
+											</div>
+								
+											<div id="notefooter">
+												
+												<div class="dropdown"><a href="" id="img2" data-toggle="dropdown" class="dropdown-toggle"><img alt="" src="image/remainder.svg"></a>
+													<ul class="dropdown-menu" id="dropdown-reminder" >
+														<li class="dropdown-header" style="font-size: 16px;">Reminder:</li>
+      													<li style="padding: 3 0 3 0;font-size: 13px;"><a role="menuitem" tabindex="-1" href="" ng-click="setReminder(data,'Today')">Later today<span style="float: right;">8:00 PM</span></a></li>
+      													<li style="padding: 3 0 3 0;font-size: 13px;"><a role="menuitem" tabindex="-1" href="" ng-click="setReminder(data,'Tomorrow')">Tomorrow<span style="float: right;">8:00 AM</span></a></li>
+      													<li style="padding: 3 0 3 0;font-size: 13px;"><a role="menuitem" tabindex="-1" href="" ng-click="setReminder(data,'Next-week')">Next weak<span style="float: right;">Mon, 8:00 AM</span></a></li>
+      													<!-- <li style="padding: 3 0 3 0;font-size: 13px;"><a role="menuitem" tabindex="-1" href="" ><span class="glyphicon glyphicon-time"></span>&nbsp&nbspPick date & time</a></li>
+      													<li style="padding: 3 0 3 0;font-size: 13px;"><a role="menuitem" tabindex="-1" href="" ><span class="glyphicon glyphicon-map-marker"></span>&nbsp&nbspPick place</a></li> -->
+     												</ul>
+     											</div>
+												
+												<!-- <a href="" id="img2"><img alt=""src="image/collaborator.svg"></a>
+												
+												<a href="" id="img2"><img alt=""src="image/addimage.svg"></a> -->
+												
+												<div class="dropup"><a href="" id="img2" data-toggle="dropdown" class="dropdown-toggle"><img alt="" src="image/color.svg"></a>
+													<div class="dropdown-menu" id="colordropup">
+															<a role="menuitem" tabindex="-1" href="" ng-click="changeColor(data,'rgb(250, 250, 250)')"><img class="colorimg" alt="" src="image/white.png"></a>
+															<a role="menuitem" tabindex="-1" href="" ng-click="changeColor(data,'rgb(255, 138, 128)')"><img class="colorimg" alt="" src="image/red.png"></a>
+															<a role="menuitem" tabindex="-1" href="" ng-click="changeColor(data,'rgb(255, 209, 128)')"><img class="colorimg" alt="" src="image/orange.png"></a>
+															<a role="menuitem" tabindex="-1" href="" ng-click="changeColor(data,'rgb(255, 255, 141)')"><img class="colorimg" alt="" src="image/yellow.png"></a>
+      														<br>
+      														<a role="menuitem" tabindex="-1" href="" ng-click="changeColor(data,'rgb(207, 216, 220)')"><img class="colorimg" alt="" src="image/gray.png"></a>
+      														<a role="menuitem" tabindex="-1" href="" ng-click="changeColor(data,'rgb(128, 216, 255)')"><img class="colorimg" alt="" src="image/blue.png"></a>
+      														<a role="menuitem" tabindex="-1" href="" ng-click="changeColor(data,'rgb(167, 255, 235)')"><img class="colorimg" alt="" src="image/teal.png"></a>
+      														<a role="menuitem" tabindex="-1" href="" ng-click="changeColor(data,'rgb(204, 255, 144)')"><img class="colorimg" alt="" src="image/green.png"></a>
+     												</div>
+     											</div>	
+     											
+												<a href="" id="img2" ng-click="doUnArchive(data)"><img alt=""src="image/unarchive.svg"></a>
+												
+												<div class="dropdown"><a href="" id="img2" data-toggle="dropdown" class="dropdown-toggle"><img alt="" src="image/list.png"></a>
+													<ul class="dropdown-menu" id="dropdown-more">
+														<li><a role="menuitem" tabindex="-1" href="" ng-click="doTrash(data)">Delete note</a></li>
+      													<!-- <li><a role="menuitem" tabindex="-1" href="">Add label</a></li>
+      													<li><a role="menuitem" tabindex="-1" href="">Show checkboxes</a></li> -->
+     												</ul>
+     											</div>	
+											</div>
+											
+											<div ng-if=data.reminder id="reminder-div" ng-mouseover="cancelbtn=true" ng-mouseleave="cancelbtn=false">
+												<span><img alt="clock" src="image/clock1.svg" width=13px ></span>
+												
+												{{data.reminder | date:'MMM, dd yyyy hh:mm a'}}
+												
+												<span ng-show="cancelbtn"><img ng-click="cancelReminder(data)" alt="cancel" src="image/cancel.svg" width=15px style="float: right;"></span>
+											</div>
+			  						</div>
+			  					
+			  				</div>
+			  				
+			  		   </div> 
+			
+			
+	</div>
+
+</div> 

@@ -1,0 +1,41 @@
+<div class="row">
+	<div class="col-lg-12">
+			
+			
+			  			<div id="maindiv"> 
+			  				
+			  				<div ng-class="showdiv" ng-repeat="data in notesList | filter: search">
+			  					
+			  					
+			  						<div ng-if="data.isTrash == 'true'" id="gridnotes" ng-style="{'background-color':data.color}">
+			  								<div id="title" ng-click="openPopup(data)" ng-bind-html="data.title">
+												<a href=""><span aria-hidden="true"><img alt="pin" src="image/icons8-Pin-20.png"></span></a>
+										
+											</div>
+							
+											<div id="description" ng-click="openPopup(data)" ng-bind-html="data.description" >
+											
+											</div>
+								
+											<div id="notefooter">
+												
+												<div class="dropdown"><a href="" id="img2" data-toggle="dropdown" class="dropdown-toggle"><img alt="" src="image/list.png"></a>
+													<ul class="dropdown-menu" id="dropdown-trash">
+														<li><a role="menuitem" tabindex="-1" href="" ng-click="deleteNote(data.tid)">Delete forever</a></li>
+      													<li><a role="menuitem" tabindex="-1" href="" ng-click="restoreNote(data)">Restore</a></li>
+     												</ul>
+     											</div>	
+     											
+											</div>
+											
+											
+			  						</div>
+			  					
+			  				</div>
+			  				
+			  		   </div> 
+			
+			
+	</div>
+
+</div>

@@ -18,6 +18,18 @@ var myApp=angular.module("todo",['ui.router','ngSanitize','ui.bootstrap'])
 					templateUrl:"templates/home.html",
 					controller:"homeCtrl"	
 			})
+			
+			.state("trash",{
+					url:"/trash",
+					templateUrl:"templates/home.html",
+					controller:"trashCtrl"
+			})
+			
+			.state("archive",{
+					url:"/archive",
+					templateUrl:"templates/home.html",
+					controller:"archiveCtrl"
+			})
 
 		 $urlRouterProvider.otherwise('/login');
 

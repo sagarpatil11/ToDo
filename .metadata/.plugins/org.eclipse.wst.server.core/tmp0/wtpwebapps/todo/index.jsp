@@ -34,6 +34,7 @@
 	<script type="text/javascript" src="js/controller/regController.js"></script>
 	<script type="text/javascript" src="js/controller/homeController.js"></script>
 	<script type="text/javascript" src="js/directive/packery.js"></script> 
-
+	<script type="text/javascript" src="js/controller/trashController.js"></script>
+	<script type="text/javascript" src="js/controller/archiveController.js"></script>
 </html>
 

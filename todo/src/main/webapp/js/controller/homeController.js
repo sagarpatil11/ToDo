@@ -6,7 +6,10 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 			$scope.shownote=true;
 		}
 	
-		
+		$scope.shownotes=true;
+		$scope.takenote=true;
+		$scope.showtrash=false;
+		$scope.showarchive=false;
 		
 		
 		//.....................show grid view.................//
@@ -89,6 +92,7 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 				{
 						$scope.notesList=response1.data.list.reverse();
 						console.log("note added");
+						$state.reload();
 						
 				}
 				else if(response1.data.status == -4)
@@ -105,6 +109,7 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 									homeService.addNote(noteData).then(function(resp){
 										console.log(resp.data);
 										$scope.notesList=resp.data.list.reverse();
+										$state.reload();
 									})
 							}
 							else
@@ -139,7 +144,7 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 			if(response1.data.status == 1)
 			{
 					$scope.notesList=response1.data.list.reverse();
-					
+					$state.reload();
 					console.log("note deleted");
 			}
 			else if(response1.data.status == -4)
@@ -157,6 +162,7 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 									console.log(resp.data);
 									
 									$scope.notesList=resp.data.list.reverse();
+									$state.reload();
 								})
 						}
 						else
@@ -199,6 +205,8 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 					this.editedDate=data.edited_date;
 					this.notecolor=data.color;
 					this.notereminder=data.reminder;
+					this.archivenote=data.isArchive;
+					this.trashnote=data.isTrash;
 				
 					
 		//..........................delete reminder.................//
@@ -214,9 +222,13 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 						noteData.user=this.user;
 						noteData.creation_date=this.createdDate;
 						noteData.color=this.notecolor;
+						noteData.isArchive=this.archivenote;
+						noteData.isTrash=this.trashnote;
+						
 						noteData.reminder=null;
 						
 						$scope.cancelReminder(noteData);
+						
 						this.notereminder=null;
 					}
 					
@@ -241,50 +253,11 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 						updateData.creation_date=this.createdDate;
 						updateData.color=this.notecolor;
 						updateData.reminder=this.notereminder;
+						updateData.isArchive=this.archivenote;
+						updateData.isTrash=this.trashnote;
 						//updateData.edited_date=this.editedDate;
 						
-						homeService.updateNote(updateData)
-						.then(function(response1)
-						{
-							console.log(response1);
-							
-								if(response1.data.status == 1)
-								{
-										$scope.notesList=response1.data.list.reverse();
-										console.log("note updated");
-					
-								}
-								else if(response1.data.status == -4)
-								{
-										console.log("access token expired");
-								
-										homeService.getNewAccessToken().then(function(response2){
-											
-											if(response2.data.status == 4)
-											{
-													localStorage.setItem("accessToken", response2.data.token.accessToken);
-													localStorage.setItem("refreshToken", response2.data.token.refreshToken);
-										
-													homeService.updateNote(updateData).then(function(resp){
-														console.log(resp.data);
-														$scope.notesList=resp.data.list.reverse();
-													})
-											}
-											else
-											{
-													console.log(response2.data);
-													$state.go('login');
-											}
-										})
-								}
-								else 
-								{
-									console.log(response1.data);
-									return;
-								}
-								
-							
-							});
+						$scope.update(updateData);
 						
 					}
 				
@@ -304,48 +277,8 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 		
 		noteData.color=color;
 		
-		homeService.updateNote(noteData)
-		.then(function(response1)
-		{
-			console.log(response1);
-			
-				if(response1.data.status == 1)
-				{
-						$scope.notesList=response1.data.list.reverse();
-						console.log("note updated");
-	
-				}
-				else if(response1.data.status == -4)
-				{
-						console.log("access token expired");
-				
-						homeService.getNewAccessToken().then(function(response2){
-							
-							if(response2.data.status == 4)
-							{
-									localStorage.setItem("accessToken", response2.data.token.accessToken);
-									localStorage.setItem("refreshToken", response2.data.token.refreshToken);
-						
-									homeService.updateNote(updateData).then(function(resp){
-										console.log(resp.data);
-										$scope.notesList=resp.data.list.reverse();
-									})
-							}
-							else
-							{
-									console.log(response2.data);
-									$state.go('login');
-							}
-						})
-				}
-				else 
-				{
-					console.log(response1.data);
-					return;
-				}
-				
-			
-			});
+		$scope.update(notedata);
+		
 		
 	}
 	
@@ -412,6 +345,7 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 				{
 						$scope.notesList=response1.data.list.reverse();
 						console.log("reminder set");
+						$state.reload();
 	
 				}
 				else if(response1.data.status == -4)
@@ -428,6 +362,7 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 									homeService.updateNote(notedata).then(function(resp){
 										console.log(resp.data);
 										$scope.notesList=resp.data.list.reverse();
+										$state.reload();
 									})
 							}
 							else
@@ -458,48 +393,8 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 		
 		notedata.reminder=null;
 		
-		homeService.updateNote(notedata)
-		.then(function(response1)
-				{
-					console.log(response1);
-					
-						if(response1.data.status == 1)
-						{
-								$scope.notesList=response1.data.list.reverse();
-								console.log("reminder set");
-			
-						}
-						else if(response1.data.status == -4)
-						{
-								console.log("access token expired");
-						
-								homeService.getNewAccessToken().then(function(response2){
-									
-									if(response2.data.status == 4)
-									{
-											localStorage.setItem("accessToken", response2.data.token.accessToken);
-											localStorage.setItem("refreshToken", response2.data.token.refreshToken);
-								
-											homeService.updateNote(notedata).then(function(resp){
-												console.log(resp.data);
-												$scope.notesList=resp.data.list.reverse();
-											})
-									}
-									else
-									{
-											console.log(response2.data);
-											$state.go('login');
-									}
-								})
-						}
-						else 
-						{
-							console.log(response1.data);
-							return;
-						}
-						
-					
-					});
+		$scope.update(notedata);
+		
 		
 	}
 	
@@ -514,99 +409,57 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 		
 		notedata.isArchive="true";
 		
-		homeService.updateNote(notedata)
-		.then(function(response1)
-				{
-					console.log(response1);
-					
-						if(response1.data.status == 1)
-						{
-								$scope.notesList=response1.data.list.reverse();
-								console.log("archive done");
-			
-						}
-						else if(response1.data.status == -4)
-						{
-								console.log("access token expired");
-						
-								homeService.getNewAccessToken().then(function(response2){
-									
-									if(response2.data.status == 4)
-									{
-											localStorage.setItem("accessToken", response2.data.token.accessToken);
-											localStorage.setItem("refreshToken", response2.data.token.refreshToken);
-								
-											homeService.updateNote(notedata).then(function(resp){
-												$scope.notesList=resp.data.list.reverse();
-											})
-									}
-									else
-									{
-											console.log(response2.data);
-											$state.go('login');
-									}
-								})
-						}
-						else 
-						{
-							console.log(response1.data);
-							return;
-						}
-						
-					
-					});
+		$scope.update(notedata);
+		
 	}
 	
 	
+	
+//...............................do un-archive.............................//
+	
+	
+	$scope.doUnArchive=function(notedata){
+		console.log("in doArchive");
+		
+		notedata.isArchive="false";
+		
+		$scope.update(notedata);
+		
+	}
+	
+	
+	
+	
 	//.................................. do trash.............................//
+	
+	
 	
 	$scope.doTrash=function(notedata){
 		console.log("in doTrash");
 		
 		notedata.isTrash="true";
+		notedata.reminder=null;
 		
-		homeService.updateNote(notedata)
-		.then(function(response1)
-				{
-					console.log(response1);
-					
-						if(response1.data.status == 1)
-						{
-								$scope.notesList=response1.data.list.reverse();
-								console.log("archive done");
-			
-						}
-						else if(response1.data.status == -4)
-						{
-								console.log("access token expired");
-						
-								homeService.getNewAccessToken().then(function(response2){
-									
-									if(response2.data.status == 4)
-									{
-											localStorage.setItem("accessToken", response2.data.token.accessToken);
-											localStorage.setItem("refreshToken", response2.data.token.refreshToken);
-								
-											homeService.updateNote(notedata).then(function(resp){
-												$scope.notesList=resp.data.list.reverse();
-											})
-									}
-									else
-									{
-											console.log(response2.data);
-											$state.go('login');
-									}
-								})
-						}
-						else 
-						{
-							console.log(response1.data);
-							return;
-						}
-						
-					
-					});
+		$scope.update(notedata);
+		
 	}
+	
+	
+	
+//.................................. restore note from trash.............................//
+	
+	
+	
+	$scope.restoreNote=function(notedata){
+		console.log("in doTrash");
+		
+		notedata.isTrash="false";
+		
+		$scope.update(notedata);
+		
+		
+	}
+	
 	
 	
 	//...............................logout....................................//
@@ -639,6 +492,7 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 			{
 				$scope.notesList=response1.data.list.reverse();
 				
+				
 			}
 			else if(response1.data.status == -4)
 			{
@@ -654,6 +508,7 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 								homeService.getNotes().then(function(resp){
 									console.log(resp.data);
 									$scope.notesList=resp.data.list.reverse();
+									
 								})
 						}
 						else
@@ -673,6 +528,62 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 		})
 	}
 	$scope.showNotes();
+	
+	
+//..................................utilty update method..............................//	
+	
+	$scope.update=function(updateData)
+	{
+		console.log("in update");
+		
+		homeService.updateNote(updateData)
+		.then(function(response1)
+		{
+			console.log(response1);
+			
+				if(response1.data.status == 1)
+				{
+						$scope.notesList=response1.data.list.reverse();
+						console.log("note updated");
+						$state.reload();
+	
+				}
+				else if(response1.data.status == -4)
+				{
+						console.log("access token expired");
+				
+						homeService.getNewAccessToken().then(function(response2){
+							
+							if(response2.data.status == 4)
+							{
+									localStorage.setItem("accessToken", response2.data.token.accessToken);
+									localStorage.setItem("refreshToken", response2.data.token.refreshToken);
+						
+									homeService.updateNote(updateData).then(function(resp){
+										console.log(resp.data);
+										$scope.notesList=resp.data.list.reverse();
+										$state.reload();
+									})
+							}
+							else
+							{
+									console.log(response2.data);
+									$state.go('login');
+							}
+						})
+				}
+				else 
+				{
+					console.log(response1.data);
+					return;
+				}
+				
+			
+			});
+	}
+
+
+
 })
 
 

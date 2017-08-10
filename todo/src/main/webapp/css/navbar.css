@@ -340,7 +340,7 @@ body{
 }
 
 #dropdown-more{
-	margin: 24px 0 0 180px;
+	margin: 24px 0 0 120px;
 }
 
 #dropdown-reminder{
@@ -348,6 +348,9 @@ body{
 	margin: 22px 0 0 3px;
 }
 
+#dropdown-trash{
+    margin: 25px 0px 0 0px;
+}
 #reminder-div{
 	border-top: 2px dotted rgba(0,0,0,0.2);
     margin: 0 15px 0 15px;
@@ -357,7 +360,7 @@ body{
 
 #colordropup{
 	min-width: 0;
-	margin-left: 114px;
+	margin-left: 40px;
     margin-bottom: 0px;
     border: none;
     /* display: none; */
