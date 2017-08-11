@@ -35,7 +35,7 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 			$scope.listBtn=false;
 			$scope.gridBtn=true;
 			
-			$scope.col2="col-lg-2";
+			$scope.col2="";
 			$scope.showdiv="col-lg-8 item";
 			localStorage.setItem("view","list");
 		}
@@ -64,16 +64,21 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 		}*/
 		
 		
+		
 		//......................Create new note .................//
 		
+	
 		$scope.submitNote=function(){
 		
-			console.log("inside note");
+		console.log("inside note");
 		
-			$scope.shownote=false;
+		$scope.shownote=false;
 		
 		var noteData={};
 		
+		if($scope.title!="" && $scope.description!="")
+		{
+			
 		noteData.title=$scope.title;
 		noteData.description=$scope.description;
 		noteData.color=$scope.putcolor;
@@ -122,11 +127,19 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 				else
 				{
 						console.log(response1.data);
-						$state.go('login');
+						/*$state.go('login');*/
+						return;
 				}
 			
 			
 			});
+			}
+			/*else
+			{
+				console.log("note is null");
+				return;
+		
+			}*/
 		}
 	
 	
@@ -272,10 +285,10 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 	//.................................change color...........................................// 
 	
 	
-	$scope.changeColor=function(noteData,color)
+	$scope.changeColor=function(notedata,color)
 	{
 		
-		noteData.color=color;
+		notedata.color=color;
 		
 		$scope.update(notedata);
 		
@@ -461,6 +474,36 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 	}
 	
 	
+	
+	//..............................pinned..............................//
+	
+	
+	
+	$scope.doPinned=function(notedata){
+		console.log("in doPinned");
+		
+		notedata.isPinned="true";
+		
+		$scope.update(notedata);
+	}
+	
+	
+	
+	
+	//..............................un-pinned..............................//
+	
+	
+	
+	$scope.unPinned=function(notedata){
+		console.log("in unPinned");
+		
+		notedata.isPinned="false";
+		
+		$scope.update(notedata);
+	}
+	
+	
+
 	
 	//...............................logout....................................//
 	

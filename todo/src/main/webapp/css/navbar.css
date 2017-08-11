@@ -1,7 +1,7 @@
 @CHARSET "UTF-8";
 
 body{
-	background-color: #e8e8e8;	
+	background-color: #fff;	
 }
 
 #wrapper {
@@ -178,6 +178,7 @@ body{
 }
 
 #title{
+	width: 90%;
 	min-height: 30px;
 	padding-left: 15px;
 	padding-right:15px;
@@ -206,6 +207,14 @@ body{
 	padding-bottom: 15px; */
 }
 
+
+#pin{
+	margin-right: 7px;
+    margin-top: -43px;
+    height: 25px;
+    width: 25px;
+    float: right;
+}
 
 #img{
 	padding-left: 15px;
@@ -373,6 +382,15 @@ body{
 .colorimg{
 	padding-left: 2;
     padding-bottom: 3px;
+}
+
+
+.col-lg-4 {
+	min-height: 0px;
+}
+
+.col-lg-8{
+	margin-left: 127px;
 }
 
 /* #query{ 

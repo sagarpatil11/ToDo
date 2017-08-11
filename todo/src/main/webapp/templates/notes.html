@@ -4,45 +4,6 @@
 				
 			<!-- ...........................Display Notes................................ -->
 		
-		       <!-- ..................... list view .......................... -->				 
-						
-						 <!-- 
-							<div  ng-repeat="data in notesList | filter: search" >
-								<div id="listnotes" ng-show="listview">
-									<div style="margin-top:36px;">
-										<div id="title" ng-click="openPopup(data)" ng-bind-html="data.title">
-										<a href="#"><span aria-hidden="true"><img alt="pin" src="image/icons8-Pin-20.png"></span></a>
-										
-										</div>
-							
-										<div id="description" ng-click="openPopup(data)" ng-bind-html="data.description" >
-										</div>	
-								
-										<div id="notefooter">
-											<a href="" id="img1"><img alt=""src="image/remainder.svg"></a>
-											<a href="" id="img1"><img alt=""src="image/collaborator.svg"></a>
-											<a href="" id="img1"><img alt=""src="image/addimage.svg"></a>
-											<a href="" id="img1"><img alt=""src="image/color.svg"></a>
-											<a href="" id="img1"><img alt=""src="image/archieve1.svg"></a>
-											<div  class="dropdown"><a href="" id="img1" data-toggle="dropdown" class="dropdown-toggle" ><img alt="more" src="image/list.png"></a>
-												<ul class="dropdown-menu" id="option-dropdown1" >
-													<li><a role="menuitem" tabindex="-1" href="" ng-click="deleteNote(data.tid)">Delete note</a></li>
-      												<li><a role="menuitem" tabindex="-1" href="">Add label</a></li>
-      												<li><a role="menuitem" tabindex="-1" href="">Show checkboxes</a></li>
-     											</ul>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>  
-							 
-							 -->
-			
-			
-			
-			  <!-- ..................... grid view ........................ -->			
-			  
-			  			
 			  			
 			  			 <div id="maindiv"> 
 			  				
@@ -51,10 +12,9 @@
 			  					
 			  						<div  id="gridnotes" ng-style="{'background-color':data.color}">
 			  								<div id="title" ng-click="openPopup(data)" ng-bind-html="data.title">
-												<a href=""><span aria-hidden="true"><img alt="pin" src="image/icons8-Pin-20.png"></span></a>
-										
+											
 											</div>
-							
+											<div id="pin"><a href="" style="float: right;"><img alt="pin" src="image/pin.svg"></a></div>
 											<div id="description" ng-click="openPopup(data)" ng-bind-html="data.description" >
 											
 											</div>

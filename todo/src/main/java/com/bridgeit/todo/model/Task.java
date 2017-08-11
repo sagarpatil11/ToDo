@@ -37,6 +37,8 @@ public class Task implements Serializable
 	private String isTrash;
 	
 	private String isArchive;
+	
+	private String isPinned;
 
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="uid")
@@ -146,6 +148,16 @@ public class Task implements Serializable
 
 	public void setIsArchive(String isArchive) {
 		this.isArchive = isArchive;
+	}
+
+
+	public String getIsPinned() {
+		return isPinned;
+	}
+
+
+	public void setIsPinned(String isPinned) {
+		this.isPinned = isPinned;
 	}
 
 

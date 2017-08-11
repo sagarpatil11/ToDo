@@ -30,8 +30,8 @@ import com.bridgeit.todo.token.TokenUtility;
 import com.bridgeit.todo.validation.UserValidation;
 
 /**
- * 
- * @author bridgeit
+ * this rest controller have user login authentication method,user logout method and get new access token method 
+ * @author sagar
  *
  */
 @RestController
@@ -58,9 +58,16 @@ public class UserLoginController
 	private Logger logger=Logger.getLogger("UserLoginController");
 	
 	
-	//...............................Login authentication................................//
 	
 	
+	/**
+	 * this method is used for user login authentication
+	 * @param user
+	 * @param result
+	 * @param request
+	 * @param response
+	 * @return ResponseEntity {@link Response}
+	 */
 	@RequestMapping(value="/login",method=RequestMethod.POST)
 	public ResponseEntity<Response> userLogin(@RequestBody User user,BindingResult result,HttpServletRequest request,HttpServletResponse response)
 	{
@@ -88,7 +95,8 @@ public class UserLoginController
 		
 		user.setPassword(securePassword.getSecurePassword(user.getPassword()));
 	
-		try {
+		try 
+		{
 			User login_user=userRegService.userLoginService(user.getEmail(), user.getPassword());
 			
 			
@@ -131,7 +139,9 @@ public class UserLoginController
 				
 				return new ResponseEntity<Response>(errorResponse,HttpStatus.OK);
 			}
-		} catch (Exception e) {
+		} 
+		catch (Exception e) 
+		{
 			// TODO Auto-generated catch block
 			errorResponse.setStatus(-3);
 			errorResponse.setMessage("DataBase Problem");
@@ -140,10 +150,14 @@ public class UserLoginController
 	}
 	
 	
+
 	
-	//............................User Logout.............................//
 	
-	
+	/**
+	 * this method is used for user logout
+	 * @param request
+	 * @return ResponseEntity {@link Response}
+	 */
 	@RequestMapping(value="/logout")
 	public ResponseEntity<Response> logout(HttpServletRequest request) 
 	{
@@ -172,6 +186,15 @@ public class UserLoginController
 		}
 	}
 	
+	
+	
+	
+	
+	/**
+	 * this method is used to get new access token if refresh token is valid
+	 * @param request
+	 * @return ResponseEntity {@link TokenResponse}
+	 */
 	@RequestMapping(value="/newAccessToken",method=RequestMethod.POST)
 	public ResponseEntity<TokenResponse> getNewAccessTokenByRefreshToken(HttpServletRequest request)
 	{

@@ -25,7 +25,8 @@ import com.bridgeit.todo.responsemsg.UserResponse;
 import com.bridgeit.todo.service.TaskService;
 
 /**
- * @author bridgeit
+ * this rest controller have todo task related methods
+ * @author sagar
  *
  */
 @RestController
@@ -166,6 +167,7 @@ public class TaskController
 	//..........................get notes..........................//
 	
 	/**
+	 * this method is used to get all notes 
 	 * @param request {@link HttpServletRequest}
 	 * @return ResponseEntity {@link Response}
 	 */
