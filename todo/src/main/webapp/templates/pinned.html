@@ -1,16 +1,15 @@
-
 <div class="row">
 		<div class="col-lg-12">
 				
-			<!-- ...........................Display Notes................................ -->
+			<!-- ...........................Display Pinned Notes................................ -->
 		
 			  			
 			  			 <div id="maindiv"> 
-			  				
-			  				<div ng-class="showdiv" testpackery1 ng-repeat="data in notesList | filter: search" ng-if="data.isArchive != 'true' && data.isTrash != 'true' && data.isPinned != 'true'">
+			  				<p>Pinned</p>
+			  				<div ng-class="showdiv" testpackery1 ng-repeat="data in notesList | filter: search" ng-if="data.isPinned == 'true'">
 			  					
 			  					
-			  						<div  id="notes" ng-style="{'background-color':data.color}">
+			  						<div  id="gridnotes" ng-style="{'background-color':data.color}">
 			  								<div id="title" ng-click="openPopup(data)" ng-bind-html="data.title">
 											
 											</div>

@@ -418,9 +418,11 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 	
 	
 	$scope.doArchive=function(notedata){
+		
 		console.log("in doArchive");
 		
 		notedata.isArchive="true";
+		notedata.isPinned="false";
 		
 		$scope.update(notedata);
 		
@@ -448,6 +450,7 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 	
 	
 	$scope.doTrash=function(notedata){
+		
 		console.log("in doTrash");
 		
 		notedata.isTrash="true";
@@ -464,6 +467,7 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 	
 	
 	$scope.restoreNote=function(notedata){
+		
 		console.log("in doTrash");
 		
 		notedata.isTrash="false";
@@ -479,12 +483,14 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 	
 	
 	
-	$scope.doPinned=function(notedata){
+	$scope.doPin=function(notedata){
+		
 		console.log("in doPinned");
 		
 		notedata.isPinned="true";
 		
 		$scope.update(notedata);
+	
 	}
 	
 	
@@ -494,7 +500,8 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 	
 	
 	
-	$scope.unPinned=function(notedata){
+	$scope.unPin=function(notedata){
+		
 		console.log("in unPinned");
 		
 		notedata.isPinned="false";
