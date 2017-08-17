@@ -90,4 +90,7 @@
  		<bean id="tokenUtility" class="com.bridgeit.todo.token.TokenUtility" />
  		
  		<bean id="tokenResponse" class="com.bridgeit.todo.responsemsg.TokenResponse" />
+ 		
+ 		<bean id="fbLoginUtility" class="com.bridgeit.todo.socialutilty.FbLoginUtility" />
+
 </beans>

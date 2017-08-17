@@ -42,6 +42,12 @@ public class UserRegService
 		return userRegDao.getUserById(uid);
 	}
 	
+	@Transactional(readOnly=true)
+	public User getUserByEmail(String email)
+	{
+		return userRegDao.getUserByEmail(email);
+	}
+	
 	@Transactional
 	public void logout(String accessToken)
 	{

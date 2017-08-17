@@ -80,9 +80,9 @@
 				
 				<li class="sidebar-brand"><br></li>
 				
-				<li><a ui-sref="home"><img alt="" src="image/noteicon.png">&nbsp&nbsp&nbsp Notes</a></li>
+				<li><a ui-sref="home"><img alt="" src="image/note.svg">&nbsp&nbsp&nbsp Notes</a></li>
 				
-				<li><a ><img alt="" src="image/icons8-Hand Up-20.png">&nbsp&nbsp&nbsp&nbsp Remainders</a></li>
+				<!-- <li><a ><img alt="" src="image/icons8-Hand Up-20.png">&nbsp&nbsp&nbsp&nbsp Remainders</a></li> -->
 				
 				<li><a ui-sref="archive"><img alt="archive" src="image/archieve.png">&nbsp&nbsp&nbsp&nbsp Archive</a></li>
 				
@@ -125,7 +125,17 @@
 							</div>
 								
 							<div id="notefooter" ng-show="shownote">
-									<a href="" id="img1"><span aria-hidden="true"><img alt=""src="image/remainder.svg"></span></a>
+									
+									 <div class="dropdown"><a href="" id="img1" data-toggle="dropdown" class="dropdown-toggle"><img alt="" src="image/remainder.svg"></a>
+										<ul class="dropdown-menu" id="dropdown-reminder" >
+											<li class="dropdown-header" style="font-size: 16px;">Reminder:</li>
+      										<li style="padding: 3 0 3 0;font-size: 13px;"><a role="menuitem" tabindex="-1" href="" >Later today<span style="float: right;">8:00 PM</span></a></li>
+      										<li style="padding: 3 0 3 0;font-size: 13px;"><a role="menuitem" tabindex="-1" href="" >Tomorrow<span style="float: right;">8:00 AM</span></a></li>
+      										<li style="padding: 3 0 3 0;font-size: 13px;"><a role="menuitem" tabindex="-1" href="" >Next weak<span style="float: right;">Mon, 8:00 AM</span></a></li>
+      										<!-- <li style="padding: 3 0 3 0;font-size: 13px;"><a role="menuitem" tabindex="-1" href="" ><span class="glyphicon glyphicon-time"></span>&nbsp&nbspPick date & time</a></li>
+      										<li style="padding: 3 0 3 0;font-size: 13px;"><a role="menuitem" tabindex="-1" href="" ><span class="glyphicon glyphicon-map-marker"></span>&nbsp&nbspPick place</a></li> -->
+     									</ul>
+     								</div> 
 									
 									<!-- <a href="" id="img1"><span aria-hidden="true"><img alt=""src="image/collaborator.svg"></span></a>
 									<a href="" id="img1"><span aria-hidden="true"><img alt=""src="image/addimage.svg"></span></a> -->

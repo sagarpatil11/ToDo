@@ -14,4 +14,6 @@ public interface UserRegDao
 	public User getUserById(int uid);
 		
 	public void deleteToken(String accessToken);
+	
+	public User getUserByEmail(String email);
 }

@@ -1,3 +1,6 @@
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import com.bridgeit.todo.model.Task;
 import com.bridgeit.todo.model.User;
@@ -10,7 +13,7 @@ import junit.framework.TestCase;
  */
 
 /**
- * @author bridgeit
+ * @author sagar
  *
  */
 public class ToDoTest extends TestCase {
@@ -44,7 +47,7 @@ public class ToDoTest extends TestCase {
 	/**
 	 * Test method for {@link com.bridgeit.todo.controller.TaskController#addNote(com.bridgeit.todo.model.Task, javax.servlet.http.HttpServletRequest)}.
 	 */
-	public void testAddNote() 
+	/*public void testAddNote() 
 	{
 		task=new Task();
 		task.setTitle("junit testing1");
@@ -54,10 +57,9 @@ public class ToDoTest extends TestCase {
 		user.setId(1);
 		task.setUser(user);
 		
-		taskService.addNote(task);
-		/*System.out.println(response.getBody().getStatus());
-		assertEquals(1, response.getBody().getStatus());*/
-	}
+		
+	
+	}*/
 
 	/**
 	 * Test method for {@link com.bridgeit.todo.controller.TaskController#updateNote(com.bridgeit.todo.model.Task, javax.servlet.http.HttpServletRequest)}.
@@ -76,9 +78,16 @@ public class ToDoTest extends TestCase {
 
 	*//**
 	 * Test method for {@link com.bridgeit.todo.controller.TaskController#getNotes(javax.servlet.http.HttpServletRequest)}.
-	 *//*
-	public void testGetNotes() {
-		fail("Not yet implemented");
+	 */
+	
+	public void testGetNotes() 
+	{
+		List<Task>  list = taskService.getNotes(2);
+		
+		assertEquals(list.size(),25);
+		//assertNotNull(taskService.getNotes(2));
+		
+		
 	}
-*/
+
 }

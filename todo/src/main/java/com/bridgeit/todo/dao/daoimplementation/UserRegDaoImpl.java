@@ -88,5 +88,20 @@ public class UserRegDaoImpl implements UserRegDao
 		
 		query.executeUpdate();
 	}
+
+
+	@Override
+	public User getUserByEmail(String email) 
+	{
+		// TODO Auto-generated method stub
+		Session session=sessionFactory.getCurrentSession();
+		
+		Query query=session.createQuery("from User where email=:email");
+		query.setParameter("email", email);
+		
+		User user=(User) query.uniqueResult();
+		
+		return user;
+	}
 	
 }
