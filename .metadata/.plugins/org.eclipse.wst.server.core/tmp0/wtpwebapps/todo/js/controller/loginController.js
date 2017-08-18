@@ -38,13 +38,24 @@ myApp.controller( 'loginCtrl',function($scope, $state, loginService)
 		})
 		
 	}
+	
+	//............................Login with facebook.......................//
+	
+	$scope.signWithFb=function()
+	{
+		loginService.loginWithFb().then(function(response){
+			console.log(response);
+		})
+	}
+	
 })
 
 
 
 myApp.service("loginService", function($http){
 	
-	console.log("in loginservice")
+	console.log("in loginservice");
+	
 	this.login=function(user){
 		return $http({
 			url:"login",
@@ -52,4 +63,13 @@ myApp.service("loginService", function($http){
 			data:user
 		})
 	}
+	
+	
+	this.loginWithFb=function(){
+		console.log("in loginWithFb");
+			return $http({
+				url:"loginwithfb"
+			})
+	}
+	
 })

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bridgeit.todo.model.FbProfile;
+import com.bridgeit.todo.model.Token;
 import com.bridgeit.todo.model.User;
 import com.bridgeit.todo.service.UserRegService;
 import com.bridgeit.todo.socialutilty.FbLoginUtility;
@@ -37,6 +38,8 @@ public class FbLoginController
 	@RequestMapping(value="/loginwithfb")
 	public void fbLogin(HttpServletRequest request,HttpServletResponse response)
 	{
+		System.out.println("in login controller");
+		
 		String fbloginurl=fbLoginUtility.getFbOauthUrl();
 		
 		try 
@@ -54,7 +57,7 @@ public class FbLoginController
 	@RequestMapping("/signin-facebook")
 	public void afterRedirect(HttpServletRequest request,HttpServletResponse response)
 	{
-		System.out.println("after login success");
+		System.out.println("fb login success");
 		
 		String code=request.getParameter("code");
 		
@@ -74,6 +77,13 @@ public class FbLoginController
 				user.setFullname(fbProfile.getName());
 				
 				userRegService.userRegService(user);
+				
+				User fbuser=userRegService.getUserByEmail(fbProfile.getEmail());
+				
+				Token token=new Token();
+				token.setAccessToken(accessToken);
+				
+				
 			}
 			
 			
