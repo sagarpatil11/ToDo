@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bridgeit.todo.model.GoogleAccessToken;
+import com.bridgeit.todo.model.GoogleProfile;
 import com.bridgeit.todo.socialutilty.GoogleLoginUtility;
 
 /**
@@ -58,9 +60,11 @@ public class GoogleLoginController
 		
 		String code=request.getParameter("code");
 		
-		String accessToken=googleLoginUtility.getAccessToken(code);
+		GoogleAccessToken googleAccessToken=googleLoginUtility.getAccessToken(code);
 		
-		System.out.println(accessToken);
+		GoogleProfile profile=googleLoginUtility.getUserProfile(googleAccessToken.getAccess_token());
+		
+		System.out.println(profile);
 	}
 	
 }

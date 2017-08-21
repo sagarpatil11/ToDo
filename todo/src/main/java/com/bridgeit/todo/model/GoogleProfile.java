@@ -1,13 +1,16 @@
 package com.bridgeit.todo.model;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown=true)
-public class FbProfile 
+public class GoogleProfile 
 {
 	private String id;
 	private String name;
-	private String email;
+	private List<Gmail> email;
+	private ProfileImage image;
 	
 	public String getId() {
 		return id;
@@ -25,18 +28,23 @@ public class FbProfile
 		this.name = name;
 	}
 	
-	public String getEmail() {
+	public List<Gmail> getEmail() {
 		return email;
 	}
 	
-	public void setEmail(String email) {
+	public void setEmail(List<Gmail> email) {
 		this.email = email;
 	}
-
-	@Override
-	public String toString() {
-		return "FbProfile [id=" + id + ", name=" + name + ", email=" + email + "]";
+	
+	public ProfileImage getImage() {
+		return image;
 	}
+	
+	public void setImage(ProfileImage image) {
+		this.image = image;
+	}
+	
+	
 	
 	
 }

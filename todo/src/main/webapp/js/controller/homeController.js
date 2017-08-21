@@ -7,6 +7,7 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 		}
 	
 		$scope.shownotes=true;
+		$scope.showpinned=true;
 		$scope.takenote=true;
 		$scope.showtrash=false;
 		$scope.showarchive=false;
@@ -76,7 +77,8 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 		
 		var noteData={};
 		
-		if($scope.title!="" && $scope.description!="")
+		if($scope.title!="" && $scope.description =="" || $scope.title =="" && $scope.description !="" ||
+			$scope.title !="" && $scope.description !="")
 		{
 			
 		noteData.title=$scope.title;
@@ -97,7 +99,7 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 				{
 						$scope.notesList=response1.data.list.reverse();
 						console.log("note added");
-						$state.reload();
+						
 						
 				}
 				else if(response1.data.status == -4)
@@ -114,7 +116,7 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 									homeService.addNote(noteData).then(function(resp){
 										console.log(resp.data);
 										$scope.notesList=resp.data.list.reverse();
-										$state.reload();
+										
 									})
 							}
 							else
@@ -157,7 +159,7 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 			if(response1.data.status == 1)
 			{
 					$scope.notesList=response1.data.list.reverse();
-					$state.reload();
+					
 					console.log("note deleted");
 			}
 			else if(response1.data.status == -4)
@@ -175,7 +177,7 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 									console.log(resp.data);
 									
 									$scope.notesList=resp.data.list.reverse();
-									$state.reload();
+									
 								})
 						}
 						else
@@ -220,7 +222,7 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 					this.notereminder=data.reminder;
 					this.archivenote=data.isArchive;
 					this.trashnote=data.isTrash;
-				
+					this.pinnednote=data.isPinned;
 					
 		//..........................delete reminder.................//
 					
@@ -237,6 +239,7 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 						noteData.color=this.notecolor;
 						noteData.isArchive=this.archivenote;
 						noteData.isTrash=this.trashnote;
+						noteData.isPinned=this.pinnednote;
 						
 						noteData.reminder=null;
 						
@@ -268,6 +271,7 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 						updateData.reminder=this.notereminder;
 						updateData.isArchive=this.archivenote;
 						updateData.isTrash=this.trashnote;
+						updateData.isPinned=this.pinnednote;
 						//updateData.edited_date=this.editedDate;
 						
 						$scope.update(updateData);
@@ -356,9 +360,10 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 			
 				if(response1.data.status == 1)
 				{
-						$scope.notesList=response1.data.list.reverse();
+						$scope.showNotes();
+						//$scope.notesList=response1.data.list.reverse();
 						console.log("reminder set");
-						$state.reload();
+						
 	
 				}
 				else if(response1.data.status == -4)
@@ -374,8 +379,8 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 						
 									homeService.updateNote(notedata).then(function(resp){
 										console.log(resp.data);
-										$scope.notesList=resp.data.list.reverse();
-										$state.reload();
+										//$scope.notesList=resp.data.list.reverse();
+										$scope.showNotes();
 									})
 							}
 							else
@@ -510,7 +515,99 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 	}
 	
 	
+	//..............................share on facebook......................//
+	
+	$scope.shareOnFb=function(data){
+		console.log("in shareOnFb");
+		
+		FB.init({
+	           appId: '1136987416445864',
+	           status: true,
+	           xfbml: true,
+	           version     : 'v2.7', 
+	       }); 
+	    
+	       FB.ui({
+	               method: 'share_open_graph',
+	               action_type: 'og.shares',
+	               action_properties: JSON.stringify({
+	                   object: {
+	                       'og:title': data.title,
+	                       'og:description': data.description,
+	                   }
+	               })
+	           },
+	           // callback
+	           function(response) {
+	               if (response && !response.error_message) {
+	             //      alert('successfully posted. ');
+	               } else {
+	              //     alert('Something went error.');
+	               }
+	           }
+	           );
 
+	}
+
+	
+	//..............................make a copy.................//
+	
+	
+	$scope.makeCopy=function(notedata){
+			console.log("in makeCopy");
+		
+			notedata.reminder=null;
+			notedata.isArchive='false';
+			notedata.isPinned='false';
+			
+			var httpnote=homeService.addNote(notedata);
+			
+			httpnote.then(function(response1)
+			{
+				console.log(response1);
+					if(response1.data.status == 1)
+					{
+							$scope.notesList=response1.data.list.reverse();
+							console.log("note of copy success");
+							
+							
+					}
+					else if(response1.data.status == -4)
+					{
+							console.log("access token expired");
+					
+							homeService.getNewAccessToken().then(function(response2){
+								
+								if(response2.data.status == 4)
+								{
+										localStorage.setItem("accessToken", response2.data.token.accessToken);
+										localStorage.setItem("refreshToken", response2.data.token.refreshToken);
+							
+										homeService.addNote(noteData).then(function(resp){
+											console.log(resp.data);
+											$scope.notesList=resp.data.list.reverse();
+											
+										})
+								}
+								else
+								{
+										console.log(response2.data);
+										$state.go('login');
+								}
+							})
+					}
+					else
+					{
+							console.log(response1.data);
+							/*$state.go('login');*/
+							return;
+					}
+				
+				
+			});
+				
+		
+	}
 	
 	//...............................logout....................................//
 	
@@ -534,6 +631,7 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 	
 	
 	$scope.showNotes=function(){
+		
 		homeService.getNotes().then(function(response1){
 			console.log(response1);
 			console.log("list display after login");
@@ -542,6 +640,7 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 			{
 				$scope.notesList=response1.data.list.reverse();
 				
+				$scope.showNames($scope.notesList);
 				
 			}
 			else if(response1.data.status == -4)
@@ -558,7 +657,7 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 								homeService.getNotes().then(function(resp){
 									console.log(resp.data);
 									$scope.notesList=resp.data.list.reverse();
-									
+									$scope.showNames($scope.notesList);
 								})
 						}
 						else
@@ -579,6 +678,27 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 	}
 	$scope.showNotes();
 	
+	$scope.showNames=function(notelist)
+	{
+		var count=0;
+			for(var i=0;i < notelist.length-1;i++)
+			{
+					if(notelist[i].isPinned == 'true')
+					{
+						count=count+1;
+					}
+			}
+			
+			if(count > 0)
+			{
+				$scope.showname=true;
+			}
+			else
+			{
+				$scope.showname=false;
+			}
+	}
+	
 	
 //..................................utilty update method..............................//	
 	
@@ -593,9 +713,10 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 			
 				if(response1.data.status == 1)
 				{
-						$scope.notesList=response1.data.list.reverse();
+						//$scope.notesList=response1.data.list.reverse();
+						$scope.showNotes();
 						console.log("note updated");
-						$state.reload();
+						
 	
 				}
 				else if(response1.data.status == -4)
@@ -611,8 +732,8 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 						
 									homeService.updateNote(updateData).then(function(resp){
 										console.log(resp.data);
-										$scope.notesList=resp.data.list.reverse();
-										$state.reload();
+										//$scope.notesList=resp.data.list.reverse();
+										$scope.showNotes();
 									})
 							}
 							else

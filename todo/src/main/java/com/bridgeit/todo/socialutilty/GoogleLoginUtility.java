@@ -12,6 +12,8 @@ import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 
 import com.bridgeit.todo.model.GoogleAccessToken;
+import com.bridgeit.todo.model.GoogleProfile;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * @author sagar
@@ -53,7 +55,7 @@ public class GoogleLoginUtility
 	/**
 	 * @param code
 	 */
-	public String getAccessToken(String code)
+	public GoogleAccessToken getAccessToken(String code)
 	{
 		String accessTokenURL = "https://www.googleapis.com/oauth2/v4/token";
 		
@@ -70,14 +72,45 @@ public class GoogleLoginUtility
 		
 		Response response = target.request().accept(MediaType.APPLICATION_JSON).post(Entity.form(f));
 		
-		GoogleAccessToken accessToken = response.readEntity(GoogleAccessToken.class);
+		String token=response.readEntity(String.class);
 		
-		System.out.println("accesstoken"+accessToken);
+		ObjectMapper objectMapper=new ObjectMapper();
+		
+		GoogleAccessToken googleAccessToken=null;
+		try 
+		{
+			googleAccessToken=(GoogleAccessToken) objectMapper.readValue(token, GoogleAccessToken.class);
+		} 
+		catch (Exception e) 
+		{
+			// TODO: handle exception
+		}
+		
+		System.out.println("accesstoken"+googleAccessToken);
 		
 		restCall.close();
 		
-		return accessToken.getAccess_token();
+		return googleAccessToken;
 	}
 	
 	
+	public GoogleProfile getUserProfile(String accessToken)
+	{ 
+		String gmail_user_url= "https://www.googleapis.com/plus/v1/people/me";
+		
+	
+		
+		ResteasyClient restCall = new ResteasyClientBuilder().build();
+		ResteasyWebTarget target = restCall.target(gmail_user_url);
+		
+		String headerAuth="Bearer "+accessToken;
+		System.out.println("header"+headerAuth);
+		Response response = target.request().header("Authorization", headerAuth).accept(MediaType.APPLICATION_JSON).get();
+		
+		GoogleProfile profile = (GoogleProfile) response.readEntity(GoogleProfile.class);
+		restCall.close();
+		
+		System.out.println(profile.getEmail().get(0).getValue());
+		return profile;
+	}
 }

@@ -17,7 +17,7 @@
 		<script src="bower_components/packery/dist/packery.pkgd.min.js"></script>
  		<script src="bower_components/draggabilly/dist/draggabilly.pkgd.min.js"></script>
  		<!-- <script type="text/javascript" src="bower_components/moment/moment.js"></script> -->
-  
+  		<script type="text/javascript" src="http://connect.facebook.net/en_US/sdk.js"></script>
  
 
  	</head>

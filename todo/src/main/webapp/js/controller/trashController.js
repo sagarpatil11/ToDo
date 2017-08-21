@@ -4,6 +4,7 @@ myApp.controller('trashCtrl',['$scope','$controller',function($scope,$controller
 		console.log("in trash ctrl");
 		
 		$scope.takenote=false;
+		$scope.showpinned=false;
 		$scope.shownotes=false;
 		$scope.showtrash=true;
 		$scope.showarchive=false;

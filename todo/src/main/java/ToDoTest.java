@@ -19,9 +19,9 @@ import junit.framework.TestCase;
 public class ToDoTest extends TestCase {
 
 	@Autowired
-	TaskService taskService;
+	/*TaskService taskService;
 	
-	Task task;
+	Task task;*/
 	
 	/**
 	 * @param name
@@ -80,7 +80,7 @@ public class ToDoTest extends TestCase {
 	 * Test method for {@link com.bridgeit.todo.controller.TaskController#getNotes(javax.servlet.http.HttpServletRequest)}.
 	 */
 	
-	public void testGetNotes() 
+	/*public void testGetNotes() 
 	{
 		List<Task>  list = taskService.getNotes(2);
 		
@@ -88,6 +88,6 @@ public class ToDoTest extends TestCase {
 		//assertNotNull(taskService.getNotes(2));
 		
 		
-	}
+	}*/
 
 }

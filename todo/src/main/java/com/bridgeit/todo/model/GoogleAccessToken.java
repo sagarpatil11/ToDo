@@ -50,6 +50,13 @@ public class GoogleAccessToken
 	public void setRefresh_token(String refresh_token) {
 		this.refresh_token = refresh_token;
 	}
+
+	@Override
+	public String toString() {
+		return "GoogleAccessToken [id_token=" + id_token + ", access_token=" + access_token + ", expires_in="
+				+ expires_in + ", token_type=" + token_type + ", refresh_token=" + refresh_token + "]";
+	}
+	
 	
 	
 	

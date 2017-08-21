@@ -7,7 +7,7 @@
 			  				<div ng-class="showdiv" ng-repeat="data in notesList | filter: search">
 			  					
 			  					
-			  						<div ng-if="data.isArchive == 'true'" id="gridnotes" ng-style="{'background-color':data.color}">
+			  						<div ng-if="data.isArchive == 'true'" id="listnotes" ng-style="{'background-color':data.color}">
 			  								<div id="title" ng-click="openPopup(data)" ng-bind-html="data.title">
 												<a href=""><span aria-hidden="true"><img alt="pin" src="image/icons8-Pin-20.png"></span></a>
 										
@@ -53,6 +53,7 @@
 												<div class="dropdown"><a href="" id="img2" data-toggle="dropdown" class="dropdown-toggle"><img alt="" src="image/list.png"></a>
 													<ul class="dropdown-menu" id="dropdown-more">
 														<li><a role="menuitem" tabindex="-1" href="" ng-click="doTrash(data)">Delete note</a></li>
+      													<li><a role="menuitem" tabindex="-1" href="" ng-click="makeCopy(data)">Make a copy</a></li>
       													<!-- <li><a role="menuitem" tabindex="-1" href="">Add label</a></li>
       													<li><a role="menuitem" tabindex="-1" href="">Show checkboxes</a></li> -->
      												</ul>

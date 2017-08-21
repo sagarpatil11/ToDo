@@ -6,8 +6,8 @@
 		
 			  			
 			  			 <div id="maindiv"> 
-			  				
-			  				<div ng-class="showdiv" testpackery1 ng-repeat="data in notesList | filter: search" ng-if="data.isArchive != 'true' && data.isTrash != 'true' && data.isPinned != 'true'">
+			  				<div id="others" ng-show="showname">&nbsp&nbsp&nbsp Others</div>
+			  				<div ng-class="showdiv" ng-repeat="data in notesList | filter: search" ng-if="data.isArchive != 'true' && data.isTrash != 'true' && data.isPinned != 'true'">
 			  					
 			  					
 			  						<div  id="notes" ng-style="{'background-color':data.color}">
@@ -55,10 +55,12 @@
      											</div>	
      											
 												<a href="" id="img2" ng-click="doArchive(data)"><img alt=""src="image/archieve1.svg"></a>
+												<a href="" id="img2" ng-click="shareOnFb(data)"><img alt=""src="image/share.png"></a>
 												
 												<div class="dropdown"><a href="" id="img2" data-toggle="dropdown" class="dropdown-toggle"><img alt="" src="image/list.png"></a>
 													<ul class="dropdown-menu" id="dropdown-more">
 														<li><a role="menuitem" tabindex="-1" href="" ng-click="doTrash(data)">Delete note</a></li>
+														<li><a role="menuitem" tabindex="-1" href="" ng-click="makeCopy(data)">Make a copy</a></li>
       													<!-- <li><a role="menuitem" tabindex="-1" href="">Add label</a></li>
       													<li><a role="menuitem" tabindex="-1" href="">Show checkboxes</a></li> -->
      												</ul>
