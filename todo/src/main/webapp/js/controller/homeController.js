@@ -77,8 +77,7 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 		
 		var noteData={};
 		
-		if($scope.title!="" && $scope.description =="" || $scope.title =="" && $scope.description !="" ||
-			$scope.title !="" && $scope.description !="")
+		if(($scope.title!="" && $scope.description =="") || ($scope.title =="" && $scope.description !="") || ($scope.title !="" && $scope.description !=""))
 		{
 			
 		noteData.title=$scope.title;
@@ -99,7 +98,6 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 				{
 						$scope.notesList=response1.data.list.reverse();
 						console.log("note added");
-						
 						
 				}
 				else if(response1.data.status == -4)
@@ -512,6 +510,22 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 		notedata.isPinned="false";
 		
 		$scope.update(notedata);
+	}
+	
+	
+	//..............................pinned from archive..............................//
+	
+	
+	
+	$scope.doPinFromArchive=function(notedata){
+		
+		console.log("in doPinnedFromArchive");
+		
+		notedata.isPinned="true";
+		notedata.isArchive="false";
+		
+		$scope.update(notedata);
+	
 	}
 	
 	

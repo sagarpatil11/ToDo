@@ -7,10 +7,14 @@
 			  				<div ng-class="showdiv" ng-repeat="data in notesList | filter: search">
 			  					
 			  					
-			  						<div ng-if="data.isArchive == 'true'" id="listnotes" ng-style="{'background-color':data.color}">
+			  						<div ng-if="data.isArchive == 'true' && data.isTrash != 'true'" id="listnotes" ng-style="{'background-color':data.color}">
 			  								<div id="title" ng-click="openPopup(data)" ng-bind-html="data.title">
 												<a href=""><span aria-hidden="true"><img alt="pin" src="image/icons8-Pin-20.png"></span></a>
 										
+											</div>
+											
+											<div id="pin">
+												<a href="" ng-click="doPinFromArchive(data)"><img alt="pin" src="image/pin.svg"></a>
 											</div>
 							
 											<div id="description" ng-click="openPopup(data)" ng-bind-html="data.description" >
