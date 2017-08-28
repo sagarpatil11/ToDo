@@ -277,6 +277,7 @@ body{
 	background: #f5f5f5;
     padding: 10px 10px 10px 10px;
     border-top: 1px solid #ccc;
+    height: 48px;
 }
 
 #logoutbtn{

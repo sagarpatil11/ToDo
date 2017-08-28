@@ -1,4 +1,4 @@
-myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
+myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService,fileReader){
 	
 		$scope.inputNote=function(){
 			console.log("shownote");
@@ -12,6 +12,8 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 		$scope.showtrash=false;
 		$scope.showarchive=false;
 		
+		$scope.headercolor={"background-color":"#f9b902", "border":"none"};
+		$scope.headername="Fundoo Notes";
 		
 		//.....................show grid view.................//
 		
@@ -562,6 +564,15 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 	           );
 
 	}
+	
+	
+	//............................add image.......................//
+	
+	$scope.addImage=function(){
+		console.log("in addImage");
+		document.getElementById("imgId").click();
+		console.log("img src"+$scope.imageSrc);
+	}
 
 	
 	//..............................make a copy.................//
@@ -653,6 +664,9 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService){
 			if(response1.data.status == 1)
 			{
 				$scope.notesList=response1.data.list.reverse();
+				
+				$scope.username=response1.data.user.fullname;
+				$scope.email=response1.data.user.email;
 				
 				$scope.showNames($scope.notesList);
 				

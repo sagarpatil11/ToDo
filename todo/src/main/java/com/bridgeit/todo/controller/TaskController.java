@@ -82,7 +82,6 @@ public class TaskController
 	} 
 	
 	
-	//..........................Update Notes...........................///
 	
 	
 	/**
@@ -112,6 +111,7 @@ public class TaskController
 			userResponse.setMessage("Note updated successfully");
 			userResponse.setList(taskList);
 			
+			
 			return new ResponseEntity<Response>(userResponse, HttpStatus.OK);
 		} 
 		catch (Exception e) {
@@ -125,7 +125,6 @@ public class TaskController
 	
 	
 	
-	//..........................Delete Notes...........................///
 	
 	/**
 	 * This method delete note 
@@ -164,7 +163,6 @@ public class TaskController
 	
 	
 	
-	//..........................get notes..........................//
 	
 	/**
 	 * this method is used to get all notes 
@@ -185,6 +183,8 @@ public class TaskController
 			userResponse.setList(taskList);
 			userResponse.setStatus(1);
 			userResponse.setMessage("Notes list");
+			user.setPassword(null);
+			userResponse.setUser(user);
 			
 			return new ResponseEntity<Response>(userResponse, HttpStatus.OK);
 		} 

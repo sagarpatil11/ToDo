@@ -20,7 +20,7 @@
 											</div>
 											
 											<div id="description" ng-click="openPopup(data)" ng-bind-html="data.description" >
-											
+												<div><img ng-src="{{imageSrc}}" /></div>
 											</div>
 								
 											<div id="notefooter">
@@ -36,9 +36,10 @@
      												</ul>
      											</div>
 												
-												<!-- <a href="" id="img2"><img alt=""src="image/collaborator.svg"></a>
+												<!-- <a href="" id="img2"><img alt=""src="image/collaborator.svg"></a>-->
 												
-												<a href="" id="img2"><img alt=""src="image/addimage.svg"></a> -->
+												<a href="" id="img2" ng-click="addImage()"><img alt=""src="image/addimage.svg"></a>
+												<input type="file" ng-file-select="onFileSelect($files)" ng-model="imageSrc" id="imgId" style="display: none"> 
 												
 												<div class="dropup"><a href="" id="img2" data-toggle="dropdown" class="dropdown-toggle"><img alt="" src="image/color.svg"></a>
 													<div class="dropdown-menu" id="colordropup">

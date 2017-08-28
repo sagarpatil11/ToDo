@@ -1,16 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="org.springframework.web.context.WebApplicationContext"/>
-<fullyQualifiedTypeName name="org.springframework.web.context.support.WebApplicationContextUtils"/>
-<fullyQualifiedTypeName name="com.bridgeit.todo.token.TokenUtility"/>
-<fullyQualifiedTypeName name="java.lang.Long"/>
-<fullyQualifiedTypeName name="java.util.concurrent.TimeUnit"/>
-<fullyQualifiedTypeName name="com.bridgeit.todo.filter.Filter"/>
-<fullyQualifiedTypeName name="javax.servlet.Filter"/>
-<fullyQualifiedTypeName name="org.hibernate.SessionFactory"/>
-<fullyQualifiedTypeName name="org.hibernate.Query"/>
-<fullyQualifiedTypeName name="org.springframework.core.env.SystemEnvironmentPropertySource"/>
-<fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestParam"/>
 <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestBody"/>
 <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PathVariable"/>
 <fullyQualifiedTypeName name="org.springframework.http.HttpStatus"/>
@@ -50,7 +39,6 @@
 <fullyQualifiedTypeName name="javax.ws.rs.client.Entity"/>
 <fullyQualifiedTypeName name="com.fasterxml.jackson.annotation.JsonIgnoreProperties"/>
 <fullyQualifiedTypeName name="com.bridgeit.todo.service.TaskService"/>
-<fullyQualifiedTypeName name="com.bridgeit.todo.model.Task"/>
 <fullyQualifiedTypeName name="com.bridgeit.todo.model.GoogleAccessToken"/>
 <fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="com.bridgeit.todo.model.Gmail"/>
@@ -60,4 +48,16 @@
 <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
 <fullyQualifiedTypeName name="com.bridgeit.todo.model.Token"/>
 <fullyQualifiedTypeName name="java.util.Date"/>
+<fullyQualifiedTypeName name="java.io.Serializable"/>
+<fullyQualifiedTypeName name="com.bridgeit.todo.model.Task"/>
+<fullyQualifiedTypeName name="javax.persistence.Entity"/>
+<fullyQualifiedTypeName name="javax.persistence.Table"/>
+<fullyQualifiedTypeName name="javax.persistence.Id"/>
+<fullyQualifiedTypeName name="org.hibernate.annotations.GenericGenerator"/>
+<fullyQualifiedTypeName name="javax.persistence.GeneratedValue"/>
+<fullyQualifiedTypeName name="javax.persistence.ManyToOne"/>
+<fullyQualifiedTypeName name="javax.persistence.CascadeType"/>
+<fullyQualifiedTypeName name="javax.persistence.JoinColumn"/>
+<fullyQualifiedTypeName name="javax.persistence.Lob"/>
+<fullyQualifiedTypeName name="javax.persistence.Column"/>
 </qualifiedTypeNameHistroy>
