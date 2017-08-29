@@ -109,7 +109,7 @@
 					
 								
 						<div id="card" ng-model="putcolor" ng-show="takenote" ng-style="{'background-color':putcolor}" >
-							
+							<div><img style="width: 100%" ng-src="{{imageSrc}}" /></div>
 							<div ng-show="shownote" id="title" contenteditable1 contentEditable=true ng-model="title" data-placeholder="Title..." spellcheck="false">
 							
 									<a href=""><span aria-hidden="false"><img alt="pin" src="image/icons8-Pin-20.png"></span></a>
@@ -118,6 +118,7 @@
 							
 							<div id="description" contenteditable1 contentEditable=true ng-click="inputNote()"  ng-model="description" 
 									data-placeholder="Take a note..." spellcheck="false" >
+									
 							</div>
 								
 							<div id="notefooter" ng-show="shownote">
@@ -133,8 +134,10 @@
      									</ul>
      								</div> 
 									
-									<!-- <a href="" id="img1"><span aria-hidden="true"><img alt=""src="image/collaborator.svg"></span></a>
-									<a href="" id="img1"><span aria-hidden="true"><img alt=""src="image/addimage.svg"></span></a> -->
+									<!-- <a href="" id="img1"><span aria-hidden="true"><img alt=""src="image/collaborator.svg"></span></a>-->
+									
+									<a href="" id="img1" ng-click="addImage()"><img alt=""src="image/addimage.svg"></a>
+									<input type="file" ng-file-select="onFileSelect($files)" ng-model="imageSrc" id="imgId" style="display: none"> 
 									
 									<div class="dropup"><a href="" id="img1" data-toggle="dropdown" class="dropdown-toggle"><img alt="" src="image/color.svg"></a>
 										<div class="dropdown-menu" id="colordropup">

@@ -28,3 +28,5 @@
 2017-08-12 09:59:43 DEBUG UserRegController:81 - User is added
 2017-08-12 10:25:27 DEBUG UserRegController:46 - In userRegistration method
 2017-08-12 10:25:28 DEBUG UserRegController:81 - User is added
+2017-08-29 10:07:11 DEBUG UserRegController:46 - In userRegistration method
+2017-08-29 10:07:12 DEBUG UserRegController:81 - User is added

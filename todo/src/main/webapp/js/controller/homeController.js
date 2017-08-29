@@ -85,10 +85,14 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService,file
 		noteData.title=$scope.title;
 		noteData.description=$scope.description;
 		noteData.color=$scope.putcolor;
+		noteData.image=$scope.imageSrc;
+		
+		console.log("img: "+noteData.image);
 		
 		$scope.title="";
 		$scope.description="";
 		$scope.putcolor="";
+		$scope.imageSrc="";
 		
 		
 		var httpnote=homeService.addNote(noteData);
@@ -223,6 +227,7 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService,file
 					this.archivenote=data.isArchive;
 					this.trashnote=data.isTrash;
 					this.pinnednote=data.isPinned;
+					this.imagenote=data.image;
 					
 		//..........................delete reminder.................//
 					
@@ -272,6 +277,7 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService,file
 						updateData.isArchive=this.archivenote;
 						updateData.isTrash=this.trashnote;
 						updateData.isPinned=this.pinnednote;
+						updateData.image=this.imagenote;
 						//updateData.edited_date=this.editedDate;
 						
 						$scope.update(updateData);
@@ -570,8 +576,9 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService,file
 	
 	$scope.addImage=function(){
 		console.log("in addImage");
+		
 		document.getElementById("imgId").click();
-		console.log("img src"+$scope.imageSrc);
+		console.log("img src",$scope.imageSrc);
 	}
 
 	
