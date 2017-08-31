@@ -100,6 +100,7 @@ public class UserRegController
 	@RequestMapping(value="/userupdate",method=RequestMethod.POST)
 	public ResponseEntity<Response> userUpdate(@RequestBody User user,BindingResult result)
 	{
+			System.out.println("in user update");
 			System.out.println(user.toString());
 			
 			try 

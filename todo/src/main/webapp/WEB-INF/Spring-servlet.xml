@@ -63,6 +63,9 @@
 				<value>
 					com.bridgeit.todo.model.Token				
 				</value>
+				<value>
+					com.bridgeit.todo.model.WebScraper				
+				</value>
 			
 			</list>
 		</property>

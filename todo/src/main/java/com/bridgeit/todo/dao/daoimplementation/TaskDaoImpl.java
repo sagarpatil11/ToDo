@@ -1,5 +1,6 @@
 package com.bridgeit.todo.dao.daoimplementation;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -17,12 +18,14 @@ public class TaskDaoImpl implements TaskDao
 	@Autowired
 	SessionFactory sessionFactory;
 	
-	public void addNote(Task task) 
+	public int  addNote(Task task) 
 	{
 		// TODO Auto-generated method stub
 		Session session=sessionFactory.getCurrentSession();
 		
-		session.save(task);
+		Serializable id=session.save(task);
+		
+		return (int) id;
 	}
 
 	public void updateNote(Task task) 

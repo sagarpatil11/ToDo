@@ -92,7 +92,7 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService,file
 		$scope.title="";
 		$scope.description="";
 		$scope.putcolor="";
-		$scope.imageSrc="";
+		$scope.imageSrc=null;
 		
 		
 		var httpnote=homeService.addNote(noteData);
@@ -578,7 +578,21 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService,file
 		console.log("in addImage");
 		
 		document.getElementById("imgId").click();
-		console.log("img src",$scope.imageSrc);
+	}
+
+	
+	
+	//...........................image...........................//
+	
+	$scope.uploadImage=function(data){
+		console.log("in uploadImage");
+		
+		document.getElementById("imageId").click();
+		
+		
+		/*data.image=$scope.uploadImg;
+		
+		$scope.update(data);*/
 	}
 
 	

@@ -16,6 +16,7 @@ import org.hibernate.annotations.GenericGenerator;
 @Table
 public class WebScraper implements Serializable
 {
+
 	@Id
 	@GenericGenerator(name="id",strategy="increment")
 	@GeneratedValue(generator="id")
@@ -29,9 +30,15 @@ public class WebScraper implements Serializable
 	
 	private String hosturl;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	private int tid;
+	/*@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="tid")
-	private Task task;
+	private Task task;*/
+	
+
+	public WebScraper() {
+	
+	}
 
 	public int getId() {
 		return id;
@@ -72,19 +79,29 @@ public class WebScraper implements Serializable
 	public void setHosturl(String hosturl) {
 		this.hosturl = hosturl;
 	}
+	
+	
 
-	public Task getTask() {
+	/*public Task getTask() {
 		return task;
 	}
 
 	public void setTask(Task task) {
 		this.task = task;
+	}*/
+
+	public int getTid() {
+		return tid;
+	}
+
+	public void setTid(int tid) {
+		this.tid = tid;
 	}
 
 	@Override
 	public String toString() {
 		return "WebScraper [id=" + id + ", title=" + title + ", imgurl=" + imgurl + ", hostname=" + hostname
-				+ ", hosturl=" + hosturl + ", task=" + task + "]";
+				+ ", hosturl=" + hosturl + ", tid=" + tid + "]";
 	}
 	
 	

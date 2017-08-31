@@ -19,10 +19,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bridgeit.todo.model.Task;
 import com.bridgeit.todo.model.User;
+import com.bridgeit.todo.model.WebScraper;
 import com.bridgeit.todo.responsemsg.ErrorResponse;
 import com.bridgeit.todo.responsemsg.Response;
 import com.bridgeit.todo.responsemsg.UserResponse;
 import com.bridgeit.todo.service.TaskService;
+import com.bridgeit.todo.service.WebScraperService;
 
 /**
  * this rest controller have todo task related methods
@@ -34,6 +36,9 @@ public class TaskController
 {
 	@Autowired
 	TaskService taskService;
+	
+	@Autowired
+	WebScraperService webScraperService;
 	
 	UserResponse userResponse=new UserResponse();
 	ErrorResponse errorResponse=new ErrorResponse();
@@ -52,6 +57,8 @@ public class TaskController
 		HttpSession session=request.getSession();
 		User user=(User) session.getAttribute("userSession");
 		
+		WebScraper webScraper=webScraperService.createWebScraper(task.getDescription());
+		
 		task.setUser(user);
 		
 		task.setCreation_date(new Date());
@@ -60,7 +67,14 @@ public class TaskController
 		
 		try 
 		{
-			taskService.addNote(task);
+			int tid=taskService.addNote(task);
+			
+			if(webScraper != null)
+			{
+				webScraper.setTid(tid);
+				webScraperService.saveWebScraper(webScraper);
+			}
+			
 			List taskList = taskService.getNotes(user.getId());
 			
 			userResponse.setList(taskList);
@@ -96,9 +110,9 @@ public class TaskController
 		HttpSession session=request.getSession();
 		User user=(User) session.getAttribute("userSession");
 		
-		//task.setUser(user);
 		System.out.println(task.toString());
 		
+		task.setUser(user);
 		task.setEdited_date(new Date());
 		
 		try 
@@ -180,10 +194,12 @@ public class TaskController
 		{
 			List taskList = taskService.getNotes(user.getId());
 			
-			userResponse.setList(taskList);
+			List<Task> list=addScraperInNote(taskList);
+			
+			userResponse.setList(list);
 			userResponse.setStatus(1);
 			userResponse.setMessage("Notes list");
-			user.setPassword(null);
+			user.setPassword("");
 			userResponse.setUser(user);
 			
 			return new ResponseEntity<Response>(userResponse, HttpStatus.OK);
@@ -200,4 +216,34 @@ public class TaskController
 	}
 	
 	
+	private List<Task> addScraperInNote(List notes) 
+	{
+		 for (int i = 0; i < notes.size(); i++) 
+		 {
+				Task todoNotes =  (Task) notes.get(i);
+				List<WebScraper> scrapers = getAllWebScraper(todoNotes.getTid());
+				todoNotes.setWebscraper(scrapers);;
+		}
+		return notes;
+	}
+	
+	
+	/**
+	 * this method gets all webScrapers from database
+	 * @param tid
+	 * @return List<WebScraper> {@link List}
+	 */
+	private List<WebScraper> getAllWebScraper(int tid)
+	{
+		try
+		{
+			return webScraperService.getWebScraper(tid);
+		}
+		catch (Exception e) 
+		{
+			// TODO: handle exception
+			e.printStackTrace();
+			return null;
+		}
+	}
 }

@@ -2,6 +2,7 @@ package com.bridgeit.todo.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -41,6 +43,9 @@ public class Task implements Serializable
 	private String isArchive;
 	
 	private String isPinned;
+	
+	@Transient
+	List<WebScraper> webscraper;
 	
 	@Lob
 	@Column(columnDefinition="mediumblob")
@@ -174,6 +179,17 @@ public class Task implements Serializable
 
 	public void setImage(String image) {
 		this.image = image;
+	}
+
+	
+	
+	public List<WebScraper> getWebscraper() {
+		return webscraper;
+	}
+
+
+	public void setWebscraper(List<WebScraper> webscraper) {
+		this.webscraper = webscraper;
 	}
 
 
