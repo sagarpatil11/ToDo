@@ -30,6 +30,8 @@ public class WebScraperService
 			{
 				String url=UrlValidator.isValidUrl(description);
 				
+				System.out.println("url: "+url);
+				
 				URI uri=new URI(url);
 				
 				String hostname=uri.getHost();

@@ -23,6 +23,22 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService,file
 			$scope.listBtn=true;
 			$scope.gridBtn=false;
 			
+			$scope.pinned1={
+					'margin-top': '30px',
+					'color':'rgba(0,0,0,.54)',
+					'font-weight': 'bold',
+					'font-family': "'Roboto',arial,sans-serif",
+					'padding-left': '15px'
+			}
+			
+			$scope.others={
+					'margin-top': '45px',
+					'color':'rgba(0,0,0,.54)',
+					'font-weight': 'bold',
+					'font-family': "'Roboto',arial,sans-serif",
+					'padding-left': '15px'
+			}
+			
 			$scope.col2="col-lg-2";
 			$scope.showdiv="col-lg-4 col-md-6 col-sm-12 col-xs-12 item";
 			
@@ -37,6 +53,22 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService,file
 			
 			$scope.listBtn=false;
 			$scope.gridBtn=true;
+			
+			$scope.pinned1={
+					'margin-top': '30px',
+					'color':'rgba(0,0,0,.54)',
+					'font-weight': 'bold',
+					'font-family': "'Roboto',arial,sans-serif",
+					'padding-left': '142px'
+			}
+			
+			$scope.others={
+					'margin-top': '45px',
+					'color':'rgba(0,0,0,.54)',
+					'font-weight': 'bold',
+					'font-family': "'Roboto',arial,sans-serif",
+					'padding-left': '142px'
+			}
 			
 			$scope.col2="";
 			$scope.showdiv="col-lg-8 item";
@@ -466,6 +498,7 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService,file
 		
 		notedata.isTrash="true";
 		notedata.reminder=null;
+		notedata.isPinned="false"
 		
 		$scope.update(notedata);
 		

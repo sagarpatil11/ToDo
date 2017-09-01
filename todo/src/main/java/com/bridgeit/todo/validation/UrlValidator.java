@@ -5,7 +5,8 @@ import java.util.regex.Pattern;
 
 public class UrlValidator 
 {
-	public static final String URL_REGEX= "^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
+	public static final String URL_REGEX= "(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*"+
+			"[-a-zA-Z0-9+&@#/%=~_|]";
 	
 	public static String isValidUrl(String url)
 	{

@@ -6,7 +6,7 @@
 		
 			  			
 			  			 <div id="maindiv"> 
-			  				<div id="others" ng-show="showname">&nbsp&nbsp&nbsp Others</div>
+			  				<div ng-style="others" ng-show="showname">Others</div>
 			  				<div ng-class="showdiv" ng-repeat="data in notesList | filter: search" ng-if="data.isArchive != 'true' && data.isTrash != 'true' && data.isPinned != 'true'">
 			  					
 			  					
@@ -79,11 +79,11 @@
 												<span ng-show="cancelbtn"><img ng-click="cancelReminder(data)" alt="cancel" src="image/cancel.svg" width=15px style="float: right;"></span>
 											</div>
 											
-											<div ng-repeat="x in data.webscraper">
-												<div style="float: left">
-														<img alt="" ng-src="{{x.imgurl}}" style="">
+											<div id="scraper" ng-repeat="x in data.webscraper">
+												<div id="scraperImg" style="float: left">
+														<img width="56px" height="100%" alt="" ng-src="{{x.imgurl}}" style="">
 												</div>
-												<div>
+												<div id="scraperData">
 														<div id="scraperTitle">{{x.title}}</div>
 														<div id="scraperHostname">{{x.hostname}}</div>
 												</div>

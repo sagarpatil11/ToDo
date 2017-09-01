@@ -29,7 +29,15 @@
      											
 											</div>
 											
-											
+											<div id="scraper" ng-repeat="x in data.webscraper">
+												<div id="scraperImg" style="float: left">
+														<img width="56px" height="100%" alt="" ng-src="{{x.imgurl}}" style="">
+												</div>
+												<div id="scraperData">
+														<div id="scraperTitle">{{x.title}}</div>
+														<div id="scraperHostname">{{x.hostname}}</div>
+												</div>
+											</div>
 			  						</div>
 			  					
 			  				</div>

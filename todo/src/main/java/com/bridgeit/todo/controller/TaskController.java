@@ -199,7 +199,7 @@ public class TaskController
 			userResponse.setList(list);
 			userResponse.setStatus(1);
 			userResponse.setMessage("Notes list");
-			user.setPassword("");
+			
 			userResponse.setUser(user);
 			
 			return new ResponseEntity<Response>(userResponse, HttpStatus.OK);
