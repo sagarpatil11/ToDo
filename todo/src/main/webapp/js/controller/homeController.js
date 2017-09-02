@@ -260,6 +260,7 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService,file
 					this.trashnote=data.isTrash;
 					this.pinnednote=data.isPinned;
 					this.imagenote=data.image;
+					this.scraper=data.webscraper;
 					
 		//..........................delete reminder.................//
 					
@@ -605,7 +606,7 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService,file
 	}
 	
 	
-	//............................add image.......................//
+	//............................add image while creating new note.......................//
 	
 	$scope.addImage=function(){
 		console.log("in addImage");
@@ -615,7 +616,7 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService,file
 
 	
 	
-	//...........................image...........................//
+	//...........................add image in created note...........................//
 	
 	$scope.uploadImage=function(data){
 		console.log("in uploadImage");
@@ -623,9 +624,9 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService,file
 		document.getElementById("imageId").click();
 		
 		
-		/*data.image=$scope.uploadImg;
-		
-		$scope.update(data);*/
+		data.image=$scope.uploadImg;
+		console.log("img "+$scope.uploadImg)
+		$scope.update(data);
 	}
 
 	

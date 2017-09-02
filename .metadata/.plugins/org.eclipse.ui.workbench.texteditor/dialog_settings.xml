@@ -2,12 +2,13 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="others" key="selection"/>
+		<item value="popupdiv" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="popupdiv"/>
 			<item value="others"/>
 			<item value="pinned"/>
 			<item value="notes"/>
@@ -15,7 +16,6 @@
 			<item value="gridnotes"/>
 			<item value="option-dropdown2"/>
 			<item value="#popupdiv"/>
-			<item value="img1"/>
 		</list>
 		<list key="replacehistory">
 		</list>

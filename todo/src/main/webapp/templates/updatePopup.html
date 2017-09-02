@@ -1,11 +1,25 @@
 
 <div id="popupdiv" ng-model="$ctrl.notecolor" ng-style="{'background-color':$ctrl.notecolor}">
 		<div ng-if="$ctrl.imagenote"><img style="width: 100%" ng-src="{{$ctrl.imagenote}}" /></div>
+		
 		<div id="title" contenteditable1 contentEditable=true ng-model="$ctrl.updateTitle" data-placeholder="Title..." 
 			spellcheck="false" ng-bind-html="$ctrl.updateTitle"></div>
 
 		<div id="description" contenteditable1 contentEditable=true ng-click="inputNote()" ng-model="$ctrl.updateDescription"
 			data-placeholder="Take a note..." spellcheck="false" ng-bind-html="$ctrl.updateDescription"></div>
+
+		<div id="popupscaraper">
+				<div id="scrapernote" ng-repeat="x in $ctrl.scraper">
+						<div id="scraperImg" style="float: left">
+								<img width="56px" height="56px"; alt="" ng-src="{{x.imgurl}}" style="">
+						</div>
+						<div id="scraperData">
+								<div id="scraperTitle">{{x.title}}</div>
+								<div id="scraperHostname">{{x.hostname}}</div>
+						</div>
+				</div>
+		
+		</div>
 
 		<div id="notefooter">
 				<a href="" id="img1"><img alt=""src="image/remainder.svg"></a>
