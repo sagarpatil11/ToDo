@@ -30,9 +30,15 @@
 											</div>
 											
 											<div id="scraper" ng-repeat="x in data.webscraper">
-												<div id="scraperImg" style="float: left">
-														<img width="56px" height="100%" alt="" ng-src="{{x.imgurl}}" style="">
+												<div id="imgLink">
+														<a target="_blank" href="{{x.hosturl}}"><img alt="" style="padding: 5px 0 0 5px;" src="image/gotolink.svg"></a>
 												</div>
+												<div id="scraperImg" style="float: left" ng-if='x.imgurl == ""'>
+														<img width="56px" height="100%" alt="" src="image/scraperimg.svg" >
+												</div>
+												<div id="scraperImg" style="float: left" ng-if='x.imgurl != ""'>
+														<img width="56px" height="100%" alt="" ng-src="{{x.imgurl}}">
+												</div> 
 												<div id="scraperData">
 														<div id="scraperTitle">{{x.title}}</div>
 														<div id="scraperHostname">{{x.hostname}}</div>

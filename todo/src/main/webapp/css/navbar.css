@@ -208,6 +208,15 @@ body{
 }
 
 
+#pinimg{
+	position: absolute;
+    z-index: 2;
+    /* float: right; */
+    margin-left: 208px;
+    margin-top: 5px;
+}
+
+
 #pin{
 	margin-right: 7px;
     margin-top: -43px;
@@ -382,7 +391,7 @@ body{
 #scrapernote{
 	margin:15px;
 	width:95%; 
-	background-color: rgb(250, 250, 250);
+	background-color: rgba(250, 250, 250, 0.8);
     border-radius: 2px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     word-wrap: break-word;
@@ -404,6 +413,10 @@ body{
 
 #option-dropdown1{
 	margin: 24px 0 0 245px;
+}
+
+#option-dropdown2{
+	margin: 20px 110px 0;
 }
 
 #dropdown-more{
@@ -484,6 +497,12 @@ body{
     text-overflow: ellipsis;
     white-space: nowrap;
     font-size: 11px;
+}
+
+#imgLink{
+	width: 24px;
+	height: 24px;
+	float: right;
 }
 
 /* #query{ 

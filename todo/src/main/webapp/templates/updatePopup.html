@@ -10,9 +10,12 @@
 
 		<div id="popupscaraper">
 				<div id="scrapernote" ng-repeat="x in $ctrl.scraper">
-						<div id="scraperImg" style="float: left">
-								<img width="56px" height="56px"; alt="" ng-src="{{x.imgurl}}" style="">
+						<div id="scraperImg" style="float: left" ng-if='x.imgurl == ""'>
+								<img width="56px" height="56px" alt="" src="image/scraperimg.svg" >
 						</div>
+						<div id="scraperImg" style="float: left" ng-if='x.imgurl != ""'>
+								<img width="56px" height="56px" alt="" ng-src="{{x.imgurl}}">
+						</div> 
 						<div id="scraperData">
 								<div id="scraperTitle">{{x.title}}</div>
 								<div id="scraperHostname">{{x.hostname}}</div>
@@ -25,6 +28,9 @@
 				<a href="" id="img1"><img alt=""src="image/remainder.svg"></a>
 				<!-- <a href="" id="img1"><img alt=""src="image/collaborator.svg"></a>
 				<a href="" id="img1"><img alt=""src="image/addimage.svg"></a> -->
+				
+				<a href="" id="img1" ng-click="$ctrl.addImg()"><img alt=""src="image/addimage.svg"></a>
+				<input type="file" ng-file-select="onFileSelect($files)" ng-model="$ctrl.imagenote" id="imgid" style="display: none"> 
 												
 				<div class="dropup"><a href="" id="img1" data-toggle="dropdown" class="dropdown-toggle"><img alt="" src="image/color.svg"></a>
 					<div class="dropdown-menu" id="colordropup">
@@ -45,8 +51,8 @@
 				<div class="dropdown"><a href="" id="img1" data-toggle="dropdown" class="dropdown-toggle"><img alt="" src="image/list.png"></a>
 					<ul class="dropdown-menu" id="option-dropdown2" >
 						<li><a role="menuitem" tabindex="-1" href="" ng-click="deleteNote(data.tid)">Delete note</a></li>
-      					<li><a role="menuitem" tabindex="-1" href="">Add label</a></li>
-      					<li><a role="menuitem" tabindex="-1" href="">Show checkboxes</a></li>
+      					<!-- <li><a role="menuitem" tabindex="-1" href="">Add label</a></li>
+      					<li><a role="menuitem" tabindex="-1" href="">Show checkboxes</a></li> -->
      				</ul>
     			</div>	
     		

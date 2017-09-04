@@ -110,7 +110,7 @@
 								
 						<div id="card" ng-model="putcolor" ng-show="takenote" ng-style="{'background-color':putcolor}" >
 							
-							<div><img style="width: 100%" ng-src="{{imageSrc}}" /></div>
+							<div ng-if="imageSrc"><img style="width: 100%" ng-src="{{imageSrc}}" /></div>
 							
 							<div ng-show="shownote" id="title" contenteditable1 contentEditable=true ng-model="title" data-placeholder="Title..." spellcheck="false">
 							

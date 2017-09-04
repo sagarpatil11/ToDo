@@ -262,6 +262,14 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService,file
 					this.imagenote=data.image;
 					this.scraper=data.webscraper;
 					
+					
+		//..........................add image.................//
+					
+					this.addImg=function(){
+						console.log("in addImg");
+						
+						document.getElementById("imgid").click();
+					}
 		//..........................delete reminder.................//
 					
 					

@@ -11,13 +11,16 @@
 			  					
 			  					
 			  						<div  id="notes" ng-style="{'background-color':data.color}">
-			  								<div ng-click="openPopup(data)" ng-if="data.image"><img style="width: 100%" ng-src="{{data.image}}" /></div>
+			  								<div ng-click="openPopup(data)" ng-if="data.image">
+			  									<a id="pinimg" href="" ng-click="doPin(data)"><img alt="pin" src="image/unpinwithborder.svg"></a>
+			  									<img style="width: 100%" ng-src="{{data.image}}" />
+			  								</div>
 			  								
 			  								<div id="title" ng-click="openPopup(data)" ng-bind-html="data.title">
 											
 											</div>
 											
-											<div id="unpin">
+											<div id="unpin" ng-if="!data.image" aria-labelledby="unpin note">
 												<a href="" ng-click="unPin(data)"><img style="fill:blue" alt="pin" src="image/unpinned.svg"></a>
 											</div>
 											
@@ -79,6 +82,9 @@
 											</div>
 											
 											<div id="scraper" ng-repeat="x in data.webscraper">
+												<div id="imgLink">
+														<a target="_blank" href="{{x.hosturl}}"><img alt="" style="padding: 5px 0 0 5px;" src="image/gotolink.svg"></a>
+												</div>
 												<div id="scraperImg" style="float: left" ng-if='x.imgurl == ""'>
 														<img width="56px" height="100%" alt="" src="image/scraperimg.svg" >
 												</div>
