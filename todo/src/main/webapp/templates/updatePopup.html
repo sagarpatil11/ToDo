@@ -10,12 +10,23 @@
 
 		<div id="popupscaraper">
 				<div id="scrapernote" ng-repeat="x in $ctrl.scraper">
+						<div id="scarperMoreOpt" class="dropdown"><a href="" data-toggle="dropdown" class="dropdown-toggle"><img style="margin: 8px 5px;" alt="" src="image/list.png"></a>
+								<ul class="dropdown-menu" id="dropdown-scraper"">
+										<li><a role="menuitem" tabindex="-1" href="" ng-click="$ctrl.removeScraper(x)">Remove</a></li>
+										<!-- <li><a role="menuitem" tabindex="-1" href="" ng-click="">Make a copy</a></li> -->
+      									<!-- <li><a role="menuitem" tabindex="-1" href="">Add label</a></li>
+      									<li><a role="menuitem" tabindex="-1" href="">Show checkboxes</a></li> -->
+     							</ul>
+     					</div>
+     						
 						<div id="scraperImg" style="float: left" ng-if='x.imgurl == ""'>
 								<img width="56px" height="56px" alt="" src="image/scraperimg.svg" >
 						</div>
+						
 						<div id="scraperImg" style="float: left" ng-if='x.imgurl != ""'>
 								<img width="56px" height="56px" alt="" ng-src="{{x.imgurl}}">
 						</div> 
+						
 						<div id="scraperData">
 								<div id="scraperTitle">{{x.title}}</div>
 								<div id="scraperHostname">{{x.hostname}}</div>

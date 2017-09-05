@@ -388,6 +388,16 @@ body{
 	
 }
 
+#scarperMoreOpt{
+	float: right;
+   	margin: 5px 3px;
+}
+
+#dropdown-scraper{
+	min-width: 120px;
+	margin: -7px 0 0;
+}
+
 #scrapernote{
 	margin:15px;
 	width:95%; 

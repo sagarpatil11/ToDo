@@ -241,7 +241,7 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService,file
 	
 	
 	$scope.openPopup=function(data){
-			console.log("in ctrl ",data.title," ",data.description," ");
+			console.log("in popup ");
 		
 			var modal=$uibModal.open({
 				templateUrl:"templates/updatePopup.html",
@@ -293,7 +293,60 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService,file
 						
 						this.notereminder=null;
 					}
+		
+		//...........................Remove Scraper...................//
 					
+					this.removeScraper=function(scraper){
+						
+						console.log("in removeScraper "+scraper.id);
+						
+						var httpresp=homeService.deleteScraper(scraper);
+						
+						httpresp.then(function(response1)
+								{
+									console.log(response1);
+										if(response1.data.status == 1)
+										{
+												$scope.notesList=response1.data.list.reverse();
+												console.log("delete scraper success");
+												
+												
+										}
+										else if(response1.data.status == -4)
+										{
+												console.log("access token expired");
+										
+												homeService.getNewAccessToken().then(function(response2){
+													
+													if(response2.data.status == 4)
+													{
+															localStorage.setItem("accessToken", response2.data.token.accessToken);
+															localStorage.setItem("refreshToken", response2.data.token.refreshToken);
+												
+															homeService.addNote(noteData).then(function(resp){
+																console.log("delete scraper success");
+																$scope.notesList=resp.data.list.reverse();
+																
+															})
+													}
+													else
+													{
+															console.log(response2.data);
+															$state.go('login');
+													}
+												})
+										}
+										else
+										{
+												console.log(response1.data);
+												/*$state.go('login');*/
+												return;
+										}
+									
+									
+								});
+									
+					}
 					
 		//.........................update note......................//			
 					
@@ -916,7 +969,7 @@ myApp.service("homeService", function($http){
 	
 	
 		this.updateNote=function(updateData){
-			console.log(updateData);
+			console.log("in updateNote Service");
 		
 			return $http({
 						url:"updateNote",
@@ -924,6 +977,18 @@ myApp.service("homeService", function($http){
 						data:updateData,
 						headers:{"accessToken":localStorage.getItem("accessToken")}
 					})		
+		}
+		
+		
+		this.deleteScraper=function(scraper){
+			console.log("in deleteScraper service ");
+			
+			return $http({
+						url:"deleteScraper",
+						method:"post",
+						data:scraper,
+						headers:{"accessToken":localStorage.getItem("accessToken")}
+					})
 		}
 	
 	

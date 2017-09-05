@@ -81,5 +81,11 @@ public class WebScraperService
 	{
 		return webScraperDao.getWebScraper(tid);
 	}
+	
+	@Transactional
+	public void deleteScraper(int id)
+	{
+		webScraperDao.deleteScraper(id);
+	}
 
 }

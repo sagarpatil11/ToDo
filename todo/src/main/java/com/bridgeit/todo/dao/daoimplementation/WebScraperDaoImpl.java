@@ -39,5 +39,19 @@ public class WebScraperDaoImpl implements WebScraperDao
 		
 		return list;
 	}
+	
+	public void deleteScraper(int id) {
+		// TODO Auto-generated method stub
+		
+		Session session=sessionFactory.getCurrentSession();
+		
+		String hql="delete from WebScraper where id=:id";
+		
+		Query query=session.createQuery(hql);
+		query.setParameter("id", id);
+		
+		query.executeUpdate();
+		
+	}
 
 }

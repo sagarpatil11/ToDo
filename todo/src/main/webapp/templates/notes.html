@@ -10,10 +10,10 @@
 			  				<div ng-class="showdiv" ng-repeat="data in notesList | filter: search" ng-if="data.isArchive != 'true' && data.isTrash != 'true' && data.isPinned != 'true'">
 			  					
 			  					
-			  						<div  id="notes" ng-style="{'background-color':data.color}">
+			  						<div  id="notes" ng-style="{'background-color':data.color}" ng-mouseover="pinImg=true" ng-mouseleave="pinImg=false">
 			  								
 			  								<div ng-click="openPopup(data)" ng-if="data.image" >
-			  										<a id="pinimg" href="" ng-click="doPin(data)"><img alt="pin" src="image/pinnedwithborder.svg"></a>
+			  										<a ng-show="pinImg" id="pinimg" href="" ng-click="doPin(data)"><img alt="pin" src="image/pinnedwithborder.svg"></a>
 			  										<img style="width: 100%" ng-src="{{data.image}}" />
 			  										
 			  								</div>
@@ -38,8 +38,17 @@
       													<li style="padding: 3 0 3 0;font-size: 13px;"><a role="menuitem" tabindex="-1" href="" ng-click="setReminder(data,'Today')">Later today<span style="float: right;">8:00 PM</span></a></li>
       													<li style="padding: 3 0 3 0;font-size: 13px;"><a role="menuitem" tabindex="-1" href="" ng-click="setReminder(data,'Tomorrow')">Tomorrow<span style="float: right;">8:00 AM</span></a></li>
       													<li style="padding: 3 0 3 0;font-size: 13px;"><a role="menuitem" tabindex="-1" href="" ng-click="setReminder(data,'Next-week')">Next weak<span style="float: right;">Mon, 8:00 AM</span></a></li>
-      												<!-- 	<li style="padding: 3 0 3 0;font-size: 13px;"><a role="menuitem" tabindex="-1" href="" ><span class="glyphicon glyphicon-time"></span>&nbsp&nbspPick date & time</a></li>
-      													<li style="padding: 3 0 3 0;font-size: 13px;"><a role="menuitem" tabindex="-1" href="" ><span class="glyphicon glyphicon-map-marker"></span>&nbsp&nbspPick place</a></li> -->
+      													
+      													<div class="dropdown">
+      														<li style="padding: 3 0 3 0;font-size: 13px;"><a role="menuitem" tabindex="-1" href="" ><span class="glyphicon glyphicon-time"></span>&nbsp&nbspPick date & time</a></li>
+      														<ul class="dropdown-menu">
+      															<li><a></a></li>
+      														
+      														</ul>
+      													
+      													</div>
+      												
+      												<!-- <li style="padding: 3 0 3 0;font-size: 13px;"><a role="menuitem" tabindex="-1" href="" ><span class="glyphicon glyphicon-map-marker"></span>&nbsp&nbspPick place</a></li>  -->
      												</ul>
      											</div>
 												
@@ -87,7 +96,7 @@
 												<div id="imgLink">
 														<a target="_blank" href="{{x.hosturl}}"><img alt="" style="padding: 5px 0 0 5px;" src="image/gotolink.svg"></a>
 												</div>
-												<div id="scraperImg" style="float: left" ng-if='x.imgurl == "">
+												<div id="scraperImg" style="float: left" ng-if='x.imgurl == ""'>
 														<img width="56px" height="100%" alt="" src="image/scraperimg.svg" >
 												</div>
 												<div id="scraperImg" style="float: left" ng-if='x.imgurl != ""'>

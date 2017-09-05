@@ -112,12 +112,21 @@ public class TaskController
 		
 		System.out.println(task.toString());
 		
+		WebScraper webScraper=webScraperService.createWebScraper(task.getDescription());
+		
 		task.setUser(user);
 		task.setEdited_date(new Date());
 		
 		try 
 		{
 			taskService.updateNote(task);
+			
+			if(webScraper != null)
+			{
+				
+				webScraper.setTid(task.getTid());
+				webScraperService.saveWebScraper(webScraper);
+			}
 			
 			List taskList = taskService.getNotes(user.getId());
 			
@@ -175,7 +184,30 @@ public class TaskController
 		}
 	}
 	
-	
+	@RequestMapping(value="deleteScraper",method=RequestMethod.POST)
+	public ResponseEntity<Response> deleteScraper(@RequestBody WebScraper scraper, HttpServletRequest request)
+	{
+		System.out.println("in deleteScraper: "+scraper);
+		
+		try
+		{
+			webScraperService.deleteScraper(scraper.getId());
+			
+			userResponse.setStatus(1);
+			userResponse.setMessage("Scraper deleted");
+			
+			return new ResponseEntity<Response>(userResponse,HttpStatus.OK);
+		}
+		catch (Exception e) 
+		{
+			// TODO: handle exception
+			errorResponse.setStatus(-1);
+			errorResponse.setMessage("Scraper is not deleted");
+			
+			return new ResponseEntity<Response>(errorResponse,HttpStatus.OK);
+		}
+		
+	}
 	
 	
 	/**

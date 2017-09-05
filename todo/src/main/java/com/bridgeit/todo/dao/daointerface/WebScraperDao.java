@@ -9,4 +9,6 @@ public interface WebScraperDao
 	public void saveWebScraper(WebScraper webScraper);
 	
 	public List<WebScraper> getWebScraper(int tid);
+	
+	public void deleteScraper(int id);
 }
