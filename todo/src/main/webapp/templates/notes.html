@@ -21,6 +21,7 @@
 			  								<div id="title" ng-click="openPopup(data)" ng-bind-html="data.title">
 											
 											</div>
+				
 											
 											<div id="pin" ng-if='!data.image'>
 												<a href="" ng-click="doPin(data)"><img alt="pin" src="image/pin.svg"></a>
@@ -52,7 +53,7 @@
      												</ul>
      											</div>
 												
-												<!-- <a href="" id="img2"><img alt=""src="image/collaborator.svg"></a>-->
+												<a href="" id="img2" ng-click="collaboratorPopup(data)"><img alt=""src="image/collaborator.svg"></a>
 												
 												<a href="" id="img2" ng-click="uploadImage(data)"><img alt=""src="image/addimage.svg"></a>
 												<input type="file" ng-file-select="onFileSelect($files)" ng-model="uploadImg" id="imageId" style="display: none"> 

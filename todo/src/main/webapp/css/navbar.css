@@ -273,8 +273,8 @@ body{
 }
 
 #img2{
-	padding-left: 10px;
-	padding-right:9px;
+	padding-left: 7px;
+	padding-right:7px;
 	outline: none;
 	display: none;
 	float:left;
@@ -513,6 +513,26 @@ body{
 	width: 24px;
 	height: 24px;
 	float: right;
+}
+
+
+#collaboratorPopup{
+	 min-height: 150px;
+}
+
+#shareWith{
+	outline: none;
+	font: 13.3333px Arial;
+}
+
+#colButton{
+	background-color: transparent;
+	border: none;
+	outline: none;
+}
+
+#colbutton:hover{
+	background-color:#ddd;
 }
 
 /* #query{ 

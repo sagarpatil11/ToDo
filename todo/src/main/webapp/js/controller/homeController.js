@@ -386,6 +386,24 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService,file
 	
 	
 	
+	//.............................Collaberator popup...........................//
+	
+	$scope.collaboratorPopup=function(data){
+		console.log("in collaboratorpopup");
+		
+		var modal=$uibModal.open({
+			templateUrl:"templates/collaborator.html",
+			controller:function($uibModalInstance){
+				console.log("popup open");
+				var $colCtrl=this;
+				
+				this.owner=data.user.email;
+			},
+			controllerAs:"$colCtrl"
+		})
+	}
+	
+	
 	//.................................change color...........................................// 
 	
 	
@@ -631,6 +649,7 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService,file
 	
 	}
 	
+
 	
 	//..............................share on facebook......................//
 	

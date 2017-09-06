@@ -17,6 +17,7 @@ import com.bridgeit.todo.model.User;
 import com.bridgeit.todo.service.TokenService;
 import com.bridgeit.todo.service.UserRegService;
 import com.bridgeit.todo.socialutilty.FbLoginUtility;
+import com.bridgeit.todo.token.TokenUtility;
 
 /**
  * 
@@ -34,6 +35,9 @@ public class FbLoginController
 	
 	@Autowired
 	TokenService tokenService;
+	
+	@Autowired
+	TokenUtility tokenUtility;
 	
 	/**
 	 * this controller method redirects to the facebook login page
@@ -59,6 +63,11 @@ public class FbLoginController
 		
 	}
 	
+	
+	/**
+	 * @param request
+	 * @param response
+	 */
 	@RequestMapping("/signin-facebook")
 	public void afterRedirect(HttpServletRequest request,HttpServletResponse response)
 	{
@@ -73,7 +82,7 @@ public class FbLoginController
 			
 			FbProfile fbProfile=fbLoginUtility.getFbProfile(accessToken);
 			
-			System.out.println("fbprofile::"+fbProfile);
+			//System.out.println("fbprofile::"+fbProfile);
 			
 			User user=userRegService.getUserByEmail(fbProfile.getEmail());
 			
@@ -87,9 +96,8 @@ public class FbLoginController
 				
 				User fbuser=userRegService.getUserByEmail(fbProfile.getEmail());
 				
-				Token token=new Token();
-				token.setAccessToken(accessToken);
-				token.setAccessTokenCreation(new Date());
+				Token token= tokenUtility.tokenGenerator();
+					
 				token.setUser(fbuser);
 				
 				tokenService.saveToken(token);
@@ -99,9 +107,8 @@ public class FbLoginController
 			}
 			else
 			{
-				Token token=new Token();
-				token.setAccessToken(accessToken);
-				token.setAccessTokenCreation(new Date());
+				Token token= tokenUtility.tokenGenerator();
+				
 				token.setUser(user);
 				
 				tokenService.saveToken(token);
