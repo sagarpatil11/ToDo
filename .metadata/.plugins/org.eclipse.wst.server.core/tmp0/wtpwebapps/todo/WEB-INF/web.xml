@@ -39,6 +39,8 @@ id="WebApp_ID" version="2.5">
 		<url-pattern>/updateNote</url-pattern>
 		<url-pattern>/deleteNote</url-pattern>
 		<url-pattern>/getNotes</url-pattern>
+		<url-pattern>/deleteScraper</url-pattern>
+		<url-pattern>/collaborator</url-pattern>
 	</filter-mapping>
    
 </web-app>

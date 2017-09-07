@@ -157,4 +157,12 @@ public class UserRegController
 		userRegService.getUserById(uid);
 	}
 	
+	
+	
+	@RequestMapping(value="/userbyemail")
+	public User getUserByEmail(String email)
+	{
+		return userRegService.getUserByEmail(email);
+	}
+	
 }

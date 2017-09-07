@@ -66,7 +66,9 @@
 				<value>
 					com.bridgeit.todo.model.WebScraper				
 				</value>
-			
+				<value>
+					com.bridgeit.todo.model.Collaborator
+				</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">

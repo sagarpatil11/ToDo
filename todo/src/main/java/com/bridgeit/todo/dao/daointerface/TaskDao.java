@@ -2,6 +2,7 @@ package com.bridgeit.todo.dao.daointerface;
 
 import java.util.List;
 
+import com.bridgeit.todo.model.Collaborator;
 import com.bridgeit.todo.model.Task;
 
 public interface TaskDao 
@@ -14,4 +15,6 @@ public interface TaskDao
 	
 	public List<Task> getNotes(int uid);
 	
+	public Task getNoteById(int tid);
+
 }

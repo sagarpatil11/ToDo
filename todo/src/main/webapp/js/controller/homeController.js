@@ -398,6 +398,75 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService,file
 				var $colCtrl=this;
 				
 				this.owner=data.user.email;
+				
+			
+			//...................add Collaborator......................//	
+				
+				this.addCollaborator=function(){
+					console.log("in addCollaborator");
+					console.log(this.emailtoshare);
+					
+					$uibModalInstance.dismiss('Save');
+					
+					if(this.emailtoshare != "")
+					{
+						var colObj={};
+					
+						colObj.tid=data.tid;
+						colObj.emailToShare=this.emailtoshare;
+					
+						var httpobj= homeService.addCollaborator(colObj);
+					
+						httpobj.then(function(response1)
+						{
+							console.log(response1);
+						
+							if(response1.data.status == 1)
+							{
+								//$scope.showNotes();
+								//$scope.notesList=response1.data.list.reverse();
+								console.log("Note Collaborated successfully");
+								
+							}
+							else if(response1.data.status == -4)
+							{
+									console.log("access token expired");
+						
+									homeService.getNewAccessToken().then(function(response2){
+									
+										if(response2.data.status == 4)
+										{
+												localStorage.setItem("accessToken", response2.data.token.accessToken);
+												localStorage.setItem("refreshToken", response2.data.token.refreshToken);
+								
+												homeService.updateNote(notedata).then(function(resp){
+													console.log(resp.data);
+												//$scope.notesList=resp.data.list.reverse();
+												//$scope.showNotes();
+												})
+										}
+										else
+										{
+												console.log(response2.data);
+												$state.go('login');
+										}
+									})
+							}
+							else if(response1.data.status == -2)
+							{
+								console.log(response1.data);
+								return;
+							}
+						
+							else
+							{
+								console.log(response1.data);
+								return;
+							}
+						
+						});
+					}
+				}
 			},
 			controllerAs:"$colCtrl"
 		})
@@ -1006,6 +1075,17 @@ myApp.service("homeService", function($http){
 						url:"deleteScraper",
 						method:"post",
 						data:scraper,
+						headers:{"accessToken":localStorage.getItem("accessToken")}
+					})
+		}
+		
+		
+		this.addCollaborator=function(colObj){
+			
+			return $http({
+						url:"collaborator",
+						method:"post",
+						data:colObj,
 						headers:{"accessToken":localStorage.getItem("accessToken")}
 					})
 		}

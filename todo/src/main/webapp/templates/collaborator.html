@@ -8,12 +8,12 @@
 						<p>{{$colCtrl.owner}} (Owner)</p>
 				</div>
 		
-				<div id="shareWith" contenteditable1 contentEditable=true data-placeholder="Enter email to share with...">
+				<div id="shareWith" ng-model="$colCtrl.emailtoshare" contenteditable1 contentEditable=true data-placeholder="Enter email to share with...">
 				</div>
 		</div>
 		
 		<div class="modal-footer">
-				<button id="colButton" style="margin-right: 15px;" type="button" ng-click="">Cancel</button>
-        		<button id="colButton" style="margin-right: 10px;" type="button" ng-click="">Save</button>
+			<!-- 	<button id="colButton" style="margin-right: 15px;" type="button" ng-click="">Cancel</button> -->
+        		<button id="colButton" style="margin-right: 10px;" type="button" ng-click="$colCtrl.addCollaborator()">Save</button>
 		</div>
 </div>

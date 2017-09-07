@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.bridgeit.todo.dao.daointerface.TaskDao;
+import com.bridgeit.todo.model.Collaborator;
 import com.bridgeit.todo.model.Task;
 
 @Repository
@@ -61,6 +62,19 @@ public class TaskDaoImpl implements TaskDao
 		return tasklist;
 		
 	}
+	
+	
+	public Task getNoteById(int tid)
+	{
+		Session session=sessionFactory.getCurrentSession();
+		
+		Query query=session.createQuery("FROM Task where tid=:tid");
+		query.setParameter("tid", tid);
+		
+		Task task=(Task) query.uniqueResult();
+		
+		return task;
+	}
 
-
+	
 }

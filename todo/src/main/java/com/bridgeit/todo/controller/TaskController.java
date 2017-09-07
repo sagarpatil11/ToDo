@@ -2,6 +2,7 @@ package com.bridgeit.todo.controller;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -17,12 +18,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bridgeit.todo.model.Collaborator;
 import com.bridgeit.todo.model.Task;
 import com.bridgeit.todo.model.User;
 import com.bridgeit.todo.model.WebScraper;
 import com.bridgeit.todo.responsemsg.ErrorResponse;
 import com.bridgeit.todo.responsemsg.Response;
 import com.bridgeit.todo.responsemsg.UserResponse;
+import com.bridgeit.todo.service.CollaboratorService;
 import com.bridgeit.todo.service.TaskService;
 import com.bridgeit.todo.service.WebScraperService;
 
@@ -39,6 +42,12 @@ public class TaskController
 	
 	@Autowired
 	WebScraperService webScraperService;
+	
+	@Autowired
+	UserRegController userRegController;
+	
+	@Autowired
+	CollaboratorService collaboratorService;
 	
 	UserResponse userResponse=new UserResponse();
 	ErrorResponse errorResponse=new ErrorResponse();
@@ -184,7 +193,7 @@ public class TaskController
 		}
 	}
 	
-	@RequestMapping(value="deleteScraper",method=RequestMethod.POST)
+	@RequestMapping(value="/deleteScraper",method=RequestMethod.POST)
 	public ResponseEntity<Response> deleteScraper(@RequestBody WebScraper scraper, HttpServletRequest request)
 	{
 		System.out.println("in deleteScraper: "+scraper);
@@ -208,6 +217,74 @@ public class TaskController
 		}
 		
 	}
+	
+	
+	
+	/**
+	 * @param colMap
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="/collaborator", method=RequestMethod.POST)
+	public ResponseEntity<Response> collaborator(@RequestBody Map<String, Object> colMap, HttpServletRequest request)
+	{
+		
+		Task task=taskService.getNoteById((int)colMap.get("tid"));
+		
+		User usertoshare=null;
+		
+		try
+		{
+			usertoshare= userRegController.getUserByEmail((String) colMap.get("emailToShare"));
+			
+			if(usertoshare == null)
+			{
+				errorResponse.setStatus(-2);
+				errorResponse.setMessage("email to share with not found");
+				
+				return new ResponseEntity<Response>(errorResponse, HttpStatus.OK);
+			}
+			
+		}
+		catch (Exception e) 
+		{
+			// TODO: handle exception
+			errorResponse.setStatus(-1);
+			errorResponse.setMessage("Some Problem have occured in getting user");
+			
+			return new ResponseEntity<Response>(errorResponse, HttpStatus.OK);
+			
+		}
+		
+		Collaborator collaborator=new Collaborator();
+		
+		collaborator.setTask(task);
+		collaborator.setNoteOwnerId(task.getUser().getId());
+		collaborator.setNoteSharedWith(usertoshare.getId());
+		
+		try
+		{
+			collaboratorService.addCollborator(collaborator);
+			
+			userResponse.setStatus(1);
+			userResponse.setMessage("Note Collaborated successfully");
+			
+			return new ResponseEntity<Response>(userResponse, HttpStatus.OK);
+		}
+		catch (Exception e) 
+		{
+			// TODO: handle exception
+			e.printStackTrace();
+			
+			errorResponse.setStatus(-1);
+			errorResponse.setMessage("Some Problem have occured while adding collaborator");
+			
+			return new ResponseEntity<Response>(errorResponse, HttpStatus.OK);
+			
+		}
+		
+	}
+	
 	
 	
 	/**

@@ -39,5 +39,11 @@ public class TaskService
 		return taskDao.getNotes(uid);
 		
 	}
+	
+	@Transactional(readOnly=true)
+	public Task getNoteById(int tid)
+	{
+		return taskDao.getNoteById(tid);
+	}
 
 }
