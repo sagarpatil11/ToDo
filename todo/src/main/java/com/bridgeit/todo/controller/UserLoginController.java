@@ -1,6 +1,7 @@
 package com.bridgeit.todo.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -219,5 +220,40 @@ public class UserLoginController
 			
 		return new ResponseEntity<TokenResponse>(tokenResponse,HttpStatus.OK);
 		
+	}
+	
+	
+	/**
+	 * @param tokenMap
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="/getTokenByUrl",method=RequestMethod.POST)
+	public ResponseEntity<Response> getTokenByUrl(@RequestBody Map<String, String> tokenMap,HttpServletRequest request,HttpServletResponse response)
+	{
+		System.out.println("tokenstr "+tokenMap.get("urlString"));
+		
+		String tokenurl= tokenMap.get("urlString");
+		
+		Token token=(Token) request.getSession().getAttribute(tokenurl);
+		
+		System.out.println("token:: "+token);
+		
+		User user= (User) request.getSession().getAttribute("userSession");
+		
+		if(token != null)
+		{	
+			userResponse.setStatus(5);
+			userResponse.setMessage("token received.Login successfull");
+			userResponse.setToken(token);
+			userResponse.setUser(user);
+			
+			return new ResponseEntity<Response>(userResponse, HttpStatus.OK);
+			
+		}
+		
+		
+		return null;
 	}
 }

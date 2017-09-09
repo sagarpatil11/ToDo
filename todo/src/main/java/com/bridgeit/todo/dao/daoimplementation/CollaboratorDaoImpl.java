@@ -1,5 +1,8 @@
 package com.bridgeit.todo.dao.daoimplementation;
 
+import java.util.List;
+
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +25,19 @@ public class CollaboratorDaoImpl implements CollaboratorDao
 		
 		session.save(collaborator);
 		
+	}
+
+	@Override
+	public List getColList(int uid) {
+		// TODO Auto-generated method stub
+		Session session= sessionFactory.getCurrentSession();
+		
+		Query query=session.createQuery("Select task from Collaborator where noteSharedWith=:id");
+		query.setParameter("id", uid);
+		
+		List colList= query.list();
+		
+		return colList;
 	}
 	
 }

@@ -10,5 +10,7 @@ public interface WebScraperDao
 	
 	public List<WebScraper> getWebScraper(int tid);
 	
+	public WebScraper getWebScraperByHostUrl(String hosturl);
+	
 	public void deleteScraper(int id);
 }

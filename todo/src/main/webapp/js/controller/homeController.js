@@ -134,8 +134,9 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService,file
 			console.log(response1);
 				if(response1.data.status == 1)
 				{
-						$scope.notesList=response1.data.list.reverse();
-						console.log("note added");
+					//	$scope.notesList=response1.data.list.reverse();
+					$scope.showNotes();	
+					console.log("note added");
 						
 				}
 				else if(response1.data.status == -4)
@@ -151,8 +152,8 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService,file
 						
 									homeService.addNote(noteData).then(function(resp){
 										console.log(resp.data);
-										$scope.notesList=resp.data.list.reverse();
-										
+										//$scope.notesList=resp.data.list.reverse();
+										$scope.showNotes();
 									})
 							}
 							else
@@ -194,8 +195,8 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService,file
 			
 			if(response1.data.status == 1)
 			{
-					$scope.notesList=response1.data.list.reverse();
-					
+					//$scope.notesList=response1.data.list.reverse();
+					$scope.showNotes();
 					console.log("note deleted");
 			}
 			else if(response1.data.status == -4)
@@ -212,8 +213,8 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService,file
 								homeService.addNote(noteData).then(function(resp){
 									console.log(resp.data);
 									
-									$scope.notesList=resp.data.list.reverse();
-									
+									//$scope.notesList=resp.data.list.reverse();
+									$scope.showNotes();
 								})
 						}
 						else
@@ -227,7 +228,7 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService,file
 			else
 			{
 				console.log(response1.data);
-				$state.go('login');
+				return;
 			}
 		
 		
@@ -307,7 +308,8 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService,file
 									console.log(response1);
 										if(response1.data.status == 1)
 										{
-												$scope.notesList=response1.data.list.reverse();
+												//$scope.notesList=response1.data.list.reverse();
+												$scope.showNotes();
 												console.log("delete scraper success");
 												
 												
@@ -325,8 +327,8 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService,file
 												
 															homeService.addNote(noteData).then(function(resp){
 																console.log("delete scraper success");
-																$scope.notesList=resp.data.list.reverse();
-																
+																//$scope.notesList=resp.data.list.reverse();
+																$scope.showNotes();
 															})
 													}
 													else

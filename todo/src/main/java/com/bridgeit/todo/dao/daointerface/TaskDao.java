@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.bridgeit.todo.model.Collaborator;
 import com.bridgeit.todo.model.Task;
+import com.bridgeit.todo.model.User;
 
 public interface TaskDao 
 {
@@ -13,7 +14,7 @@ public interface TaskDao
 	
 	public void deleteTask(int tid);
 	
-	public List<Task> getNotes(int uid);
+	public List<Task> getNotes(User user);
 	
 	public Task getNoteById(int tid);
 

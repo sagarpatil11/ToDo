@@ -8,9 +8,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class GoogleProfile 
 {
 	private String id;
-	private String name;
-	private List<Gmail> email;
-	private ProfileImage image;
+	private String displayName;
+	private List<Gmail> emails;
+	//private ProfileImage image;
 	
 	public String getId() {
 		return id;
@@ -21,29 +21,29 @@ public class GoogleProfile
 	}
 	
 	public String getName() {
-		return name;
+		return displayName;
 	}
 	
 	public void setName(String name) {
-		this.name = name;
+		this.displayName = name;
 	}
 	
 	public List<Gmail> getEmail() {
-		return email;
+		return emails;
 	}
 	
 	public void setEmail(List<Gmail> email) {
-		this.email = email;
+		this.emails = email;
 	}
 	
-	public ProfileImage getImage() {
+	/*public ProfileImage getImage() {
 		return image;
 	}
 	
 	public void setImage(ProfileImage image) {
 		this.image = image;
 	}
-	
+	*/
 	
 	
 	

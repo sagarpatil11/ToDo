@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.bridgeit.todo.dao.daointerface.TaskDao;
 import com.bridgeit.todo.model.Collaborator;
 import com.bridgeit.todo.model.Task;
+import com.bridgeit.todo.model.User;
 
 @Repository
 public class TaskDaoImpl implements TaskDao
@@ -50,12 +51,12 @@ public class TaskDaoImpl implements TaskDao
 		query.executeUpdate();
 	}
 	
-	public List<Task> getNotes(int uid)
+	public List<Task> getNotes(User user)
 	{
 		Session session=sessionFactory.getCurrentSession();
 		
-		Query query=session.createQuery("FROM Task where uid=:uid");
-		query.setParameter("uid", uid);
+		Query query=session.createQuery("FROM Task where user=:user");
+		query.setParameter("user", user);
 		
 		List<Task> tasklist= query.list();
 		

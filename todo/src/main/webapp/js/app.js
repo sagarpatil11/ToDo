@@ -30,6 +30,12 @@ var myApp=angular.module("todo",['ui.router','ngSanitize','ui.bootstrap'])
 					templateUrl:"templates/home.html",
 					controller:"archiveCtrl"
 			})
+			
+			.state("socialRedirect",{
+					url:"/socialRedirect",
+					templateUrl:"templates/socialRedirect.html",
+					controller:"socialLoginController"
+			})
 
 		 $urlRouterProvider.otherwise('/login');
 

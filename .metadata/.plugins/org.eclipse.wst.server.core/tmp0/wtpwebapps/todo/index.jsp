@@ -37,5 +37,7 @@
 	<script type="text/javascript" src="js/directive/imgupload.js"></script> 
 	<script type="text/javascript" src="js/controller/trashController.js"></script>
 	<script type="text/javascript" src="js/controller/archiveController.js"></script>
+	<script type="text/javascript" src="js/controller/socialLoginController.js"></script>
+	
 </html>
 

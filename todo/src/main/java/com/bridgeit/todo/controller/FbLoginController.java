@@ -3,17 +3,26 @@ package com.bridgeit.todo.controller;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
+import java.util.Map;
 
+import javax.jws.soap.SOAPBinding.Use;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bridgeit.todo.model.FbProfile;
 import com.bridgeit.todo.model.Token;
 import com.bridgeit.todo.model.User;
+import com.bridgeit.todo.responsemsg.ErrorResponse;
+import com.bridgeit.todo.responsemsg.Response;
+import com.bridgeit.todo.responsemsg.UserResponse;
 import com.bridgeit.todo.service.TokenService;
 import com.bridgeit.todo.service.UserRegService;
 import com.bridgeit.todo.socialutilty.FbLoginUtility;
@@ -38,6 +47,9 @@ public class FbLoginController
 	
 	@Autowired
 	TokenUtility tokenUtility;
+	
+	UserResponse userResponse=new UserResponse();
+	ErrorResponse errorResponse=new ErrorResponse();
 	
 	/**
 	 * this controller method redirects to the facebook login page
@@ -67,9 +79,10 @@ public class FbLoginController
 	/**
 	 * @param request
 	 * @param response
+	 * @throws IOException 
 	 */
 	@RequestMapping("/signin-facebook")
-	public void afterRedirect(HttpServletRequest request,HttpServletResponse response)
+	public void afterRedirect(HttpServletRequest request,HttpServletResponse response) throws IOException
 	{
 		System.out.println("fb login success");
 		
@@ -88,6 +101,8 @@ public class FbLoginController
 			
 			if(user == null)
 			{
+				System.out.println("new fb user");
+				
 				User newuser=new User();
 				newuser.setEmail(fbProfile.getEmail());
 				newuser.setFullname(fbProfile.getName());
@@ -104,9 +119,15 @@ public class FbLoginController
 				
 				request.getSession().setAttribute("userSession", fbuser);
 				
+				request.getSession().setAttribute("tokenObj", token);
+				
+				response.sendRedirect("http://localhost:8080/todo/#!/socialRedirect?token=tokenObj");
+				
 			}
 			else
-			{
+			{	
+				System.out.println("user already exits");
+				
 				Token token= tokenUtility.tokenGenerator();
 				
 				token.setUser(user);
@@ -114,9 +135,11 @@ public class FbLoginController
 				tokenService.saveToken(token);
 				
 				request.getSession().setAttribute("userSession", user);
+			
+				request.getSession().setAttribute("tokenObj", token);
+				
+				response.sendRedirect("http://localhost:8080/todo/#!/socialRedirect?token=tokenObj");
 			}
-			
-			
 			
 		} 
 		catch (UnsupportedEncodingException e) 
@@ -125,4 +148,7 @@ public class FbLoginController
 			e.printStackTrace();
 		}
 	}
+	
+	
+	
 }

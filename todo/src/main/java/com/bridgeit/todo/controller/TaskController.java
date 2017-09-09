@@ -1,5 +1,6 @@
 package com.bridgeit.todo.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -84,9 +85,9 @@ public class TaskController
 				webScraperService.saveWebScraper(webScraper);
 			}
 			
-			List taskList = taskService.getNotes(user.getId());
+		//	List taskList = taskService.getNotes(user.getId());
 			
-			userResponse.setList(taskList);
+			//userResponse.setList(taskList);
 			userResponse.setStatus(1);
 			userResponse.setMessage("Note added");
 			
@@ -123,25 +124,30 @@ public class TaskController
 		
 		WebScraper webScraper=webScraperService.createWebScraper(task.getDescription());
 		
-		task.setUser(user);
+		//task.setUser(user);
 		task.setEdited_date(new Date());
 		
+		System.out.println("update task"+task);
 		try 
 		{
 			taskService.updateNote(task);
 			
 			if(webScraper != null)
 			{
-				
-				webScraper.setTid(task.getTid());
-				webScraperService.saveWebScraper(webScraper);
-			}
+				if(webScraperService.getScraperByHostUrl(webScraper.getHosturl()) == null)
+				{	
+					System.out.println("add scarper in update");
+					
+					webScraper.setTid(task.getTid());
+					webScraperService.saveWebScraper(webScraper);
 			
-			List taskList = taskService.getNotes(user.getId());
+				}
+			}
+		//	List taskList = taskService.getNotes(user.getId());
 			
 			userResponse.setStatus(1);
 			userResponse.setMessage("Note updated successfully");
-			userResponse.setList(taskList);
+		//	userResponse.setList(taskList);
 			
 			
 			return new ResponseEntity<Response>(userResponse, HttpStatus.OK);
@@ -176,9 +182,9 @@ public class TaskController
 		{
 			taskService.deleteTask( tid);
 			
-			List taskList = taskService.getNotes(user.getId());
+		//	List taskList = taskService.getNotes(user.getId());
 			
-			userResponse.setList(taskList);
+		//	userResponse.setList(taskList);
 			userResponse.setStatus(1);
 			userResponse.setMessage("Note deleted");
 			
@@ -186,6 +192,8 @@ public class TaskController
 		} 
 		catch (Exception e) {
 			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
 			errorResponse.setStatus(-1);
 			errorResponse.setMessage("Note is not deleted");
 			
@@ -262,6 +270,8 @@ public class TaskController
 		collaborator.setNoteOwnerId(task.getUser().getId());
 		collaborator.setNoteSharedWith(usertoshare.getId());
 		
+		System.out.println("\nColl task"+collaborator);
+		
 		try
 		{
 			collaboratorService.addCollborator(collaborator);
@@ -301,20 +311,33 @@ public class TaskController
 	
 		try 
 		{
-			List taskList = taskService.getNotes(user.getId());
+			List taskList = taskService.getNotes(user);
 			
-			List<Task> list=addScraperInNote(taskList);
+			System.out.println("main list"+taskList);
+			
+			List colList = collaboratorService.getColList(user.getId());
+			System.out.println("col list"+colList);
+
+			
+			List<Task> finalList=new ArrayList();
+			
+			finalList.addAll(colList);
+			finalList.addAll(taskList);
+			
+			List<Task> list=addScraperInNote(finalList);
 			
 			userResponse.setList(list);
 			userResponse.setStatus(1);
 			userResponse.setMessage("Notes list");
 			
 			userResponse.setUser(user);
-			
+
 			return new ResponseEntity<Response>(userResponse, HttpStatus.OK);
 		} 
 		catch (Exception e) {
 			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
 			errorResponse.setStatus(-1);
 			errorResponse.setMessage("There is some problem in getting list of notes");
 			

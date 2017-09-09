@@ -11,8 +11,10 @@ import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 
+import com.bridgeit.todo.model.FbProfile;
 import com.bridgeit.todo.model.GoogleAccessToken;
 import com.bridgeit.todo.model.GoogleProfile;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
@@ -84,9 +86,11 @@ public class GoogleLoginUtility
 		catch (Exception e) 
 		{
 			// TODO: handle exception
+			e.printStackTrace();
+			System.out.println("error in getting google accesstoken");
 		}
 		
-		System.out.println("accesstoken"+googleAccessToken);
+		System.out.println("googleaccesstoken "+googleAccessToken);
 		
 		restCall.close();
 		
@@ -94,7 +98,7 @@ public class GoogleLoginUtility
 	}
 	
 	
-	public GoogleProfile getUserProfile(String accessToken)
+	public JsonNode getUserProfile(String accessToken)
 	{ 
 		String gmail_user_url= "https://www.googleapis.com/plus/v1/people/me";
 		
@@ -107,10 +111,27 @@ public class GoogleLoginUtility
 		System.out.println("header"+headerAuth);
 		Response response = target.request().header("Authorization", headerAuth).accept(MediaType.APPLICATION_JSON).get();
 		
-		GoogleProfile profile = (GoogleProfile) response.readEntity(GoogleProfile.class);
+		System.out.println("get profile");
+		
+		String profile = response.readEntity(String.class);
+		
+		ObjectMapper objectMapper=new ObjectMapper();
+		
+		JsonNode googleProfile=null;
+		
+		try 
+		{
+			googleProfile=objectMapper.readTree(profile);
+		} 
+		catch (Exception e) 
+		{
+			// TODO: handle exception
+			e.printStackTrace();
+		}
 		restCall.close();
 		
-		System.out.println(profile.getEmail().get(0).getValue());
-		return profile;
+		System.out.println("googleprofile "+googleProfile);
+		//System.out.println(googleProfile.get(fieldName));
+		return googleProfile;
 	}
 }

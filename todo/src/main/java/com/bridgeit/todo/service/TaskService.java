@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.bridgeit.todo.dao.daointerface.TaskDao;
 import com.bridgeit.todo.model.Task;
+import com.bridgeit.todo.model.User;
 
 @Service
 public class TaskService 
@@ -34,9 +35,9 @@ public class TaskService
 	}
 	
 	@Transactional(readOnly=true)
-	public List<Task> getNotes(int uid)
+	public List<Task> getNotes(User user)
 	{
-		return taskDao.getNotes(uid);
+		return taskDao.getNotes(user);
 		
 	}
 	

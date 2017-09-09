@@ -32,35 +32,38 @@ public class WebScraperService
 				
 				System.out.println("url: "+url);
 				
-				URI uri=new URI(url);
+				if(url != null)
+				{
+					URI uri=new URI(url);
 				
-				String hostname=uri.getHost();
+					String hostname=uri.getHost();
 				
-				String title=null;
-				String imgurl=null;
+					String title=null;
+					String imgurl=null;
 				
-				Document document=Jsoup.connect(url).get();
+					Document document=Jsoup.connect(url).get();
 				
-				Elements ogTitle=document.select("meta[property=og:title]");
-				Elements ogImage=document.select("meta[property=og:image]");
+					Elements ogTitle=document.select("meta[property=og:title]");
+					Elements ogImage=document.select("meta[property=og:image]");
 				
-				if (ogTitle != null) {
-					title = ogTitle.attr("content");
-				} else {
-					title = document.text();
-				}
+						if (ogTitle != null) {
+							title = ogTitle.attr("content");
+						} else {
+							title = document.text();
+						}
 
-//				metaOgImage = document.select("meta[property=og:image]");
-				if (ogImage != null) {
-					imgurl = ogImage.attr("content");
-				}
+						//				metaOgImage = document.select("meta[property=og:image]");
+						if (ogImage != null) {
+							imgurl = ogImage.attr("content");
+						}
 
-				webScraper = new WebScraper();
-				webScraper.setTitle(title);
-				webScraper.setImgurl(imgurl);
-				webScraper.setHostname(hostname);
-				webScraper.setHosturl(url);
-			}
+						webScraper = new WebScraper();
+						webScraper.setTitle(title);
+						webScraper.setImgurl(imgurl);
+						webScraper.setHostname(hostname);
+						webScraper.setHosturl(url);
+				}
+			}	
 		}
 		catch (Exception e) 
 		{
@@ -86,6 +89,12 @@ public class WebScraperService
 	public void deleteScraper(int id)
 	{
 		webScraperDao.deleteScraper(id);
+	}
+	
+	@Transactional(readOnly=true)
+	public WebScraper getScraperByHostUrl(String url)
+	{
+		return webScraperDao.getWebScraperByHostUrl(url);
 	}
 
 }

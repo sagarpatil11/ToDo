@@ -11,7 +11,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bridgeit.todo.model.GoogleAccessToken;
 import com.bridgeit.todo.model.GoogleProfile;
+import com.bridgeit.todo.model.Token;
+import com.bridgeit.todo.model.User;
+import com.bridgeit.todo.responsemsg.ErrorResponse;
+import com.bridgeit.todo.responsemsg.UserResponse;
+import com.bridgeit.todo.service.TokenService;
+import com.bridgeit.todo.service.UserRegService;
 import com.bridgeit.todo.socialutilty.GoogleLoginUtility;
+import com.bridgeit.todo.token.TokenUtility;
+import com.fasterxml.jackson.databind.JsonNode;
 
 /**
  * @author sagar
@@ -24,7 +32,17 @@ public class GoogleLoginController
 	@Autowired
 	GoogleLoginUtility googleLoginUtility;
 	
+	@Autowired
+	UserRegService userRegService;
 	
+	@Autowired
+	TokenService tokenService;
+	
+	@Autowired
+	TokenUtility tokenUtility;
+	
+	UserResponse userResponse=new UserResponse();
+	ErrorResponse errorResponse=new ErrorResponse();
 	
 	/**
 	 * @param request
@@ -60,11 +78,67 @@ public class GoogleLoginController
 		
 		String code=request.getParameter("code");
 		
-		GoogleAccessToken googleAccessToken=googleLoginUtility.getAccessToken(code);
+		try
+		{
 		
-		GoogleProfile profile=googleLoginUtility.getUserProfile(googleAccessToken.getAccess_token());
+				GoogleAccessToken googleAccessToken=googleLoginUtility.getAccessToken(code);
 		
-		System.out.println(profile);
+				JsonNode googleprofile=googleLoginUtility.getUserProfile(googleAccessToken.getAccess_token());
+		
+			//	System.out.println(profile);
+				System.out.println(googleprofile.get("displayName").asText());
+				JsonNode emailNode= googleprofile.get("emails");
+				System.out.println(emailNode.get(0).get("value").asText());
+				
+				User user=userRegService.getUserByEmail(emailNode.get(0).get("value").asText());
+				
+				if(user == null)
+				{
+					System.out.println("new fb user");
+					
+					User newuser=new User();
+					newuser.setEmail(emailNode.get(0).get("value").asText());
+					newuser.setFullname(googleprofile.get("displayName").asText());
+					
+					userRegService.userRegService(newuser);
+					
+					User gmailuser=userRegService.getUserByEmail(emailNode.get(0).get("value").asText());
+					
+					Token token= tokenUtility.tokenGenerator();
+						
+					token.setUser(gmailuser);
+					
+					tokenService.saveToken(token);
+					
+					request.getSession().setAttribute("userSession", gmailuser);
+					
+					request.getSession().setAttribute("tokenObj", token);
+					
+					response.sendRedirect("http://localhost:8080/todo/#!/socialRedirect?token=tokenObj");
+					
+				}
+				else
+				{	
+					System.out.println("user already exits");
+					
+					Token token= tokenUtility.tokenGenerator();
+					
+					token.setUser(user);
+					
+					tokenService.saveToken(token);
+					
+					request.getSession().setAttribute("userSession", user);
+				
+					request.getSession().setAttribute("tokenObj", token);
+					
+					response.sendRedirect("http://localhost:8080/todo/#!/socialRedirect?token=tokenObj");
+				}
+		}
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			// TODO: handle exception
+		}
 	}
 	
 }

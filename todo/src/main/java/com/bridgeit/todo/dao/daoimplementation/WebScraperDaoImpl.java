@@ -54,4 +54,18 @@ public class WebScraperDaoImpl implements WebScraperDao
 		
 	}
 
+	@Override
+	public WebScraper getWebScraperByHostUrl(String hosturl) 
+	{
+		// TODO Auto-generated method stub
+		Session session= sessionFactory.getCurrentSession();
+		
+		Query query= session.createQuery("from WebScraper where hosturl=:url");
+		query.setParameter("url", hosturl);
+		
+		WebScraper webScraper=(WebScraper) query.uniqueResult();
+		
+		return webScraper;
+	}
+
 }
