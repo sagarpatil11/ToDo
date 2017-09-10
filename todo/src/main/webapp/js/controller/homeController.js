@@ -39,6 +39,13 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService,file
 					'padding-left': '15px'
 			}
 			
+			$scope.pinimg={
+					'position': 'absolute',
+					'z-index': '2',
+		    		'margin-left': '78%',
+		    		'margin-top': '5px'
+			}
+			
 			$scope.col2="col-lg-2";
 			$scope.showdiv="col-lg-4 col-md-6 col-sm-12 col-xs-12 item";
 			
@@ -68,6 +75,13 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService,file
 					'font-weight': 'bold',
 					'font-family': "'Roboto',arial,sans-serif",
 					'padding-left': '142px'
+			}
+			
+			$scope.pinimg={
+					'position': 'absolute',
+					'z-index': '2',
+		    		'margin-left': '89%',
+		    		'margin-top': '5px'
 			}
 			
 			$scope.col2="";

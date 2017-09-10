@@ -13,7 +13,7 @@
 			  						<div  id="notes" ng-style="{'background-color':data.color}" ng-mouseover="pinImg=true" ng-mouseleave="pinImg=false">
 			  								
 			  								<div ng-click="openPopup(data)" ng-if="data.image" >
-			  										<a ng-show="pinImg" id="pinimg" href="" ng-click="doPin(data)"><img alt="pin" src="image/pinnedwithborder.svg"></a>
+			  										<a ng-show="pinImg" ng-style="pinimg" href="" ng-click="doPin(data)"><img alt="pin" src="image/pinnedwithborder.svg"></a>
 			  										<img style="width: 100%" ng-src="{{data.image}}" />
 			  										
 			  								</div>
@@ -73,6 +73,7 @@
      											</div>	
      											
 												<a href="" id="img2" ng-click="doArchive(data)"><img alt="" src="image/archieve1.svg"></a>
+												
 												<a href="" id="img2" ng-click="shareOnFb(data)"><img alt=""src="image/share.png"></a>
 												
 												<div class="dropdown"><a href="" id="img2" data-toggle="dropdown" class="dropdown-toggle"><img alt="" src="image/list.png"></a>

@@ -7,14 +7,20 @@
 			  				<div ng-class="showdiv" ng-repeat="data in notesList | filter: search">
 			  					
 			  					
-			  						<div ng-if="data.isArchive == 'true' && data.isTrash != 'true'" id="listnotes" ng-style="{'background-color':data.color}">
-			  								<div ng-if="data.image"><img style="width: 100%" ng-src="{{data.image}}" /></div>
+			  						<div ng-if="data.isArchive == 'true' && data.isTrash != 'true'" id="listnotes" ng-style="{'background-color':data.color}" ng-mouseover="pinImg=true" ng-mouseleave="pinImg=false">
+			  								
+			  								<div ng-click="openPopup(data)" ng-if="data.image" >
+			  										<a ng-show="pinImg" ng-style="pinimg" href="" ng-click="doPin(data)"><img alt="pin" src="image/pinnedwithborder.svg"></a>
+			  										<img style="width: 100%" ng-src="{{data.image}}" />
+			  										
+			  								</div>
+			  								
 			  								<div id="title" ng-click="openPopup(data)" ng-bind-html="data.title">
 												<a href=""><span aria-hidden="true"><img alt="pin" src="image/icons8-Pin-20.png"></span></a>
 										
 											</div>
 											
-											<div id="pin">
+											<div id="pin" ng-if='!data.image'>
 												<a href="" ng-click="doPinFromArchive(data)"><img alt="pin" src="image/pin.svg"></a>
 											</div>
 							
@@ -35,9 +41,11 @@
      												</ul>
      											</div>
 												
-												<!-- <a href="" id="img2"><img alt=""src="image/collaborator.svg"></a>
+												<a href="" id="img2" ng-click="collaboratorPopup(data)"><img alt=""src="image/collaborator.svg"></a>
 												
-												<a href="" id="img2"><img alt=""src="image/addimage.svg"></a> -->
+												<a href="" id="img2" ng-click="uploadImage(data)"><img alt=""src="image/addimage.svg"></a>
+												<input type="file" ng-file-select="onFileSelect($files)" ng-model="uploadImg" id="imageId" style="display: none">
+												
 												
 												<div class="dropup"><a href="" id="img2" data-toggle="dropdown" class="dropdown-toggle"><img alt="" src="image/color.svg"></a>
 													<div class="dropdown-menu" id="colordropup">
@@ -54,6 +62,8 @@
      											</div>	
      											
 												<a href="" id="img2" ng-click="doUnArchive(data)"><img alt=""src="image/unarchive.svg"></a>
+												
+												<a href="" id="img2" ng-click="shareOnFb(data)"><img alt=""src="image/share.png"></a>
 												
 												<div class="dropdown"><a href="" id="img2" data-toggle="dropdown" class="dropdown-toggle"><img alt="" src="image/list.png"></a>
 													<ul class="dropdown-menu" id="dropdown-more">
