@@ -1,7 +1,5 @@
 package com.bridgeit.todo.dao.daoimplementation;
 
-import javax.servlet.http.HttpSession;
-
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -52,7 +50,11 @@ public class UserRegDaoImpl implements UserRegDao
 		
 		LogicalExpression andexp=Restrictions.and(emailid, pwd);
 		
-		criteria.add(andexp);
+		Criterion status=Restrictions.eq("isActive", "true");
+		
+		LogicalExpression andexp1=Restrictions.and(andexp, status);
+
+		criteria.add(andexp1);
 		
 		User user=(User) criteria.uniqueResult();
 		
@@ -102,6 +104,19 @@ public class UserRegDaoImpl implements UserRegDao
 		User user=(User) query.uniqueResult();
 		
 		return user;
+	}
+
+
+	@Override
+	public int activateUserAccount(String email) 
+	{
+		// TODO Auto-generated method stub
+		Session session=sessionFactory.getCurrentSession();
+		
+		Query query=session.createQuery("update User set isActive= 'true' where email=:email");
+		query.setParameter("email", email);
+		
+		return query.executeUpdate();
 	}
 	
 }

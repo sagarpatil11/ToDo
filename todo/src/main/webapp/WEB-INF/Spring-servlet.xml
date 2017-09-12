@@ -99,5 +99,6 @@
  		<bean id="fbLoginUtility" class="com.bridgeit.todo.socialutilty.FbLoginUtility" />
  		
  		<bean id="googleLoginUtility" class="com.bridgeit.todo.socialutilty.GoogleLoginUtility" />
-
+		
+		<bean id="emailVarification" class="com.bridgeit.todo.validation.EmailVarification"></bean>
 </beans>

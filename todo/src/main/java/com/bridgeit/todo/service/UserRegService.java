@@ -53,4 +53,11 @@ public class UserRegService
 	{
 		userRegDao.deleteToken(accessToken);
 	}
+	
+	@Transactional
+	public int activateUserAccount(String email)
+	{
+		return userRegDao.activateUserAccount(email);
+	}
+	
 }

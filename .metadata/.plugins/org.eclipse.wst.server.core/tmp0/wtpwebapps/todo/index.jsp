@@ -38,6 +38,7 @@
 	<script type="text/javascript" src="js/controller/trashController.js"></script>
 	<script type="text/javascript" src="js/controller/archiveController.js"></script>
 	<script type="text/javascript" src="js/controller/socialLoginController.js"></script>
+	<script type="text/javascript" src="js/controller/forgetPasswordController.js"></script>
 	
 </html>
 

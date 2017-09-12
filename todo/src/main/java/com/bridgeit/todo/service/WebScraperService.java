@@ -69,6 +69,7 @@ public class WebScraperService
 		{
 			// TODO: handle exception
 			e.printStackTrace();
+			
 		}
 		return webScraper;
 	}

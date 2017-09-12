@@ -94,7 +94,7 @@ public class GoogleLoginController
 				
 				if(user == null)
 				{
-					System.out.println("new fb user");
+					System.out.println("new gmail user");
 					
 					User newuser=new User();
 					newuser.setEmail(emailNode.get(0).get("value").asText());

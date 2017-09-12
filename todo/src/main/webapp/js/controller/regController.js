@@ -19,7 +19,7 @@ myApp.controller("regCtrl", function($scope,$state,regService){
 			console.log(response);
 			
 			if(response.data.status == 1){
-				$state.go("login");
+				$state.go("activateUser");
 			}
 			else{
 				$state.go("register");

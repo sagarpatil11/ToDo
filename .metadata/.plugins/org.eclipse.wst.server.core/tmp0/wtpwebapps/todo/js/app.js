@@ -36,6 +36,18 @@ var myApp=angular.module("todo",['ui.router','ngSanitize','ui.bootstrap'])
 					templateUrl:"templates/socialRedirect.html",
 					controller:"socialLoginController"
 			})
+			
+			.state("activateUser",{
+					url:"/activatingUser",
+					templateUrl:"templates/userRegLanding.html",
+				
+			})
+			
+			.state("forgetPassword",{
+					url:"/forgetPassword",
+					templateUrl:"templates/forgetPassword.html",
+					controller:""
+			})
 
 		 $urlRouterProvider.otherwise('/login');
 

@@ -16,4 +16,6 @@ public interface UserRegDao
 	public void deleteToken(String accessToken);
 	
 	public User getUserByEmail(String email);
+	
+	public int activateUserAccount(String email);
 }

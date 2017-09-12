@@ -20,7 +20,7 @@ public class TaskDaoImpl implements TaskDao
 	@Autowired
 	SessionFactory sessionFactory;
 	
-	public int  addNote(Task task) 
+	public int addNote(Task task) 
 	{
 		// TODO Auto-generated method stub
 		Session session=sessionFactory.getCurrentSession();

@@ -31,6 +31,8 @@ public class User implements Serializable
 	
 	private String password;
 	
+	private String isActive;
+	
 	public User() 
 	{
 		
@@ -66,11 +68,19 @@ public class User implements Serializable
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	public String getIsActive() {
+		return isActive;
+	}
+
+	public void setIsActive(String isActive) {
+		this.isActive = isActive;
+	}
 
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", fullname=" + fullname + ", email=" + email + ", mobile=" + mobile + ", password="
-				+ password + "]";
+				+ password + ", isActive=" + isActive + "]";
 	}
 	
 	
