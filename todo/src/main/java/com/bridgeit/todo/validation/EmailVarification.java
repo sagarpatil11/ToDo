@@ -49,8 +49,8 @@ public class EmailVarification
 			message.setSubject("Activate Fundoo Account");
 			
 			message.setContent("Dear user,"
-				+ "\n\n click on the below link to activate your Fundoo Notes account.","text/html");
-			message.setContent("\n\n <a href='http://localhost:8080/todo/activateUser?email="+useremail+"'>Fundoo Notes</a>","text/html");
+				+ "\n\n click on the below link to activate your Fundoo Notes account."
+				+ "\n\n <a href='http://localhost:8080/todo/activateUser?email="+useremail+"'>Fundoo Notes</a>","text/html");
 			
 
 			Transport.send(message);
@@ -102,8 +102,8 @@ public class EmailVarification
 			message.setSubject("Activate Fundoo Account");
 			
 			message.setContent("Dear user,"
-				+ "\n\n click on the below link to reset the password.","text/html");
-			message.setContent("\n\n <a href='http://localhost:8080/todo/activateUser?email="+useremail+"'>Fundoo Notes</a>","text/html");
+				+ "\n\n click on the below link to reset the password."
+				+	"\n\n <a href='http://localhost:8080/todo/redirectToResetPassword?email="+useremail+"'>Reset Password</a>","text/html");
 			
 
 			Transport.send(message);

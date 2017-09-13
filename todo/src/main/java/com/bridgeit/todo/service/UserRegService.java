@@ -1,8 +1,5 @@
 package com.bridgeit.todo.service;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -58,6 +55,12 @@ public class UserRegService
 	public int activateUserAccount(String email)
 	{
 		return userRegDao.activateUserAccount(email);
+	}
+	
+	@Transactional
+	public int resetPassword(String newPwd,String email)
+	{
+		return userRegDao.resetPassword(newPwd, email);
 	}
 	
 }

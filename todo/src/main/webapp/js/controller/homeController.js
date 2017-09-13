@@ -812,8 +812,9 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService,file
 				console.log(response1);
 					if(response1.data.status == 1)
 					{
-							$scope.notesList=response1.data.list.reverse();
-							console.log("note of copy success");
+							/*$scope.notesList=response1.data.list.reverse();*/
+							$scope.showNotes();
+							console.log("make copy success:: "+response1.data);
 							
 							
 					}
@@ -830,8 +831,8 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService,file
 							
 										homeService.addNote(noteData).then(function(resp){
 											console.log(resp.data);
-											$scope.notesList=resp.data.list.reverse();
-											
+										/*	$scope.notesList=resp.data.list.reverse();*/
+											$scope.showNotes();
 										})
 								}
 								else
@@ -929,7 +930,7 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService,file
 	$scope.showNames=function(notelist)
 	{
 		var count=0;
-			for(var i=0;i < notelist.length-1;i++)
+			for(var i=0;i < notelist.length;i++)
 			{
 					if(notelist[i].isPinned == 'true')
 					{
@@ -939,11 +940,18 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService,file
 			
 			if(count > 0)
 			{
-				$scope.showname=true;
+				$scope.showOthers=true;
+				$scope.showPinned=true;
+			}
+			else if(count == notelist.length)
+			{
+				$scope.showOthers=false;
+				$scope.showPinned=true;
 			}
 			else
 			{
-				$scope.showname=false;
+				$scope.showOthers=false;
+				$scope.showPinned=false;
 			}
 	}
 	

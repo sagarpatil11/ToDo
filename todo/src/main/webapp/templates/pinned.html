@@ -5,7 +5,7 @@
 		
 			  			
 			  			 <div id="maindiv"> 
-			  				<div ng-show="showname" ng-style="pinned1"> Pinned</div>
+			  				<div ng-show="showPinned" ng-style="pinned1"> Pinned</div>
 			  				
 			  				<div ng-class="showdiv" ng-repeat="data in notesList | filter: search" ng-if="data.isArchive != 'true' && data.isTrash != 'true' && data.isPinned == 'true'">
 			  					

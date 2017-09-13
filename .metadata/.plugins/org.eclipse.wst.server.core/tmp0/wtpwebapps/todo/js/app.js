@@ -46,7 +46,18 @@ var myApp=angular.module("todo",['ui.router','ngSanitize','ui.bootstrap'])
 			.state("forgetPassword",{
 					url:"/forgetPassword",
 					templateUrl:"templates/forgetPassword.html",
-					controller:""
+					controller:"forgetPasswordCtrl"
+			})
+			
+			.state("forgetPwdLanding",{
+					url:"/forgetPwdLanding",
+					templateUrl:"templates/forgetPwdLanding.html",
+			})
+			
+			.state("resetPassword",{
+					url:"/resetPassword",
+					templateUrl:"templates/resetPassword.html",
+					controller:"forgetPasswordCtrl"
 			})
 
 		 $urlRouterProvider.otherwise('/login');

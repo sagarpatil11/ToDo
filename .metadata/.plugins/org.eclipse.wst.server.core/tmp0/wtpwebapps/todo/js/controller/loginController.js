@@ -2,12 +2,14 @@ myApp.controller( 'loginCtrl',function($scope, $state, loginService)
 {
 	$scope.signin = function () 
 	{
+		console.log("in signin",loginService);
+		
 		var user={};
 		
 		user.email=$scope.email;
 		user.password=$scope.password;
 		
-		var httpObj = loginService.login(user);
+		var httpObj=loginService.login(user);
 		
 		httpObj.then(function(response)
 		{
@@ -57,6 +59,7 @@ myApp.service("loginService", function($http){
 	console.log("in loginservice");
 	
 	this.login=function(user){
+		console.log("in service login");
 		return $http({
 			url:"login",
 			method:"post",

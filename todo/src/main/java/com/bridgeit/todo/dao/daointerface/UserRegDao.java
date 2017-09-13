@@ -18,4 +18,6 @@ public interface UserRegDao
 	public User getUserByEmail(String email);
 	
 	public int activateUserAccount(String email);
+	
+	public int resetPassword(String newPwd, String email);
 }

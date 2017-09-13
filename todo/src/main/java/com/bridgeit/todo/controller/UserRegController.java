@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -97,9 +98,15 @@ public class UserRegController
 				
 				userRegService.userRegService(user);
 				
-				request.getSession().setAttribute("userEmail", user.getEmail());
+				//request.getSession().invalidate();
 				
-				emailVarification.sendMailForVarification(user.getEmail(), "userEmail");
+				String randomStr= RandomStringUtils.randomAlphanumeric(9);
+				
+				System.out.println("randomstr::"+randomStr);
+				
+				request.getSession().setAttribute(randomStr, user.getEmail());
+				
+				emailVarification.sendMailForVarification(user.getEmail(), randomStr);
 				
 				System.out.println("user add");
 				userResponse.setStatus(1);
@@ -210,6 +217,8 @@ public class UserRegController
 		return userRegService.getUserByEmail(email);
 	}
 	
+	
+	
 	/**
 	 * this method is used to activate user's account
 	 * @param email
@@ -253,17 +262,24 @@ public class UserRegController
 	}
 	
 	
-	@RequestMapping(value="/forgetPassword")
+	/**
+	 * @param map
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="/forgetPassword",method=RequestMethod.POST)
 	public ResponseEntity<Response> forgetPassword(@RequestBody Map<String, String> map, HttpServletRequest request)
 	{
 		String email=map.get("userEmail");
+		
+		System.out.println("in forgetpwd:email is::"+email);
 		
 		request.getSession().setAttribute("emailForResetPwd", email);
 		
 		try
 		{
 		
-			emailVarification.sendMailForVarification(email, "emailForResetPwd");
+			emailVarification.sendEmailToResetPassword(email, "emailForResetPwd");
 		
 			userResponse.setStatus(7);
 			userResponse.setMessage("email sent successfully");
@@ -281,6 +297,11 @@ public class UserRegController
 		
 	}
 	
+	/**
+	 * @param email
+	 * @param request
+	 * @param response
+	 */
 	@RequestMapping(value="/redirectToResetPassword")
 	public void redirectToResetPassword(@RequestParam String email,HttpServletRequest request,HttpServletResponse response)
 	{
@@ -291,15 +312,67 @@ public class UserRegController
 		{
 			try 
 			{
-				response.sendRedirect("http://localhost:8080/todo/#!/login");
+				response.sendRedirect("http://localhost:8080/todo/#!/resetPassword");
 			} 
 			catch (IOException e) 
 			{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				System.out.println("worng email key");
 			}
 		}
 		
 	}
+	
+	@RequestMapping(value="/resetPassword",method=RequestMethod.POST)
+	public ResponseEntity<Response> resetPassword(@RequestBody Map<String, String> pwdmap,HttpServletRequest request)
+	{
+		String newPassword= pwdmap.get("newPassword");
+		
+		String encriptedpwd=securePassword.getSecurePassword(newPassword);
+		
+		System.out.println("new pwd::"+newPassword+"::"+encriptedpwd);
+		
+		String emailToChangePwd=(String) request.getSession().getAttribute("emailForResetPwd");
+		
+		try
+		{
+			int result=userRegService.resetPassword(encriptedpwd, emailToChangePwd);
+			
+			if(result == 1)
+			{
+				System.out.println("reset password successfull");
+				
+				userResponse.setStatus(8);
+				userResponse.setMessage("Reset Password successfull");
+				
+				return new ResponseEntity<Response>(userResponse, HttpStatus.OK);
+			}
+			else
+			{
+					System.out.println("Reset password unsucessfull");
+					
+					errorResponse.setStatus(-8);
+					errorResponse.setMessage("Reset password unsucessfull");
+					
+					return new ResponseEntity<Response>(errorResponse, HttpStatus.OK);
+					
+			}
+			
+		}
+		catch (Exception e) 
+		{
+			// TODO: handle exception
+			errorResponse.setStatus(-8);
+			errorResponse.setMessage("Reset password unsucessfull");
+			
+			return new ResponseEntity<Response>(errorResponse, HttpStatus.OK);
+			
+		}
+		
+	}
+	
+	
+	
 	
 }

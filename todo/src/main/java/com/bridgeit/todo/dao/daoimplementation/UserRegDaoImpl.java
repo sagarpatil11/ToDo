@@ -118,5 +118,20 @@ public class UserRegDaoImpl implements UserRegDao
 		
 		return query.executeUpdate();
 	}
+
+
+	@Override
+	public int resetPassword(String newPwd, String email) 
+	{
+		// TODO Auto-generated method stub
+		Session session=sessionFactory.getCurrentSession();
+		
+		Query query=session.createQuery("update User set password=:newPwd where email=:email");
+		query.setParameter("newPwd", newPwd);
+		query.setParameter("email", email);
+		
+		return query.executeUpdate();
+		
+	}
 	
 }

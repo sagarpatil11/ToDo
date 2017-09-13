@@ -49,3 +49,15 @@
 2017-09-12 13:22:06 DEBUG UserRegController:96 - User is added
 2017-09-12 16:00:40 DEBUG UserRegController:55 - In userRegistration method
 2017-09-12 16:00:47 DEBUG UserRegController:96 - User is added
+2017-09-13 11:04:00 DEBUG UserRegController:69 - In userRegistration method
+2017-09-13 11:04:05 DEBUG UserRegController:110 - User is added
+2017-09-13 11:59:59 DEBUG UserRegController:69 - In userRegistration method
+2017-09-13 12:00:07 DEBUG UserRegController:110 - User is added
+2017-09-13 16:15:42 DEBUG UserRegController:69 - In userRegistration method
+2017-09-13 16:15:46 DEBUG UserRegController:110 - User is added
+2017-09-13 16:34:19 DEBUG UserRegController:69 - In userRegistration method
+2017-09-13 16:34:23 DEBUG UserRegController:110 - User is added
+2017-09-13 16:41:20 DEBUG UserRegController:69 - In userRegistration method
+2017-09-13 16:41:24 DEBUG UserRegController:112 - User is added
+2017-09-13 17:36:02 DEBUG UserRegController:70 - In userRegistration method
+2017-09-13 17:36:08 DEBUG UserRegController:117 - User is added
