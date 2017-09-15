@@ -99,6 +99,8 @@ public class GoogleLoginController
 					User newuser=new User();
 					newuser.setEmail(emailNode.get(0).get("value").asText());
 					newuser.setFullname(googleprofile.get("displayName").asText());
+					newuser.setProfileImage(googleprofile.get("image").get("url").asText());
+					newuser.setIsActive("true");
 					
 					userRegService.userRegService(newuser);
 					

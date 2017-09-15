@@ -106,6 +106,8 @@ public class FbLoginController
 				User newuser=new User();
 				newuser.setEmail(fbProfile.getEmail());
 				newuser.setFullname(fbProfile.getName());
+			//	newuser.setProfileImage(fbProfile.);
+				newuser.setIsActive("true");
 				
 				userRegService.userRegService(newuser);
 				

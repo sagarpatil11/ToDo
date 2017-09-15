@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -30,6 +31,10 @@ public class User implements Serializable
 	private String mobile;
 	
 	private String password;
+	
+	@Lob
+	@Column(columnDefinition="mediumblob")
+	private String profileImage;
 	
 	private String isActive;
 	
@@ -76,11 +81,19 @@ public class User implements Serializable
 	public void setIsActive(String isActive) {
 		this.isActive = isActive;
 	}
+	
+	public String getProfileImage() {
+		return profileImage;
+	}
+
+	public void setProfileImage(String profileImage) {
+		this.profileImage = profileImage;
+	}
 
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", fullname=" + fullname + ", email=" + email + ", mobile=" + mobile + ", password="
-				+ password + ", isActive=" + isActive + "]";
+				+ password + ", profileImage=" + profileImage + ", isActive=" + isActive + "]";
 	}
 	
 	

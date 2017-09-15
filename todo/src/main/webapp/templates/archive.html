@@ -10,7 +10,7 @@
 			  						<div ng-if="data.isArchive == 'true' && data.isTrash != 'true'" id="listnotes" ng-style="{'background-color':data.color}" ng-mouseover="pinImg=true" ng-mouseleave="pinImg=false">
 			  								
 			  								<div ng-click="openPopup(data)" ng-if="data.image" >
-			  										<a ng-show="pinImg" ng-style="pinimg" href="" ng-click="doPin(data)"><img alt="pin" src="image/pinnedwithborder.svg"></a>
+			  										<a ng-show="pinImg" ng-style="pinimg" href="" ng-click="doPinFromArchive(data)"><img alt="pin" src="image/pinnedwithborder.svg"></a>
 			  										<img style="width: 100%" ng-src="{{data.image}}" />
 			  										
 			  								</div>

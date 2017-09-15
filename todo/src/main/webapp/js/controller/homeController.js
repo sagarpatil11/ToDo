@@ -886,9 +886,10 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService,file
 			{
 				$scope.notesList=response1.data.list.reverse();
 				
-				$scope.username=response1.data.user.fullname;
-				$scope.email=response1.data.user.email;
-				
+				$scope.username= response1.data.user.fullname;
+				$scope.email= response1.data.user.email;
+				$scope.profileImg= response1.data.user.profileImage;
+ 				
 				$scope.showNames($scope.notesList);
 				
 			}
@@ -943,7 +944,7 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService,file
 				$scope.showOthers=true;
 				$scope.showPinned=true;
 			}
-			else if(count == notelist.length)
+			else if(count == notelist.length && notelist.length > 0)
 			{
 				$scope.showOthers=false;
 				$scope.showPinned=true;

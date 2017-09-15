@@ -27,10 +27,11 @@
 						src="image/grid.svg"></a></li>
 				<li><a href="" ng-show="listBtn" ng-click="listView()"><span aria-hidden="true"></span><img alt=""
 						src="image/list.svg"></a></li>
-				<li><div class="dropdown"><a href="" data-toggle="dropdown" class="dropdown-toggle" ><img id="userimg" src="image/usericon.png" ></a>
+				<li><div class="dropdown"><a href="" data-toggle="dropdown" class="dropdown-toggle" >
+					<!-- <img id="userimg" src="image/usericon.png" > --><img id="userimg" ng-src="{{profileImg}}" ></a>
 						<div class="dropdown-menu" id="profile-card">
 							<div style="margin: 15px 15px 15px 15px;"">
-								<img id="profileimg" alt="" src="image/usericon.png">
+								<img id="profileimg" alt="" ng-src="{{profileImg}}">
 								<div style="float: right;width: 145px;">
 									 <p style="font-weight: bold">{{username}}</p>
 									 <p>{{email}}</p> 
