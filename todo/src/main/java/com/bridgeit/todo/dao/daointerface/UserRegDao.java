@@ -20,4 +20,6 @@ public interface UserRegDao
 	public int activateUserAccount(String email);
 	
 	public int resetPassword(String newPwd, String email);
+	
+	public int saveProfilePic(String imgurl,String email);
 }

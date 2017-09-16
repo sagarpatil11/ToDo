@@ -133,5 +133,19 @@ public class UserRegDaoImpl implements UserRegDao
 		return query.executeUpdate();
 		
 	}
+
+
+	@Override
+	public int saveProfilePic(String imgurl, String email) 
+	{
+		// TODO Auto-generated method stub
+		Session session=sessionFactory.getCurrentSession();
+		
+		Query query=session.createQuery("update User set profileImage=:imgurl where email=:email");
+		query.setParameter("imgurl", imgurl);
+		query.setParameter("email", email);
+		
+		return query.executeUpdate();
+	}
 	
 }

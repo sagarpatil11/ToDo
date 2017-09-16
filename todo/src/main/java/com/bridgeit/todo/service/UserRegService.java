@@ -63,4 +63,10 @@ public class UserRegService
 		return userRegDao.resetPassword(newPwd, email);
 	}
 	
+	@Transactional
+	public int saveProfilePic(String imgurl,String email)
+	{
+		return userRegDao.saveProfilePic(imgurl, email);
+	}
+	
 }

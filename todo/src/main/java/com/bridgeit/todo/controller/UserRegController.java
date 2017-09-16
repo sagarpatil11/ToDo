@@ -324,6 +324,12 @@ public class UserRegController
 		
 	}
 	
+	
+	/**
+	 * @param pwdmap
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value="/resetPassword",method=RequestMethod.POST)
 	public ResponseEntity<Response> resetPassword(@RequestBody Map<String, String> pwdmap,HttpServletRequest request)
 	{
@@ -373,6 +379,51 @@ public class UserRegController
 	}
 	
 	
+	/**
+	 * @param picmap
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="/saveProfilePic")
+	public ResponseEntity<Response> saveProfilePic(@RequestBody Map<String, String> picmap,HttpServletRequest request)
+	{
+		String imgurl=picmap.get("profileImage");
+		System.out.println("imgurl::"+imgurl);
+		
+		User user= (User) request.getSession().getAttribute("userSession");
+		
+		try
+		{
+				int result=userRegService.saveProfilePic(imgurl, user.getEmail());
+
+				if(result == 1)
+				{
+						User updatedUser=userRegService.getUserByEmail(user.getEmail());
+						
+						userResponse.setStatus(10);
+						userResponse.setMessage("Profile Photo updated successfully");
+						userResponse.setUser(updatedUser);
+						
+						return new ResponseEntity<Response>(userResponse, HttpStatus.OK);
+				}
+				else
+				{
+					errorResponse.setStatus(-10);
+					errorResponse.setMessage("Error while updating Profile Photo");
+					
+					return new ResponseEntity<Response>(errorResponse, HttpStatus.OK);
+				}
+		}
+		catch (Exception e) 
+		{
+				// TODO: handle exception
+				errorResponse.setStatus(-10);
+				errorResponse.setMessage("Error while updating Profile Photo");
+			
+				return new ResponseEntity<Response>(errorResponse, HttpStatus.OK);
+		}
+	
+	}
 	
 	
 }

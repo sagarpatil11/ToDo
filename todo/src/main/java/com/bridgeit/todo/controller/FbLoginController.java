@@ -27,6 +27,7 @@ import com.bridgeit.todo.service.TokenService;
 import com.bridgeit.todo.service.UserRegService;
 import com.bridgeit.todo.socialutilty.FbLoginUtility;
 import com.bridgeit.todo.token.TokenUtility;
+import com.fasterxml.jackson.databind.JsonNode;
 
 /**
  * 
@@ -93,25 +94,25 @@ public class FbLoginController
 			String accessToken=fbLoginUtility.getAccessToken(code);
 			System.out.println("accessToken:"+accessToken);
 			
-			FbProfile fbProfile=fbLoginUtility.getFbProfile(accessToken);
+			JsonNode fbProfile=fbLoginUtility.getFbProfile(accessToken);
 			
-			//System.out.println("fbprofile::"+fbProfile);
+			System.out.println("fbprofile::"+fbProfile);
 			
-			User user=userRegService.getUserByEmail(fbProfile.getEmail());
+			User user=userRegService.getUserByEmail(fbProfile.get("email").asText());
 			
 			if(user == null)
 			{
 				System.out.println("new fb user");
 				
 				User newuser=new User();
-				newuser.setEmail(fbProfile.getEmail());
-				newuser.setFullname(fbProfile.getName());
-			//	newuser.setProfileImage(fbProfile.);
+				newuser.setEmail(fbProfile.get("email").asText());
+				newuser.setFullname(fbProfile.get("name").asText());
+				newuser.setProfileImage(fbProfile.get("picture").get("data").get("url").asText());
 				newuser.setIsActive("true");
 				
 				userRegService.userRegService(newuser);
 				
-				User fbuser=userRegService.getUserByEmail(fbProfile.getEmail());
+				User fbuser=userRegService.getUserByEmail(fbProfile.get("email").asText());
 				
 				Token token= tokenUtility.tokenGenerator();
 					
@@ -142,7 +143,7 @@ public class FbLoginController
 				
 				response.sendRedirect("http://localhost:8080/todo/#!/socialRedirect?token=tokenObj");
 			}
-			
+		
 		} 
 		catch (UnsupportedEncodingException e) 
 		{

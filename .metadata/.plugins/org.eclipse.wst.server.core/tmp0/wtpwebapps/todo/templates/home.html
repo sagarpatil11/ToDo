@@ -28,11 +28,12 @@
 				<li><a href="" ng-show="listBtn" ng-click="listView()"><span aria-hidden="true"></span><img alt=""
 						src="image/list.svg"></a></li>
 				<li><div class="dropdown"><a href="" data-toggle="dropdown" class="dropdown-toggle" >
-					<!-- <img id="userimg" src="image/usericon.png" > --><img id="userimg" ng-src="{{profileImg}}" ></a>
+					<img ng-if='profileImg == null' id="userimg" src="image/usericon.png" > <img ng-if='profileImg' id="userimg" ng-src="{{profileImg}}" ></a>
 						<div class="dropdown-menu" id="profile-card">
 							<div style="margin: 15px 15px 15px 15px;"">
-								<img id="profileimg" alt="" ng-src="{{profileImg}}">
-								<div style="float: right;width: 145px;">
+								<img ng-if='profileImg == null' id="profileimg" src="image/usericon.png" ng-click="changeProfilePic()" >
+								<img ng-if='profileImg' id="profileimg" alt="" ng-src="{{profileImg}}" ng-click="changeProfilePic()">
+								<div style="float: right;width: 145px; word-break:break-word">
 									 <p style="font-weight: bold">{{username}}</p>
 									 <p>{{email}}</p> 
 								</div>

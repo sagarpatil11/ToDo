@@ -281,7 +281,8 @@ body{
 }
 
 #userimg{
-	width: 40px;
+	width: 42px;
+	height:42px;
     margin-right: 20px;
 	margin-top: 5px;
 	border-radius: 25px;
@@ -289,6 +290,7 @@ body{
 
 #profileimg{
 	width: 100px;
+	height:100px;
     margin: 0 20px 0 0;
 }
 
@@ -535,6 +537,12 @@ body{
 #colbutton:hover{
 	background-color:#ddd;
 }
+
+
+
+/* #profilePicPopup{
+	min-height: 200px;
+} */
 
 /* #query{ 
     width: 400px;

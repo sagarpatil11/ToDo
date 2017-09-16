@@ -12,6 +12,7 @@ import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 
 import com.bridgeit.todo.model.FbAccessToken;
 import com.bridgeit.todo.model.FbProfile;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
@@ -88,9 +89,9 @@ public class FbLoginUtility
 	}
 	
 	
-	public FbProfile getFbProfile(String accessToken)
+	public JsonNode getFbProfile(String accessToken)
 	{
-		String getFbProfileURL="https://graph.facebook.com/v2.9/me?access_token="+accessToken+"&fields=id,name,email";
+		String getFbProfileURL="https://graph.facebook.com/v2.9/me?access_token="+accessToken+"&fields=id,name,email,picture";
 		
 		ResteasyClient client= new ResteasyClientBuilder().build();
 		ResteasyWebTarget target=client.target(getFbProfileURL);
@@ -100,11 +101,12 @@ public class FbLoginUtility
 		
 		ObjectMapper objectMapper=new ObjectMapper();
 		
-		FbProfile fbProfile=null;
+		JsonNode fbProfile=null;
 		
 		try 
 		{
-			fbProfile=objectMapper.readValue(profile, FbProfile.class);
+			//fbProfile=objectMapper.readValue(profile, FbProfile.class);
+			fbProfile=objectMapper.readTree(profile);
 		} 
 		catch (Exception e) 
 		{

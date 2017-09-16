@@ -489,6 +489,96 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService,file
 	}
 	
 	
+	
+	//.................................change profile picture.................................//
+	
+	$scope.changeProfilePic=function(){
+		console.log("in changeProfilePic");
+		
+		var modal=$uibModal.open({
+			templateUrl:"templates/changeProfilePic.html",
+			controller:function($uibModalInstance){
+				console.log("popup open");
+				var $profileImgCtrl=this;
+				
+				this.changePhoto=function()
+				{
+					console.log("in changePhoto");
+					document.getElementById("picId").click();
+				}
+				
+				
+				this.saveProfilePic=function()
+				{
+					console.log("in savePhotoPic");
+					
+					$uibModalInstance.dismiss('Set Profile Picture');
+					
+					var profilePicData={};
+					profilePicData.profileImage=this.profileImage;
+					
+					var httpobj=homeService.saveProfilePic(profilePicData);
+					
+					httpobj.then(function(response1){
+						
+						console.log("resp::",response1);
+						
+						if(response1.data.status == 10)
+						{
+							//console.log("img::",response1.data.user.profileImage);
+							//$scope.profileImg=response1.data.user.profileImage;
+							console.log("pic updated::",response1.data.status);
+							//$state.reload();
+							$scope.showNotes();
+						}
+						else if(response1.data.status == -4)
+						{
+								console.log("access token expired");
+					
+								homeService.getNewAccessToken().then(function(response2){
+								
+									if(response2.data.status == 4)
+									{
+											localStorage.setItem("accessToken", response2.data.token.accessToken);
+											localStorage.setItem("refreshToken", response2.data.token.refreshToken);
+							
+											homeService.updateNote(notedata).then(function(resp){
+												//$scope.profileImg=response2.data.user.profileImage;
+												console.log("pic updated::",response2.data.status);
+												//$state.reload();
+												$scope.showNotes();
+											})
+									}
+									else
+									{
+											console.log(response2.data);
+											$state.go('login');
+									}
+								})
+						}
+						else if(response1.data.status == -2)
+						{
+							console.log(response1.data);
+							return;
+						}
+					
+						else
+						{
+							console.log(response1.data);
+							return;
+						}
+					})
+						
+					
+				}
+				
+		
+			},
+			controllerAs:"$profileImgCtrl"
+		})
+	}
+	
+	
 	//.................................change color...........................................// 
 	
 	
@@ -884,14 +974,12 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService,file
 			
 			if(response1.data.status == 1)
 			{
-				$scope.notesList=response1.data.list.reverse();
-				
 				$scope.username= response1.data.user.fullname;
 				$scope.email= response1.data.user.email;
 				$scope.profileImg= response1.data.user.profileImage;
- 				
-				$scope.showNames($scope.notesList);
 				
+				$scope.notesList=response1.data.list.reverse();
+				$scope.showNames($scope.notesList);
 			}
 			else if(response1.data.status == -4)
 			{
@@ -906,8 +994,13 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService,file
 					
 								homeService.getNotes().then(function(resp){
 									console.log(resp.data);
+									
+									$scope.username= response1.data.user.fullname;
+									$scope.email= response1.data.user.email;
+									$scope.profileImg= response1.data.user.profileImage;
+									
 									$scope.notesList=resp.data.list.reverse();
-									$scope.showNames($scope.notesList);
+									$scope.showNames($scope.notesList);	
 								})
 						}
 						else
@@ -1114,8 +1207,18 @@ myApp.service("homeService", function($http){
 						headers:{"accessToken":localStorage.getItem("accessToken")}
 					})
 		}
-	
-	
+		
+		
+		this.saveProfilePic=function(profilePicData){
+			console.log("in service saveProfilePic");
+			return $http({
+						url:"saveProfilePic",
+						method:"post",
+						data: profilePicData,
+						headers:{"accessToken":localStorage.getItem("accessToken")}
+					})
+		}			
+					
 })
 
 
