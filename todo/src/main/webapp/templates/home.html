@@ -14,15 +14,20 @@
 				aria-hidden="true"><img src="image/icons8-Menu_20.png"></span></a>
 			<a class="navbar-brand" id="website-name" ng-style="headernamestyle" href="">{{headername}}</a>
 		
-				<input type="search" class="form-control" placeholder="Search..."
-						id="query" name="search" value="" ng-model="search" style="width: 700px;padding: 22px 12px;">
+				<!-- <input type="search" class="form-control" placeholder="Search..."
+						id="query" name="search" value="" ng-model="search" style="width: 700px;padding: 22px 12px;"> -->
 		</div>
-
-
+	
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav navbar-right">
 				<!-- <li><a href=""><span aria-hidden="true"><img alt=""
 							src="image/refresh.svg"></span></a></li> -->
+							
+				<li>
+					<input type="search" class="form-control" placeholder="Search..."
+						id="query" name="search" value="" ng-model="search" style="width: 85%;margin-right: 410px;padding: 22px 12px;">
+				</li>
+							
 				<li><a href="" ng-show="gridBtn" ng-click="gridView()"><span aria-hidden="true"></span><img alt=""
 						src="image/grid.svg"></a></li>
 				<li><a href="" ng-show="listBtn" ng-click="listView()"><span aria-hidden="true"></span><img alt=""
@@ -44,23 +49,9 @@
 							</div>
 						</div>
 					</div>
-				</li>	
+				</li>
+					
 			</ul>
-
-			<!-- <form class="navbar-form navbar-right" action="" method="GET">
-				<div class="input-group">
-					<div class="input-group-btn">
-						<button type="submit" class="btn">
-							<span class="glyphicon glyphicon-search"></span>
-						</button>
-					</div>
-					<input type="search" class="form-control" placeholder="Search..."
-						id="query" name="search" value="" ng-model="search">
-					<div class="input-group-btn">
-                    	<button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-search"></span></button>
-                  	</div>
-				</div>
-			</form> -->
 
 		</div>
 	</div>
@@ -126,17 +117,17 @@
 							</div>
 								
 							<div id="notefooter" ng-show="shownote">
-									
+									<!-- 
 									 <div class="dropdown"><a href="" id="img1" data-toggle="dropdown" class="dropdown-toggle"><img alt="" src="image/remainder.svg"></a>
 										<ul class="dropdown-menu" id="dropdown-reminder" >
 											<li class="dropdown-header" style="font-size: 16px;">Reminder:</li>
       										<li style="padding: 3 0 3 0;font-size: 13px;"><a role="menuitem" tabindex="-1" href="" >Later today<span style="float: right;">8:00 PM</span></a></li>
       										<li style="padding: 3 0 3 0;font-size: 13px;"><a role="menuitem" tabindex="-1" href="" >Tomorrow<span style="float: right;">8:00 AM</span></a></li>
       										<li style="padding: 3 0 3 0;font-size: 13px;"><a role="menuitem" tabindex="-1" href="" >Next weak<span style="float: right;">Mon, 8:00 AM</span></a></li>
-      										<!-- <li style="padding: 3 0 3 0;font-size: 13px;"><a role="menuitem" tabindex="-1" href="" ><span class="glyphicon glyphicon-time"></span>&nbsp&nbspPick date & time</a></li>
-      										<li style="padding: 3 0 3 0;font-size: 13px;"><a role="menuitem" tabindex="-1" href="" ><span class="glyphicon glyphicon-map-marker"></span>&nbsp&nbspPick place</a></li> -->
+      										<li style="padding: 3 0 3 0;font-size: 13px;"><a role="menuitem" tabindex="-1" href="" ><span class="glyphicon glyphicon-time"></span>&nbsp&nbspPick date & time</a></li>
+      										<li style="padding: 3 0 3 0;font-size: 13px;"><a role="menuitem" tabindex="-1" href="" ><span class="glyphicon glyphicon-map-marker"></span>&nbsp&nbspPick place</a></li>
      									</ul>
-     								</div> 
+     								</div> --> 
 									
 									<!-- <a href="" id="img1"><span aria-hidden="true"><img alt=""src="image/collaborator.svg"></span></a>-->
 									
@@ -144,7 +135,7 @@
 									<input type="file" ng-file-select="onFileSelect($files)" ng-model="imageSrc" id="imgId" style="display: none"> 
 									
 									<div class="dropup"><a href="" id="img1" data-toggle="dropdown" class="dropdown-toggle"><img alt="" src="image/color.svg"></a>
-										<div class="dropdown-menu" id="colordropup">
+										<div class="dropdown-menu" id="colordropup" style="margin-left: 40px;">
 											<a role="menuitem" tabindex="-1" href="" ng-click="putcolor='rgb(250, 250, 250)'"><img class="colorimg" alt="" src="image/white.png"></a>
 											<a role="menuitem" tabindex="-1" href="" ng-click="putcolor='rgb(255, 138, 128)'"><img class="colorimg" alt="" src="image/red.png"></a>
 											<a role="menuitem" tabindex="-1" href="" ng-click="putcolor='rgb(255, 209, 128)'"><img class="colorimg" alt="" src="image/orange.png"></a>

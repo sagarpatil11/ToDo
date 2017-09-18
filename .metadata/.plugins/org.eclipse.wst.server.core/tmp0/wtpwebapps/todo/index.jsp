@@ -4,6 +4,7 @@
 		<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
 		<link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css"> 
 		<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+		<link rel="stylesheet" href="bower_components/ng-img-crop/source/scss/ng-img-crop.scss"> 
 
 		<link rel="stylesheet" href="css/login.css">
 		<link rel="stylesheet" href="css/navbar.css">
@@ -18,8 +19,8 @@
  		<!-- <script type="text/javascript" src="bower_components/packery-angular/dist/packery-angular.min.js"></script> -->
 		<script src="bower_components/packery/dist/packery.pkgd.min.js"></script>
  		<script src="bower_components/draggabilly/dist/draggabilly.pkgd.min.js"></script>
- 		<!-- <script type="text/javascript" src="bower_components/moment/moment.js"></script> -->
   		<script type="text/javascript" src="http://connect.facebook.net/en_US/sdk.js"></script>
+  		<script type="text/javascript" src="bower_components/ng-img-crop/source/js/ng-img-crop.js"></script>
  
 
  	</head>
@@ -41,6 +42,7 @@
 	<script type="text/javascript" src="js/controller/archiveController.js"></script>
 	<script type="text/javascript" src="js/controller/socialLoginController.js"></script>
 	<script type="text/javascript" src="js/controller/forgetPasswordController.js"></script>
+	<script type="text/javascript" src="js/directive/imageCrop.js"></script>
 	
 </html>
 

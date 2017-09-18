@@ -1,4 +1,4 @@
-var myApp=angular.module("todo",['ui.router','ngSanitize','ui.bootstrap'])
+var myApp=angular.module("todo",['ui.router','ngSanitize','ui.bootstrap','ngImgCrop'])
 .config(function($stateProvider, $urlRouterProvider){
 	$stateProvider
 			.state("login",{
