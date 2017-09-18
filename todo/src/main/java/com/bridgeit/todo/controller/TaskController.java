@@ -26,6 +26,7 @@ import com.bridgeit.todo.responsemsg.Response;
 import com.bridgeit.todo.responsemsg.UserResponse;
 import com.bridgeit.todo.service.CollaboratorService;
 import com.bridgeit.todo.service.TaskService;
+import com.bridgeit.todo.service.UserRegService;
 import com.bridgeit.todo.service.WebScraperService;
 
 /**
@@ -44,6 +45,9 @@ public class TaskController
 	
 	@Autowired
 	UserRegController userRegController;
+	
+	@Autowired
+	UserRegService userRegService;
 	
 	@Autowired
 	CollaboratorService collaboratorService;
@@ -242,7 +246,7 @@ public class TaskController
 		
 		try
 		{
-			usertoshare= userRegController.getUserByEmail((String) colMap.get("emailToShare"));
+			usertoshare= userRegService.getUserByEmail((String) colMap.get("emailToShare"));
 			
 			if(usertoshare == null)
 			{
@@ -310,15 +314,15 @@ public class TaskController
 	
 		try 
 		{
-			List taskList = taskService.getNotes(user);
+			List<Task> taskList = taskService.getNotes(user);
 			
 			System.out.println("main list"+taskList);
 			
-			List colList = collaboratorService.getColList(user.getId());
+			List<Task> colList = collaboratorService.getColList(user.getId());
 			System.out.println("col list"+colList);
 
 			
-			List<Task> finalList=new ArrayList();
+			List<Task> finalList=new ArrayList<Task>();
 			
 			finalList.addAll(colList);
 			finalList.addAll(taskList);
@@ -347,7 +351,7 @@ public class TaskController
 	}
 	
 	
-	private List<Task> addScraperInNote(List notes) 
+	private List<Task> addScraperInNote(List<Task> notes) 
 	{
 		 for (int i = 0; i < notes.size(); i++) 
 		 {

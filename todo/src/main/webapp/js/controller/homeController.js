@@ -525,11 +525,10 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService,file
 						
 						if(response1.data.status == 10)
 						{
-							//console.log("img::",response1.data.user.profileImage);
+							console.log("img::",response1.data);
 							//$scope.profileImg=response1.data.user.profileImage;
-							console.log("pic updated::",response1.data.status);
-							//$state.reload();
-							$scope.showNotes();
+							$scope.getLoginUser();
+							console.log("pic updated");
 						}
 						else if(response1.data.status == -4)
 						{
@@ -544,9 +543,8 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService,file
 							
 											homeService.updateNote(notedata).then(function(resp){
 												//$scope.profileImg=response2.data.user.profileImage;
-												console.log("pic updated::",response2.data.status);
-												//$state.reload();
-												$scope.showNotes();
+												$scope.getLoginUser();
+												console.log("pic updated");
 											})
 									}
 									else
@@ -974,9 +972,9 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService,file
 			
 			if(response1.data.status == 1)
 			{
-				$scope.username= response1.data.user.fullname;
-				$scope.email= response1.data.user.email;
-				$scope.profileImg= response1.data.user.profileImage;
+			//	$scope.username= response1.data.user.fullname;
+			//	$scope.email= response1.data.user.email;
+			//	$scope.profileImg= response1.data.user.profileImage;
 				
 				$scope.notesList=response1.data.list.reverse();
 				$scope.showNames($scope.notesList);
@@ -995,9 +993,9 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService,file
 								homeService.getNotes().then(function(resp){
 									console.log(resp.data);
 									
-									$scope.username= response1.data.user.fullname;
-									$scope.email= response1.data.user.email;
-									$scope.profileImg= response1.data.user.profileImage;
+								//	$scope.username= resp.data.user.fullname;
+								//	$scope.email= resp.data.user.email;
+								//	$scope.profileImg= resp.data.user.profileImage;
 									
 									$scope.notesList=resp.data.list.reverse();
 									$scope.showNames($scope.notesList);	
@@ -1019,7 +1017,8 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService,file
 			
 		})
 	}
-	$scope.showNotes();
+	
+	
 	
 	$scope.showNames=function(notelist)
 	{
@@ -1103,8 +1102,62 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService,file
 			});
 	}
 
-
-
+	
+	//........................get login user..............................//
+	
+	$scope.getLoginUser=function()
+	{
+		console.log("in getLoginUser");
+		
+		homeService.getLoginUser()
+		.then(function(response1)
+		{
+			console.log(response1);
+			
+			if(response1.data.status == 1)
+			{
+				$scope.username= response1.data.user.fullname;
+				$scope.email= response1.data.user.email;
+				$scope.profileImg= response1.data.user.profileImage;
+					
+			}
+			else if(response1.data.status == -4)
+			{
+					console.log("access token expired");
+			
+					homeService.getNewAccessToken().then(function(response2){
+						
+						if(response2.data.status == 4)
+						{
+								localStorage.setItem("accessToken", response2.data.token.accessToken);
+								localStorage.setItem("refreshToken", response2.data.token.refreshToken);
+					
+								homeService.updateNote(updateData).then(function(resp){
+									console.log(resp.data);
+									
+									$scope.username= resp.data.user.fullname;
+									$scope.email= resp.data.user.email;
+									$scope.profileImg= resp.data.user.profileImage;
+								})
+						}
+						else
+						{
+								console.log(response2.data);
+								$state.go('login');
+						}
+					})
+			}
+			else 
+			{
+				console.log(response1.data);
+				return;
+			}
+			
+		});
+	}
+	
+	$scope.getLoginUser();
+	$scope.showNotes();
 })
 
 
@@ -1217,7 +1270,14 @@ myApp.service("homeService", function($http){
 						data: profilePicData,
 						headers:{"accessToken":localStorage.getItem("accessToken")}
 					})
-		}			
+		}	
+		
+		this.getLoginUser=function(){
+			return $http({
+						url:"userbyemail",
+						headers:{"accessToken":localStorage.getItem("accessToken")}
+			})		
+		}
 					
 })
 

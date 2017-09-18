@@ -55,8 +55,8 @@ public class TaskDaoImpl implements TaskDao
 	{
 		Session session=sessionFactory.getCurrentSession();
 		
-		Query query=session.createQuery("FROM Task where user=:user");
-		query.setParameter("user", user);
+		Query query=session.createQuery("FROM Task where uid=:uid");
+		query.setParameter("uid", user.getId());
 		
 		List<Task> tasklist= query.list();
 		

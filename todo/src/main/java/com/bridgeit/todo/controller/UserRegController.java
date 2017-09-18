@@ -212,9 +212,29 @@ public class UserRegController
 	 * @return User {@link User}
 	 */
 	@RequestMapping(value="/userbyemail")
-	public User getUserByEmail(String email)
+	public ResponseEntity<Response> getUpdatedUserByEmail(HttpServletRequest request)
 	{
-		return userRegService.getUserByEmail(email);
+		User user= (User) request.getSession().getAttribute("userSession");
+		
+		try
+		{
+			User updatedUser=userRegService.getUserByEmail(user.getEmail());
+			
+			userResponse.setStatus(1);
+			userResponse.setMessage("Updated user got successfully");
+			userResponse.setUser(updatedUser);
+			
+			return new ResponseEntity<Response>(userResponse, HttpStatus.OK);
+		}
+		catch (Exception e) 
+		{
+			// TODO: handle exception
+			errorResponse.setStatus(-1);
+			errorResponse.setMessage("Error in getting updated user");
+			
+			return new ResponseEntity<Response>(errorResponse, HttpStatus.OK);
+		}
+	
 	}
 	
 	
