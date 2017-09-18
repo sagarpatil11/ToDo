@@ -1,0 +1,205 @@
+
+<!-- ...................................nav bar................................... -->
+
+<nav class="navbar navbar-inverse navbar-fixed-top" ng-style="headercolor" role="navigation">
+	<div class="container-fluid" id="navbar1">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+				<span class="sr-only">Toggle navigation</span> 
+				<span class="icon-bar"></span> 
+				<span class="icon-bar"></span> 
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#menu-toggle" id="menu-toggle"><span
+				aria-hidden="true"><img src="image/icons8-Menu_20.png"></span></a>
+			<a class="navbar-brand" id="website-name" ng-style="headernamestyle" href="">{{headername}}</a>
+		
+				<input type="search" class="form-control" placeholder="Search..."
+						id="query" name="search" value="" ng-model="search" style="width: 700px;padding: 22px 12px;">
+		</div>
+
+
+		<div id="navbar" class="navbar-collapse collapse">
+			<ul class="nav navbar-nav navbar-right">
+				<!-- <li><a href=""><span aria-hidden="true"><img alt=""
+							src="image/refresh.svg"></span></a></li> -->
+				<li><a href="" ng-show="gridBtn" ng-click="gridView()"><span aria-hidden="true"></span><img alt=""
+						src="image/grid.svg"></a></li>
+				<li><a href="" ng-show="listBtn" ng-click="listView()"><span aria-hidden="true"></span><img alt=""
+						src="image/list.svg"></a></li>
+				<li><div class="dropdown"><a href="" data-toggle="dropdown" class="dropdown-toggle" >
+					<img ng-if='profileImg == null' id="userimg" src="image/usericon.png" > <img ng-if='profileImg' id="userimg" ng-src="{{profileImg}}" ></a>
+						<div class="dropdown-menu" id="profile-card">
+							<div style="margin: 15px 15px 15px 15px;"">
+								<img ng-if='profileImg == null' id="profileimg" src="image/usericon.png" ng-click="changeProfilePic()" >
+								<img ng-if='profileImg' id="profileimg" alt="" ng-src="{{profileImg}}" ng-click="changeProfilePic()">
+								<div style="float: right;width: 145px; word-break:break-word">
+									 <p style="font-weight: bold">{{username}}</p>
+									 <p>{{email}}</p> 
+								</div>
+							</div>
+							<div id="profile-footer">
+								<!-- <button>Add Account</button> -->
+								<button id="logoutbtn" ng-click="logout()">Sign out</button>
+							</div>
+						</div>
+					</div>
+				</li>	
+			</ul>
+
+			<!-- <form class="navbar-form navbar-right" action="" method="GET">
+				<div class="input-group">
+					<div class="input-group-btn">
+						<button type="submit" class="btn">
+							<span class="glyphicon glyphicon-search"></span>
+						</button>
+					</div>
+					<input type="search" class="form-control" placeholder="Search..."
+						id="query" name="search" value="" ng-model="search">
+					<div class="input-group-btn">
+                    	<button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-search"></span></button>
+                  	</div>
+				</div>
+			</form> -->
+
+		</div>
+	</div>
+</nav>
+
+
+
+<!--  ......................................side bar toggle ...................................... -->
+
+<div id="wrapper" class="toggled">
+	<div class="container-fluid">
+		<!-- Sidebar -->
+		<div id="sidebar-wrapper">
+			<ul class="sidebar-nav">
+				
+				<li class="sidebar-brand"><br></li>
+				
+				<li><a ui-sref="home"><img alt="" src="image/note.svg">&nbsp&nbsp&nbsp Notes</a></li>
+				
+				<!-- <li><a ><img alt="" src="image/icons8-Hand Up-20.png">&nbsp&nbsp&nbsp&nbsp Remainders</a></li> -->
+				
+				<li><a ui-sref="archive"><img alt="archive" src="image/archieve.png">&nbsp&nbsp&nbsp&nbsp Archive</a></li>
+				
+				<li><a ui-sref="trash"><img alt="" src="image/icons8-Trash Can-20.png">&nbsp&nbsp&nbsp&nbsp Trash</a></li>
+
+			</ul>
+		</div>
+		<!-- /#sidebar-wrapper -->
+		<div contenteditable="true" aria-multiline="true" role="textbox"
+			class="notranslate IZ65Hb-YPqjbf h1U9Be-YPqjbf" tabindex="0"
+			spellcheck="false"></div>
+		
+	
+	
+   <!-- ....................................Page Content......................................... -->
+
+
+
+		<div id="page-content-wrapper">
+			<div class="container-fluid">
+				<div class="row">
+					<!-- <div class="col-sm-2"></div>  -->
+						<div class="col-lg-12">
+								
+								
+					<!--...........................Take a note................................  -->
+					
+					
+								
+						<div id="card" ng-model="putcolor" ng-show="takenote" ng-style="{'background-color':putcolor}" >
+							
+							<div ng-if="imageSrc"><img style="width: 100%" ng-src="{{imageSrc}}" /></div>
+							
+							<div ng-show="shownote" id="title" contenteditable1 contentEditable=true ng-model="title" data-placeholder="Title..." spellcheck="false">
+							
+									<a href=""><span aria-hidden="false"><img alt="pin" src="image/icons8-Pin-20.png"></span></a>
+								
+							</div>
+							
+							<div id="description" contenteditable1 contentEditable=true ng-click="inputNote()"  ng-model="description" 
+									data-placeholder="Take a note..." spellcheck="false" >
+									
+							</div>
+								
+							<div id="notefooter" ng-show="shownote">
+									
+									 <div class="dropdown"><a href="" id="img1" data-toggle="dropdown" class="dropdown-toggle"><img alt="" src="image/remainder.svg"></a>
+										<ul class="dropdown-menu" id="dropdown-reminder" >
+											<li class="dropdown-header" style="font-size: 16px;">Reminder:</li>
+      										<li style="padding: 3 0 3 0;font-size: 13px;"><a role="menuitem" tabindex="-1" href="" >Later today<span style="float: right;">8:00 PM</span></a></li>
+      										<li style="padding: 3 0 3 0;font-size: 13px;"><a role="menuitem" tabindex="-1" href="" >Tomorrow<span style="float: right;">8:00 AM</span></a></li>
+      										<li style="padding: 3 0 3 0;font-size: 13px;"><a role="menuitem" tabindex="-1" href="" >Next weak<span style="float: right;">Mon, 8:00 AM</span></a></li>
+      										<!-- <li style="padding: 3 0 3 0;font-size: 13px;"><a role="menuitem" tabindex="-1" href="" ><span class="glyphicon glyphicon-time"></span>&nbsp&nbspPick date & time</a></li>
+      										<li style="padding: 3 0 3 0;font-size: 13px;"><a role="menuitem" tabindex="-1" href="" ><span class="glyphicon glyphicon-map-marker"></span>&nbsp&nbspPick place</a></li> -->
+     									</ul>
+     								</div> 
+									
+									<!-- <a href="" id="img1"><span aria-hidden="true"><img alt=""src="image/collaborator.svg"></span></a>-->
+									
+									<a href="" id="img1" ng-click="addImage()"><img alt=""src="image/addimage.svg"></a>
+									<input type="file" ng-file-select="onFileSelect($files)" ng-model="imageSrc" id="imgId" style="display: none"> 
+									
+									<div class="dropup"><a href="" id="img1" data-toggle="dropdown" class="dropdown-toggle"><img alt="" src="image/color.svg"></a>
+										<div class="dropdown-menu" id="colordropup">
+											<a role="menuitem" tabindex="-1" href="" ng-click="putcolor='rgb(250, 250, 250)'"><img class="colorimg" alt="" src="image/white.png"></a>
+											<a role="menuitem" tabindex="-1" href="" ng-click="putcolor='rgb(255, 138, 128)'"><img class="colorimg" alt="" src="image/red.png"></a>
+											<a role="menuitem" tabindex="-1" href="" ng-click="putcolor='rgb(255, 209, 128)'"><img class="colorimg" alt="" src="image/orange.png"></a>
+											<a role="menuitem" tabindex="-1" href="" ng-click="putcolor='rgb(255, 255, 141)'"><img class="colorimg" alt="" src="image/yellow.png"></a>
+  											<br>
+      										<a role="menuitem" tabindex="-1" href="" ng-click="putcolor='rgb(207, 216, 220)'"><img class="colorimg" alt="" src="image/gray.png"></a>
+      										<a role="menuitem" tabindex="-1" href="" ng-click="putcolor='rgb(128, 216, 255)'"><img class="colorimg" alt="" src="image/blue.png"></a>
+      										<a role="menuitem" tabindex="-1" href="" ng-click="putcolor='rgb(167, 255, 235)'"><img class="colorimg" alt="" src="image/teal.png"></a>
+											<a role="menuitem" tabindex="-1" href="" ng-click="putcolor='rgb(204, 255, 144)'"><img class="colorimg" alt="" src="image/green.png"></a>
+     									</div>
+     								</div>	
+								
+									<!-- <a href="" id="img1"><span aria-hidden="true"><img alt=""src="image/archieve1.svg"></span></a>
+								
+									<div class="dropdown"><a href="" id="img1" data-toggle="dropdown" class="dropdown-toggle" ><img alt="more" src="image/list.png"></a>
+										<ul class="dropdown-menu" >
+      										<li><a role="menuitem" tabindex="-1" href="">Add label</a></li>
+      										<li><a role="menuitem" tabindex="-1" href="">Show checkboxes</a></li>
+     									</ul>
+									</div> -->
+									
+									<button id="donebutton" type="button" ng-click="submitNote()">Done</button>
+							</div>
+							
+						</div> 
+						
+								
+						<div ng-include="'templates/pinned.html'" ng-show="showpinned"></div>
+								
+						<div ng-include="'templates/notes.html'" ng-show="shownotes"></div>
+								
+						<div ng-include="'templates/trash.html'" ng-show="showtrash"></div>
+								
+						<div ng-include="'templates/archive.html'" ng-show="showarchive"></div>
+		
+			  
+			  		<!-- ........ -->
+			  
+			  
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /#page-content-wrapper -->
+	</div>
+</div>
+<!-- /#wrapper -->
+
+
+
+<script>
+$("#menu-toggle").click(function(e) {
+    e.preventDefault();
+    $("#wrapper").toggleClass("toggled");
+});
+</script>
+
+

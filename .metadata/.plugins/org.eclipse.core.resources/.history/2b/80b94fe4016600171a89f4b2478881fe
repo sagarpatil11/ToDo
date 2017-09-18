@@ -1,0 +1,16 @@
+package com.bridgeit.todo.model;
+
+import java.util.UUID;
+
+public class Token 
+{
+	private String accessToken;
+	private String refreshToken;
+	
+	public String generateAccessToken()
+	{
+		return accessToken=UUID.randomUUID().toString().replaceAll("-", "");
+	}
+	
+	
+}

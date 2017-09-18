@@ -35,3 +35,11 @@
 .Trashes
 ehthumbs.db
 Thumbs.db
+*.out
+bower_components
+.metadata
+.recommenders
+.project
+RemoteSystemsTempFiles
+Servers
+target

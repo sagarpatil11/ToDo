@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Encapsulate field &apos;com.bridgeit.todo.model.Task.creation_date&apos; in &apos;com.bridgeit.todo.model.Task&apos;&#x0A;- Original project: &apos;todo&apos;&#x0A;- Original element: &apos;com.bridgeit.todo.model.Task.creation_date&apos;&#x0A;- Getter method name: &apos;getCreation_date&apos;&#x0A;- Setter method name: &apos;setCreation_date&apos;&#x0A;- Field visibility: &apos;public&apos;&#x0A;- Use getter and setter methods in declaring type" comments="false" declaring="true" description="Encapsulate field &apos;creation_date&apos;" flags="589830" getter="getCreation_date" id="org.eclipse.jdt.ui.self.encapsulate" input="/src\/main\/java&lt;com.bridgeit.todo.model{Task.java[Task^creation_date" insertion="8" setter="setCreation_date" stamp="1500007678886" version="1.0" visibility="1"/>
+</session>

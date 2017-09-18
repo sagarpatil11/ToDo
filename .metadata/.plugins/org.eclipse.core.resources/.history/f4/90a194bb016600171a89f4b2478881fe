@@ -1,0 +1,5 @@
+package com.bridgeit.todo.model;
+
+public class Token {
+
+}

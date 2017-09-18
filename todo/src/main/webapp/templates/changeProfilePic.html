@@ -1,0 +1,21 @@
+<div id="profilePicPopup">
+		<div class="modal-header" style="background-color: rgba(0,0,0,0.04);">
+			<h3 class="modal-title">Select Profile Picture</h3>
+		</div>
+	
+		<div class="modal-body" style="min-height: 200px">
+				<div>
+						<img style="width: 568px" alt="" ng-src="{{$profileImgCtrl.profileImage}}">
+				</div>
+		
+				<!-- <div id="shareWith" ng-model="$colCtrl.emailtoshare" contenteditable1 contentEditable=true data-placeholder="Enter email to share with...">
+				</div> --> 
+		</div>
+		
+		<div class="modal-footer" style="background-color: rgba(0,0,0,0.04);">
+			 	<button id="colButton" style="float: left" type="button" ng-click="$profileImgCtrl.changePhoto()" >Select picture</button> 
+			 	<input type="file" ng-file-select="onFileSelect($files)" ng-model="$profileImgCtrl.profileImage" id="picId" style="display: none">
+			 	
+        		<button id="colButton" style="margin-right: 10px;" type="button" ng-click="$profileImgCtrl.saveProfilePic()">Set Profile Picture</button>
+		</div>
+</div>
