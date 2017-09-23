@@ -17,7 +17,7 @@ public class TaskService
 	TaskDao taskDao;
 	
 	@Transactional
-	public int addNote(Task task)
+	public Integer addNote(Task task)
 	{
 		return taskDao.addNote(task);
 	}

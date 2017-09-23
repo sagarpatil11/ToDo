@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bridgeit.todo.dao.daointerface.RedisCacheDao;
 import com.bridgeit.todo.model.Token;
 import com.bridgeit.todo.model.User;
 import com.bridgeit.todo.responsemsg.ErrorResponse;
@@ -52,6 +53,9 @@ public class UserLoginController
 	
 	@Autowired
 	TokenUtility tokenUtility;
+	
+	@Autowired
+	RedisCacheDao redisCacheDao;
 	
 	UserResponse userResponse=new UserResponse();
 	ErrorResponse errorResponse=new ErrorResponse();
@@ -115,6 +119,8 @@ public class UserLoginController
 				
 				try {
 					tokenService.saveToken(token);
+					
+					redisCacheDao.saveinRedis(token);
 					
 					System.out.println(token.toString());
 					

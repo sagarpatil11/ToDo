@@ -515,7 +515,7 @@ myApp.controller( 'homeCtrl',function($scope, $state,$uibModal, homeService,file
 					$uibModalInstance.dismiss('Set Profile Picture');
 					
 					var profilePicData={};
-					profilePicData.profileImage=this.croppedImage;
+					profilePicData.profileImage=this.profileImage;
 					
 					var httpobj=homeService.saveProfilePic(profilePicData);
 					

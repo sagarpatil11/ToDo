@@ -20,14 +20,14 @@ public class TaskDaoImpl implements TaskDao
 	@Autowired
 	SessionFactory sessionFactory;
 	
-	public int addNote(Task task) 
+	public Integer addNote(Task task) 
 	{
 		// TODO Auto-generated method stub
 		Session session=sessionFactory.getCurrentSession();
 		
 		Serializable id=session.save(task);
 		
-		return (int) id;
+		return (Integer) id;
 	}
 
 	public void updateNote(Task task) 

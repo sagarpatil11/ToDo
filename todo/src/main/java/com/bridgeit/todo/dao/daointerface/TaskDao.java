@@ -8,7 +8,7 @@ import com.bridgeit.todo.model.User;
 
 public interface TaskDao 
 {
-	public int addNote(Task task);
+	public Integer addNote(Task task);
 	
 	public void updateNote(Task task);
 	

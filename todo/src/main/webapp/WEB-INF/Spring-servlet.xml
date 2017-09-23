@@ -31,8 +31,7 @@
    
    <tx:annotation-driven transaction-manager="transactionManager" />
      
-    <bean
-        class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix">
             <value>/WEB-INF/views/</value>
         </property>
@@ -81,10 +80,20 @@
 		
 		</bean>
 		
-		<bean id="transactionManager"
-				class="org.springframework.orm.hibernate4.HibernateTransactionManager">
-		<property name="sessionFactory" ref="sessionFactory" />
+		<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+				<property name="sessionFactory" ref="sessionFactory" />
 		</bean>
+		
+		
+		<bean id="jedisConnFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+				<property name="hostName" value="127.0.0.1"></property>
+				<property name="port" value="6379"></property>
+		</bean>
+		
+		<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+				<property name="connectionFactory" ref="jedisConnFactory"></property>
+		</bean>
+		
  		
  		<bean id="userValidation" class="com.bridgeit.todo.validation.UserValidation" />
  		

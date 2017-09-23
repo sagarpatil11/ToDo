@@ -6,6 +6,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.bridgeit.todo.dao.daointerface.RedisCacheDao;
 import com.bridgeit.todo.model.Token;
 import com.bridgeit.todo.responsemsg.TokenResponse;
 import com.bridgeit.todo.service.TokenService;
@@ -17,6 +18,9 @@ public class TokenUtility
 	
 	@Autowired
 	TokenResponse tokenResponse;
+	
+	@Autowired
+	RedisCacheDao redisCacheDao;
 	
 	public Token tokenGenerator()
 	{
@@ -48,11 +52,12 @@ public class TokenUtility
 			return tokenResponse;
 		}
 		
-		Token token=tokenService.checkAccessToken(accessToken);
+		//Token token=tokenService.checkAccessToken(accessToken);
 		
+		Token token=(Token) redisCacheDao.getFromRedis(accessToken);
 		if(token != null)
 		{
-			System.out.println(token.toString());
+			System.out.println("in validateAccessToken :: "+token.toString());
 			
 			long difference = new Date().getTime() - token.getAccessTokenCreation().getTime();
 			long differenceInMinutes = TimeUnit.MILLISECONDS.toMinutes(difference);

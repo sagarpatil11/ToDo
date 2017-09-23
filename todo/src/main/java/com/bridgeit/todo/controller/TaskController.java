@@ -79,7 +79,7 @@ public class TaskController
 		
 		try 
 		{
-			int tid=taskService.addNote(task);
+			Integer tid=taskService.addNote(task);
 			
 			if(webScraper != null)
 			{
